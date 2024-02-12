@@ -1,0 +1,54 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\ReCaptcha;
+use Magento\Framework\Escaper;
+use Hyva\Theme\ViewModel\StoreConfig;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+$storeConfig = $viewModels->require(StoreConfig::class);
+$recaptcha   = $viewModels->require(ReCaptcha::class);
+$siteKey     = $storeConfig->getStoreConfig('recaptcha_frontend/type_invisible/public_key');
+
+if (!$siteKey) {
+    // No v2 invisible google API credentials configured
+    return;
+}
+
+$inputElementId        = $block->getData('input_element_id');
+$instanceSuffix        = $recaptcha->calcJsInstanceSuffix($inputElementId ?: $block->getData('form_id') ?: 'x');
+$callback              = "googleRecaptchaCallback$instanceSuffix";
+$elementIdSuffix       = $instanceSuffix ?: 'x';
+$grecaptchaContainerId = "grecaptcha-container-$elementIdSuffix";
+$grecaptchaInstanceId  = "grecaptchaInstance$instanceSuffix";
+
+// reCaptcha v2 invisible form element
+
+?>
+<div id="<?= $escaper->escapeHtmlAttr($grecaptchaContainerId) ?>" class="g-recaptcha">
+</div>
+<script>
+    'use strict';
+    <?php /* Explicitly render the recaptcha, so it doesn't use the first .g-recaptcha on the page */ ?>
+    document.addEventListener('DOMContentLoaded', () => {
+        grecaptchaV2LoadCallbacks.push(() => {
+            const containerId = '<?= $escaper->escapeJs($grecaptchaContainerId) ?>';
+            window.<?= /** @noEscape */ $grecaptchaInstanceId ?> = window.grecaptcha.render(containerId, {
+                sitekey: '<?= $escaper->escapeJs($siteKey) ?>',
+                callback: '<?= $escaper->escapeJs($callback) ?>',
+                size: 'invisible'
+            });
+        });
+    });
+</script>

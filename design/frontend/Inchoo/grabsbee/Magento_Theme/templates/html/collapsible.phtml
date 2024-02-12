@@ -1,0 +1,54 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+?>
+
+<div class="block <?= $escaper->escapeHtmlAttr($block->getBlockCss()) ?> card filter-option py-4 px-8 mb-6"
+     x-data="{ open: true }">
+    <button
+        type="button"
+        class="
+            title <?= $escaper->escapeHtmlAttr($block->getBlockCss()) ?>-title
+            flex justify-between
+            items-center cursor-pointer hover:text-secondary-darker w-full
+        "
+        @click="open = !open"
+        :aria-expanded="open"
+    >
+        <span class="text-lg title">
+            <?= $escaper->escapeHtml(__($block->getData('block_title'))) ?>
+        </span>
+        <span class="px-1 py-1 border rounded border-container">
+            <?= $heroicons->chevronDownHtml(
+                'transition-transform duration-300 ease-in-out transform rotate-180',
+                24,
+                24,
+                [":class" => "{ 'rotate-180': open, 'rotate-0': !open }", 'aria-hidden' => 'true']
+            ); ?>
+        </span>
+    </button>
+    <span x-show="open" class="delimiter block border-b border-container w-full mt-4 mb-3"></span>
+    <div class="content <?= $escaper->escapeHtmlAttr($block->getBlockCss()) ?>-content block"
+         :class="{ 'hidden': !open , 'block': open }"
+         id="<?= $escaper->escapeHtmlAttr($block->getBlockCss()) ?>"
+    >
+        <?= $block->getChildHtml() ?>
+    </div>
+</div>
