@@ -18,7 +18,7 @@ fieldset {
     }
 
     label {
-        @apply mb-2 block text-secondary-darker
+        @apply mb-2 block
     }
 
     .field.choice {
@@ -39,7 +39,7 @@ fieldset {
     }
 
     legend {
-        @apply text-primary text-xl mb-3
+        @apply text-xl mb-3
     }
 
     legend + br {

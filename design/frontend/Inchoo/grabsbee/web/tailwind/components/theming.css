@@ -1,7 +1,3 @@
-body {
-    @apply bg-container;
-}
-
 #cart-drawer {
     @apply text-black;
 }
@@ -29,17 +25,14 @@ body {
         @apply bg-white border-gray-400;
 
         &:focus {
-            @apply outline-none border-primary;
+            @apply outline-none;
         }
     }
 }
 
 .card {
-    @apply p-4 rounded-sm bg-container-lighter shadow;
+    @apply p-4 rounded-sm shadow;
 }
 
 .card-interactive {
-    &:hover {
-        @apply bg-container;
-    }
 }

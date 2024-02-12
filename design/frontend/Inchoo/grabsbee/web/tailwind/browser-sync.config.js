@@ -13,7 +13,7 @@ if (baseDir === '') {
     require('process').exit(1)
 }
 
-const proxy = process.env.PROXY_URL || 'https://www.hyva.loc/';
+const proxy = process.env.PROXY_URL || 'https://www.grabsbee.loc/';
 const port = process.env.PORT || 3000;
 const { host } = url.parse(proxy);
 

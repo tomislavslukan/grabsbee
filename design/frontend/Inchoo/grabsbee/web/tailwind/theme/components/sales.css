@@ -1,11 +1,9 @@
 .order-items > div:nth-child(even) {
-    @apply bg-container-darker;
 }
 
 .order-links {
     @apply block;
     @apply items-center;
-    @apply bg-container;
 }
 
 .order-links li {
@@ -19,7 +17,6 @@
 
 .order-links li.current {
     @apply flex-grow;
-    @apply text-primary;
 }
 
 .order-links li a {
