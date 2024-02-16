@@ -82,7 +82,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
     <?php if ($block->getLayer()->getState()->getFilters()): ?>
         <div class="block-actions filter-actions">
             <a href="<?= $escaper->escapeUrl($block->getClearUrl()) ?>"
-               class="text-xs text-primary hover:text-primary-darker"><?= $escaper->escapeHtml(__('Clear All')) ?></a>
+               class="text-sm text-primary hover:text-primary-darker"><?= $escaper->escapeHtml(__('Clear All')) ?></a>
         </div>
     <?php endif; ?>
 </div>

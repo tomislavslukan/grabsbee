@@ -70,7 +70,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
     }
 </script>
 <div id="header"
-     class="relative z-30 w-full border-b shadow bg-container-lighter border-container-lighter"
+     class="relative bg-primary z-30 w-full border-b shadow bg-container-lighter border-container-lighter"
      x-data="initHeader()"
      @private-content-loaded.window="getData(event.detail.data)"
 >
@@ -78,47 +78,12 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
         <!--Logo-->
         <?= $block->getChildHtml('logo'); ?>
 
-        <!--Main Navigation-->
-        <?= $block->getChildHtml('topmenu') ?>
-
         <div class="flex items-center order-3">
-            <!--Compare Icon-->
-            <a id="compare-link"
-               class="relative invisible inline-block mx-1 no-underline sm:ml-3 hover:text-black"
-               :class="{ 'invisible': !(itemCount > 0) }"
-               href="<?= $escaper->escapeUrl($block->getUrl('catalog/product_compare/index')) ?>"
-               title="<?= $escaper->escapeHtml(__('Compare Products')) ?>"
-               x-data="initCompareHeader()"
-               @private-content-loaded.window="receiveCompareData($event.detail.data)"
-            >
-                <?= $heroicons->scaleHtml(
-                    "w-8 h-8 md:h-6 md:w-6 hover:text-black",
-                    25,
-                    25
-                ) ?>
-
-                <span class="sr-only label">
-                   <?= $escaper->escapeHtml(__('Compare Products')) ?>
-                </span>
-
-                <span class="absolute top-0 right-0 h-5 px-2 py-1 -mt-5 -mr-4 text-xs font-semibold
-                    leading-none text-center text-white uppercase transform -translate-x-1
-                    translate-y-1/2 bg-yellow-500 rounded-full"
-                >
-                    <span x-text="itemCount"></span>
-                    <span x-show="itemCount === 1" class="sr-only">
-                        <?= $escaper->escapeHtml(__('item')) ?>
-                    </span>
-                    <span x-show="itemCount > 1" class="sr-only">
-                        <?= $escaper->escapeHtml(__('items')) ?>
-                    </span>
-                </span>
-            </a>
 
             <!--Search Icon-->
             <button
                 id="menu-search-icon"
-                class="inline-block ml-1 no-underline sm:ml-3 hover:text-black"
+                class="inline-block ml-1 no-underline sm:ml-3 text-white hover:text-white"
                 @click.prevent="
                     searchOpen = !searchOpen;
                     $dispatch('search-open');
@@ -129,7 +94,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 x-ref="searchButton"
             >
                 <?= $heroicons->searchHtml(
-                    "w-8 h-8 md:h-6 md:w-6 hover:text-black",
+                    "w-5 h-5 hover:text-white text-p",
                     25,
                     25,
                     [
@@ -138,9 +103,6 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 ) ?>
             </button>
 
-            <!--Customer Icon & Dropdown-->
-            <?= $block->getChildHtml('customer') ?>
-
             <!--Cart Icon-->
             <?php if ($showMiniCart): ?>
                 <button
@@ -148,7 +110,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 <a
             <?php endif ?>
                 id="menu-cart-icon"
-                class="relative inline-block ml-1 no-underline sm:ml-3 hover:text-black"
+                class="relative inline-block ml-1 no-underline sm:ml-3 hover:text-white"
                 x-ref="cartButton"
                 :aria-disabled="isCartEmpty()"
                 title="<?= $escaper->escapeHtmlAttr(__('Cart')) ?>"
@@ -179,7 +141,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 </span>
 
                 <?= $heroicons->shoppingCartHtml(
-                    "w-8 h-8 md:h-6 md:w-6 hover:text-black",
+                    "w-5 h-5 text-white hover:text-white",
                     25,
                     25
                 ) ?>
@@ -189,7 +151,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                     x-show="!isCartEmpty()"
                     x-cloak
                     class="
-                        absolute top-0 right-0 h-5 px-2 py-1 -mt-5 -mr-4 text-xs font-semibold
+                        absolute top-0 right-0 h-5 px-2 py-1 -mt-5 -mr-4 text-sm font-semibold
                         leading-none text-center text-white uppercase transform -translate-x-1
                         translate-y-1/2 rounded-full bg-primary
                     "
@@ -200,6 +162,9 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
             <?php else: ?>
                 </a>
             <?php endif ?>
+
+            <!--Main Navigation-->
+            <?= $block->getChildHtml('topmenu') ?>
 
         </div>
     </div>

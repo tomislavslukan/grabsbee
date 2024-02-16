@@ -61,7 +61,7 @@ $recaptcha = $block->getData('viewModelRecaptcha');
                 <?= $block->getChildHtml('form_fields_before') ?>
                 <?= $recaptcha ? $recaptcha->getInputHtml(ReCaptcha::RECAPTCHA_FORM_ID_PRODUCT_REVIEW) : '' ?>
                 <fieldset>
-                    <legend class="text-xs">
+                    <legend class="text-sm">
                         <span>
                             <?= $escaper->escapeHtml(
                                 __("You're reviewing:")

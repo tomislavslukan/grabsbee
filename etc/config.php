@@ -334,7 +334,6 @@ return [
         'Hyva_HoTemplatehints' => 1,
         'Hyva_Theme' => 1,
         'Inchoo_StyleGuide' => 1,
-        'Inchoo_Test' => 1,
         'MarkShust_LayoutHandleLogger' => 1,
         'PayPal_Braintree' => 1,
         'PayPal_BraintreeGraphQl' => 1,

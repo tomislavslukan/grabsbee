@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
 /* purgecss start ignore */
 @import "tailwindcss/base";
 @import "tailwindcss/components";
@@ -25,3 +27,47 @@
 
 @import "tailwindcss/utilities";
 @import "theme.css";
+
+
+@layer components {
+    .btn__primary {
+        @apply box-border bg-primary text-white uppercase text-center font-primary font-bold cursor-pointer;
+    }
+
+    .btn__secondary {
+        @apply flex items-center box-border justify-center bg-white text-secondary border-1px border-secondary uppercase font-primary font-bold;
+    }
+
+    .btn__state {
+        @apply box-border bg-secondary-90 text-white uppercase text-center font-primary font-bold cursor-pointer;
+    }
+
+    .btn__disabled {
+        @apply bg-gray-25 box-border text-white uppercase text-center font-primary font-bold cursor-pointer;
+    }
+
+    .table__data--title {
+        @apply font-primary font-bold mobile:text-base text-sm mobile:leading-6 leading-5 uppercase text-text-color p-3;
+    }
+
+    .table__data--content {
+        @apply font-primary font-normal mobile:text-base text-sm leading-5 mobile:leading-6 text-text-color p-3;
+    }
+
+    .table__background {
+        @apply odd:bg-white even:bg-gray-5;
+    }
+
+    .custom-checkbox {
+        @apply inline-block w-4 h-4 border border-gray-25 relative cursor-pointer;
+    }
+
+    .custom-checkbox input:checked + .checkmark {
+        @apply absolute top-0 left-0 w-full h-full flex items-center justify-center;
+    }
+
+    .checkmark {
+        @apply hidden;
+    }
+
+}
