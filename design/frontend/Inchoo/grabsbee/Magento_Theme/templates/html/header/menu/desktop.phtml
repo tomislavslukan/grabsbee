@@ -36,6 +36,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
     <div x-ref="nav-desktop"
          @load.window="setActiveMenu($root)"
          class="hidden lg:block lg:min-h-0 lg:px-24 lg:w-auto lg:pt-0">
+
         <nav
             class="duration-150 ease-in-out transform w-auto relative min-h-0 transition-display"
             aria-label="<?= $escaper->escapeHtmlAttr(__('Main menu')) ?>"
@@ -79,21 +80,6 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                     'block' : hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>'
                                 }"
                                 >
-                                    <?php foreach ($menuItems as $index2 => $menuItem): ?>
-
-                                            <li class="flex flex-row text-center justify-center">
-                                                <a href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
-                                                   title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
-                                                   class="block w-full px-3 py-1 my-1 whitespace-nowrap first:mt-0 hover:underline"
-                                                   @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index2) ?>]').focus())"
-                                                >
-                                            <span class="font-primary font-bold text-sm leading-6 tracking-wide uppercase">
-                                                <?= $escaper->escapeHtml($menuItem['name']) ?>
-                                            </span>
-                                                </a>
-                                            </li>
-
-                                    <?php endforeach; ?>
 
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
 
@@ -111,7 +97,10 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 
                                     <?php endforeach; ?>
 
+
+
                                 </ul>
+
                             </div>
                         <?php endif; ?>
 

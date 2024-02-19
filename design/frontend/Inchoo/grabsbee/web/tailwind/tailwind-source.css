@@ -30,6 +30,7 @@
 
 
 @layer components {
+
     .btn__primary {
         @apply box-border bg-primary text-white uppercase text-center font-primary font-bold cursor-pointer;
     }
