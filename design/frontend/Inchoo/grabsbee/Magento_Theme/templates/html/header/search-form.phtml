@@ -86,56 +86,58 @@ $helper = $this->helper(SearchHelper::class);
             <span><?= $escaper->escapeHtml(__('Search')) ?></span>
         </label>
 
-             <div class="flex justify-center items-center h-[101px] box-border bg-primary">
+         <div class="desktop:h-[144px] h-[147px] px-3 desktop:px-24 desktop:flex desktop:items-center desktop:justify-center bg-primary fixed top-0 w-full z-99">
+             <div class="h-[101px] bg-primary grid desktop:grid-cols-12 desktop:grid-rows-1 grid-cols-12 grid-rows-2">
 
-                     <div class="flex flex-col-reverse justify-center flex-col items-center mobile:justify-between mobile:flex-row">
-                         <div class="min-w-full flex flex-row items-stretch my-4">
-                             <label class="relative block">
-                                 <svg class="absolute top-1/2 transform -translate-y-1/2" width="13" height="12" viewBox="0 0 13 12" fill="white" xmlns="http://www.w3.org/2000/svg">
-                                     <path d="M8.57535 8.24933C8.55552 8.2645 8.53627 8.28142 8.5176 8.30008C8.49893 8.31875 8.4826 8.33742 8.46685 8.35783C8.1011 8.71017 7.6706 8.99425 7.19518 9.19142C6.71568 9.38975 6.18893 9.5 5.63477 9.5C5.0806 9.5 4.55385 9.38975 4.07318 9.19083C3.57385 8.98433 3.1241 8.681 2.74727 8.30358C2.37043 7.92617 2.0671 7.477 1.86002 6.97767C1.66168 6.49758 1.55143 5.97083 1.55143 5.41667C1.55143 4.8625 1.66168 4.33575 1.8606 3.85508C2.0671 3.35633 2.37043 2.906 2.74727 2.52917C3.1241 2.15233 3.57443 1.849 4.07318 1.6425C4.55385 1.44358 5.0806 1.33333 5.63477 1.33333C6.18893 1.33333 6.71568 1.44358 7.19635 1.6425C7.69568 1.849 8.14543 2.15233 8.52227 2.52975C8.8991 2.90717 9.20243 3.35633 9.40952 3.85567C9.60785 4.33575 9.7181 4.8625 9.7181 5.41667C9.7181 5.97083 9.60785 6.49758 9.40893 6.97825C9.21177 7.45367 8.92768 7.88417 8.57535 8.24992V8.24933ZM11.8805 10.8376L9.73676 8.69383C10.043 8.31117 10.2968 7.88475 10.4869 7.4245C10.7436 6.805 10.8848 6.12658 10.8848 5.41667C10.8848 4.70675 10.7436 4.02833 10.4869 3.40883C10.2209 2.766 9.83068 2.18792 9.3471 1.70433C8.86352 1.22075 8.28543 0.8305 7.6426 0.5645C7.0231 0.307834 6.34468 0.166667 5.63477 0.166667C4.92485 0.166667 4.24643 0.307834 3.62693 0.5645C2.9841 0.8305 2.40602 1.22075 1.92243 1.70433C1.43885 2.18792 1.0486 2.766 0.782599 3.40883C0.525932 4.02833 0.384766 4.70675 0.384766 5.41667C0.384766 6.12658 0.525932 6.805 0.782599 7.4245C1.0486 8.06733 1.43885 8.64542 1.92243 9.129C2.40602 9.61258 2.9841 10.0028 3.62693 10.2688C4.24643 10.5255 4.92485 10.6667 5.63477 10.6667C6.34468 10.6667 7.0231 10.5255 7.6426 10.2688C8.10227 10.0781 8.52927 9.82433 8.91193 9.51867L11.0557 11.6624C11.2838 11.8905 11.653 11.8905 11.8805 11.6624C12.108 11.4343 12.1086 11.0651 11.8805 10.8376Z" fill="white"/>
-                                 </svg />
+                 <div class="desktop:col-span-11 col-span-12 flex items-center relative">
+                     <input id="search"
+                            x-ref="searchInput"
+                            type="search"
+                            autocomplete="off"
+                            name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
+                            value="<?= /** @noEscape */ $helper->getEscapedQueryText() ?>"
+                            placeholder="<?= $escaper->escapeHtmlAttr(__('Search entire store here...')) ?>"
+                            maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
+                            @focus.once="suggest"
+                            @input.debounce.300="suggest"
+                            @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
+                            @search-open.window.debounce.10="$el.focus() $el.select()"
+                            aria-label="<?= __('Search field') ?>"
+                            class="w-full focus:border-secondary focus:ring-0 h-[42px] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary indent-4" />
 
-                                 <input id="search"
-                                        x-ref="searchInput"
-                                        type="search"
-                                        autocomplete="off"
-                                        name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
-                                        value="<?= /** @noEscape */ $helper->getEscapedQueryText() ?>"
-                                        placeholder="<?= $escaper->escapeHtmlAttr(__('Search entire store here...')) ?>"
-                                        maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
-                                        @focus.once="suggest"
-                                        @input.debounce.300="suggest"
-                                        @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
-                                        @search-open.window.debounce.10="
-                            $el.focus()
-                            $el.select()"
-                                        aria-label="<?= __('Search field') ?>"
-                                        class="focus:border-secondary focus:ring-0 min-w-full flex flex-row items-stretch h-[42px] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary placeholder:pl-2" />
-
-                             </label>
-                         </div>
-
-                         <div>
-                             <button
-                                 class="absolute flex justify-end mobile:ml-24"
-                                 aria-label="<?= $escaper->escapeHtmlAttr(__('Close menu')) ?>"
-                                 type="button"
-                             >
-                                <span class="'hidden' : !open, 'block': open">
-                                   <div class="flex row items-center">
-                                       <p class="font-normal text-white leading-5 text-xs font-primary">Close</p>
-                                    <span class="ml-2"> <?= $hyvaicons->renderHtml('searchClose', 'w-3 h-3');?></span>
-                                   </div>
-                                </span>
-                             </button>
-                         </div>
-
+                     <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-white">
+                         <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                             <path d="M8.57535 8.24932C8.55552 8.26449 8.53627 8.28141 8.5176 8.30007C8.49893 8.31874 8.4826 8.33741 8.46685 8.35782C8.1011 8.71016 7.6706 8.99424 7.19518 9.19141C6.71568 9.38974 6.18893 9.49999 5.63477 9.49999C5.0806 9.49999 4.55385 9.38974 4.07318 9.19082C3.57385 8.98432 3.1241 8.68099 2.74727 8.30357C2.37043 7.92616 2.0671 7.47699 1.86002 6.97766C1.66168 6.49757 1.55143 5.97082 1.55143 5.41666C1.55143 4.86249 1.66168 4.33574 1.8606 3.85507C2.0671 3.35632 2.37043 2.90599 2.74727 2.52916C3.1241 2.15232 3.57443 1.84899 4.07318 1.64249C4.55385 1.44357 5.0806 1.33332 5.63477 1.33332C6.18893 1.33332 6.71568 1.44357 7.19635 1.64249C7.69568 1.84899 8.14543 2.15232 8.52227 2.52974C8.8991 2.90716 9.20243 3.35632 9.40952 3.85566C9.60785 4.33574 9.7181 4.86249 9.7181 5.41666C9.7181 5.97082 9.60785 6.49757 9.40893 6.97824C9.21177 7.45366 8.92768 7.88416 8.57535 8.24991V8.24932ZM11.8805 10.8376L9.73676 8.69382C10.043 8.31116 10.2968 7.88474 10.4869 7.42449C10.7436 6.80499 10.8848 6.12657 10.8848 5.41666C10.8848 4.70674 10.7436 4.02832 10.4869 3.40882C10.2209 2.76599 9.83068 2.18791 9.3471 1.70432C8.86352 1.22074 8.28543 0.83049 7.6426 0.56449C7.0231 0.307823 6.34468 0.166656 5.63477 0.166656C4.92485 0.166656 4.24643 0.307823 3.62693 0.56449C2.9841 0.83049 2.40602 1.22074 1.92243 1.70432C1.43885 2.18791 1.0486 2.76599 0.782599 3.40882C0.525932 4.02832 0.384766 4.70674 0.384766 5.41666C0.384766 6.12657 0.525932 6.80499 0.782599 7.42449C1.0486 8.06732 1.43885 8.64541 1.92243 9.12899C2.40602 9.61257 2.9841 10.0028 3.62693 10.2688C4.24643 10.5255 4.92485 10.6667 5.63477 10.6667C6.34468 10.6667 7.0231 10.5255 7.6426 10.2688C8.10227 10.0781 8.52927 9.82432 8.91193 9.51866L11.0557 11.6624C11.2838 11.8905 11.653 11.8905 11.8805 11.6624C12.108 11.4343 12.1086 11.0651 11.8805 10.8376Z" fill="white"/>
+                         </svg>
                      </div>
+                 </div>
 
+
+                 <div class="desktop:col-span-1 col-span-12 flex items-center justify-center order-first desktop:order-last desktop:justify-end">
+                     <button
+                         class="flex justify-end ml-6"
+                         aria-label="<?= $escaper->escapeHtmlAttr(__('Close search menu')) ?>"
+                         type="button"
+                         @click.prevent="
+                    searchOpen = !searchOpen;
+                    $dispatch('search-open');
+                "
+                     >
+
+                <span class="'hidden' : !open, 'block': open">
+                    <div class="flex row items-center desktop:ml-24">
+                        <p class="font-normal text-white leading-5 text-xs font-primary">Close</p>
+                        <span class="ml-2"><?= $hyvaicons->renderHtml('searchClose', 'w-3 h-3');?></span>
+                    </div>
+                </span>
+                     </button>
+                 </div>
              </div>
+         </div>
+
 
          <template x-if="suggestions.length > 0">
-             <div class="w-full leading-normal transition appearance-none text-grey-800 flex flex-col mt-1">
+             <div class="leading-normal transition appearance-none text-grey-800 flex flex-col mt-1">
                  <template x-for="suggestion in suggestions">
                      <div class="flex justify-between p-2 bg-container-lighter even:bg-container mb-1 cursor-pointer
                                  border border-container hover:bg-container-darker"

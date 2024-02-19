@@ -45,7 +45,7 @@ $recaptcha = $block->getData('viewModelRecaptcha');
         <div>
 
         <div class="desktop:flex desktop:flex-row desktop:items-center desktop:justify-around">
-            <input type="text" aria-label="<?= __('Label') ?>" id="" name="" placeholder="Placeholder" class="desktop:w-[364px] focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-11 font-primary w-full font-normal text-sm leading-6">
+            <input type="text" aria-label="<?= __('Label') ?>" id="" name="" placeholder="Subscribe to our newsletter!" class="desktop:w-[364px] focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-11 font-primary w-full font-normal text-sm leading-6">
 
             <?= $block->getBlockHtml('formkey') ?>
             <?= $recaptcha ? $recaptcha->getInputHtml(ReCaptcha::RECAPTCHA_FORM_ID_NEWSLETTER) : '' ?>
