@@ -19,6 +19,7 @@ use Hyva\Theme\ViewModel\SvgIcons;
 
 /** @var HeroiconsOutline $heroicons */
 $heroicons = $viewModels->require(HeroiconsOutline::class);
+
 /** @var SvgIcons $hyvaicons */
 $hyvaicons = $viewModels->require(SvgIcons::class);
 
@@ -100,8 +101,9 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 
                                 <button
                                     @click="openSubcategory('<?= /* @noEscape */ $index ?>')"
+                                    x-bind:class="{ 'rotate-180': open }"
                                     class="absolute right-0 flex items-center mr-3 w-3 h-3 cursor-pointer
-                                bg-container-lighter border-container"
+                                    bg-container-lighter border-container"
                                     aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>"
                                     aria-haspopup="true"
                                     :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'"

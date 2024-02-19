@@ -3669,6 +3669,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-bottom: 1.5rem;
 }
 
+.mx-7{
+  margin-left: 1.75rem;
+  margin-right: 1.75rem;
+}
+
 .-ml-px{
   margin-left: -1px;
 }
@@ -3859,6 +3864,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .-ml-3{
   margin-left: -0.75rem;
+}
+
+.ml-7{
+  margin-left: 1.75rem;
 }
 
 .box-border{
@@ -4908,6 +4917,16 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-7{
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
+.px-7{
+  padding-left: 1.75rem;
+  padding-right: 1.75rem;
 }
 
 .pb-1{
@@ -6598,6 +6617,11 @@ fieldset ~ fieldset{
   .desktop\:px-24{
     padding-left: 6rem;
     padding-right: 6rem;
+  }
+
+  .desktop\:text-base{
+    font-size: 1rem;
+    line-height: 1.5rem;
   }
 }
 

@@ -13,10 +13,14 @@ use Hyva\Theme\ViewModel\StoreConfig;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
+use Hyva\Theme\ViewModel\SvgIcons;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
 /** @var ViewModelRegistry $viewModels */
+
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
 
 $storeConfig = $viewModels->require(StoreConfig::class);
 $maxItemsToDisplay = $storeConfig->getStoreConfig('checkout/sidebar/max_items_display_count');
@@ -162,7 +166,6 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 
                 <header class="relative px-4 py-6 sm:px-6">
                     <p id="cart-drawer-title" class="text-lg font-medium leading-7 text-gray-900">
-                        <strong><?= $escaper->escapeHtml(__('My Cart')) ?></strong>
                         <span class="items-total text-sm"
                               x-show="maxItemsToDisplay && maxItemsToDisplay < itemsCount"
                               x-text="getItemCountTitle()">
@@ -173,8 +176,8 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                 <?= $block->getChildHtml('cart-drawer.items.before'); ?>
 
                 <template x-if="!itemsCount">
-                    <div class="relative px-4 py-6 bg-white border-bs sm:px-6 border-container">
-                        <?= $escaper->escapeHtml(__('Cart is empty')) ?>
+                    <div class="relative px-7 py-6 border-container text-text-color font-primary font-bold desktop:text-base text-xs leading-6">
+                        <?= $escaper->escapeHtml(__('You have no items in your shopping cart')) ?>
                     </div>
                 </template>
 
@@ -269,14 +272,22 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                 <?= $block->getChildHtml('cart-drawer.bottom'); ?>
             </div>
 
+
             <button
-                type="button"
+                class="absolute top-0 right-0 text-text-color"
                 @click="closeCartDrawer"
                 aria-label="<?= $escaper->escapeHtmlAttr(__('Close minicart')) ?>"
-                class="absolute top-0 right-0 p-4 mt-2 text-gray-300 transition-colors hover:text-black"
+                type="button"
             >
-                <?= $heroicons->xHtml('', 24, 24, ['aria-hidden' => 'true']); ?>
+            <span class="'hidden' : !open, 'block': open">
+               <div class="flex row items-center my-6 mx-7">
+                   <p class="font-normal text-text-color leading-5 desktop:text-base text-xs font-primary">Close</p>
+                <span class="ml-2"> <?= $hyvaicons->renderHtml('closeCart', 'w-3 h-3');?></span>
+               </div>
+            </span>
+
             </button>
+
         </div>
         <?= $block->getChildHtml('loading') ?>
     </div>
