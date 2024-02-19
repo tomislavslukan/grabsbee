@@ -75,30 +75,44 @@ $helper = $this->helper(SearchHelper::class);
         }
     }
 </script>
-<div class="container py-2 mx-auto text-black" x-data="initMiniSearch()">
+
+<div x-data="initMiniSearch()">
      <form class="form minisearch" id="search_mini_form" x-ref="form" @submit.prevent="search()"
           action="<?= $escaper->escapeUrl($helper->getResultUrl()) ?>" method="get" role="search">
         <label class="hidden" for="search" data-role="minisearch-label">
             <span><?= $escaper->escapeHtml(__('Search')) ?></span>
         </label>
-        <input id="search"
-               x-ref="searchInput"
-               type="search"
-               autocomplete="off"
-               name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
-               value="<?= /** @noEscape */ $helper->getEscapedQueryText() ?>"
-               placeholder="<?= $escaper->escapeHtmlAttr(__('Search entire store here...')) ?>"
-               maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
-               class="w-full p-2 text-lg leading-normal transition appearance-none text-grey-800
-                focus:outline-none focus:border-transparent lg:text-xl"
-               @focus.once="suggest"
-               @input.debounce.300="suggest"
-               @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
-               @search-open.window.debounce.10="
+
+         <div>
+             <div>
+                 <div class="flex justify-center items-center w-full h-[101px] box-border bg-primary">
+                     <div>
+                         <label class="relative block">
+                             <svg class="absolute top-1/2 transform -translate-y-1/2" width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                 <path d="M8.57535 8.24933C8.55552 8.2645 8.53627 8.28142 8.5176 8.30008C8.49893 8.31875 8.4826 8.33742 8.46685 8.35783C8.1011 8.71017 7.6706 8.99425 7.19518 9.19142C6.71568 9.38975 6.18893 9.5 5.63477 9.5C5.0806 9.5 4.55385 9.38975 4.07318 9.19083C3.57385 8.98433 3.1241 8.681 2.74727 8.30358C2.37043 7.92617 2.0671 7.477 1.86002 6.97767C1.66168 6.49758 1.55143 5.97083 1.55143 5.41667C1.55143 4.8625 1.66168 4.33575 1.8606 3.85508C2.0671 3.35633 2.37043 2.906 2.74727 2.52917C3.1241 2.15233 3.57443 1.849 4.07318 1.6425C4.55385 1.44358 5.0806 1.33333 5.63477 1.33333C6.18893 1.33333 6.71568 1.44358 7.19635 1.6425C7.69568 1.849 8.14543 2.15233 8.52227 2.52975C8.8991 2.90717 9.20243 3.35633 9.40952 3.85567C9.60785 4.33575 9.7181 4.8625 9.7181 5.41667C9.7181 5.97083 9.60785 6.49758 9.40893 6.97825C9.21177 7.45367 8.92768 7.88417 8.57535 8.24992V8.24933ZM11.8805 10.8376L9.73676 8.69383C10.043 8.31117 10.2968 7.88475 10.4869 7.4245C10.7436 6.805 10.8848 6.12658 10.8848 5.41667C10.8848 4.70675 10.7436 4.02833 10.4869 3.40883C10.2209 2.766 9.83068 2.18792 9.3471 1.70433C8.86352 1.22075 8.28543 0.8305 7.6426 0.5645C7.0231 0.307834 6.34468 0.166667 5.63477 0.166667C4.92485 0.166667 4.24643 0.307834 3.62693 0.5645C2.9841 0.8305 2.40602 1.22075 1.92243 1.70433C1.43885 2.18792 1.0486 2.766 0.782599 3.40883C0.525932 4.02833 0.384766 4.70675 0.384766 5.41667C0.384766 6.12658 0.525932 6.805 0.782599 7.4245C1.0486 8.06733 1.43885 8.64542 1.92243 9.129C2.40602 9.61258 2.9841 10.0028 3.62693 10.2688C4.24643 10.5255 4.92485 10.6667 5.63477 10.6667C6.34468 10.6667 7.0231 10.5255 7.6426 10.2688C8.10227 10.0781 8.52927 9.82433 8.91193 9.51867L11.0557 11.6624C11.2838 11.8905 11.653 11.8905 11.8805 11.6624C12.108 11.4343 12.1086 11.0651 11.8805 10.8376Z" fill="white"/>
+                             </svg />
+
+                             <input d="search"
+                                    x-ref="searchInput"
+                                    type="search"
+                                    autocomplete="off"
+                                    name="<?= $escaper->escapeHtmlAttr($helper->getQueryParamName()) ?>"
+                                    value="<?= /** @noEscape */ $helper->getEscapedQueryText() ?>"
+                                    placeholder="<?= $escaper->escapeHtmlAttr(__('Search entire store here...')) ?>"
+                                    maxlength="<?= $escaper->escapeHtmlAttr($helper->getMaxQueryLength()) ?>"
+                                    @focus.once="suggest"
+                                    @input.debounce.300="suggest"
+                                    @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
+                                    @search-open.window.debounce.10="
                     $el.focus()
                     $el.select()
-               "
-        />
+               " type="text" aria-label="<?= __('Search field') ?>" class="focus:border-secondary focus:ring-0 w-[336px] h-[42px] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary placeholder:pl-2" placeholder="Search entire store here..." />
+                         </label>
+                     </div>
+                 </div>
+             </div>
+         </div>
+
          <template x-if="suggestions.length > 0">
              <div class="w-full leading-normal transition appearance-none text-grey-800 flex flex-col mt-1">
                  <template x-for="suggestion in suggestions">

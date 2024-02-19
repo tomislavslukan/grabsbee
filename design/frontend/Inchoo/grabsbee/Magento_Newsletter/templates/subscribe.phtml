@@ -24,7 +24,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 // on the Magento_ReCaptchaNewsletter module
 $recaptcha = $block->getData('viewModelRecaptcha');
 ?>
-<div class="pr-4 lg:w-1/4 md:w-1/2">
+<div class="">
     <form
         class="form subscribe"
         action="<?= $escaper->escapeUrl($block->getFormActionUrl()) ?>"
@@ -35,29 +35,27 @@ $recaptcha = $block->getData('viewModelRecaptcha');
         aria-label="<?= $escaper->escapeHtmlAttr(__('Subscribe to Newsletter')) ?>"
     >
         <h2
-            class="mb-3 text-sm font-medium tracking-widest text-gray-900 uppercase title-font"
+            class="pt-5 text-center text-sm text-white font-bold tracking-widest uppercase"
             id="footer-newsletter-heading"
         >
             <?= $escaper->escapeHtml(__('Newsletter')) ?>
+
         </h2>
-        <div class="flex flex-wrap justify-center gap-2 md:justify-start">
-            <label for="newsletter-subscribe" class="sr-only">
-                <?= $escaper->escapeHtml(__('Email Address')) ?>
-            </label>
-            <input
-                name="email"
-                type="email"
-                required
-                id="newsletter-subscribe"
-                class="form-input inline-flex w-full"
-                placeholder="<?= $escaper->escapeHtmlAttr(__('Enter your email address')) ?>"
-                aria-describedby="footer-newsletter-heading"
-            >
+        <p class="font-primary font-normal text-xs text-white leading-5 text-center py-5">Sign up for our newsletter and be the first to find out about new products, discounts and more</p>
+        <div>
+
+        <div class="desktop:flex desktop:flex-row desktop:items-center desktop:justify-around">
+            <input type="text" aria-label="<?= __('Label') ?>" id="" name="" placeholder="Placeholder" class="desktop:w-[364px] focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-11 font-primary w-full font-normal text-sm leading-6">
+
             <?= $block->getBlockHtml('formkey') ?>
             <?= $recaptcha ? $recaptcha->getInputHtml(ReCaptcha::RECAPTCHA_FORM_ID_NEWSLETTER) : '' ?>
-            <button class="inline-flex shrink-0 ml-auto xl:mt-0 btn btn-primary">
+
+
+            <button class="desktop:w-[130px] desktop:ml-3 my-5 btn__primary w-full h-11 text-sm leading-6 tracking-wider" aria-label="<?= __('Primary mobile large') ?>">
                 <?= $escaper->escapeHtml(__('Subscribe')) ?>
             </button>
+        </div>
+
         </div>
         <div>
             <template x-if="displayErrorMessage">
@@ -75,6 +73,7 @@ $recaptcha = $block->getData('viewModelRecaptcha');
     <div class="w-full">
         <?= $recaptcha ? $recaptcha->getLegalNoticeHtml(ReCaptcha::RECAPTCHA_FORM_ID_NEWSLETTER) : '' ?>
     </div>
+
     <script>
         function initNewsletterForm() {
             return {

@@ -66,18 +66,22 @@
                     <arguments>
                         <argument name="cache_lifetime" xsi:type="string">3600</argument>
                     </arguments>
+
                     <block name="topmenu_mobile"
                            as="topmenu.mobile"
                            template="Magento_Theme::html/header/menu/mobile.phtml"
                     ></block>
 
-                    <block name="topmenu_desktop"
-                           as="topmenu.desktop"
-                           template="Magento_Theme::html/header/menu/desktop.phtml"
-                    ></block>
                 </block>
             </block>
+
+            <block name="topmenu_desktop"
+                   as="topmenu.desktop"
+                   template="Magento_Theme::html/header/menu/desktop.phtml"
+            ></block>
+
         </referenceContainer>
+
 
         <referenceContainer name="top.container">
             <block class="Magento\Theme\Block\Html\Breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
@@ -89,12 +93,15 @@
 
         <referenceContainer name="footer">
             <block name="footer-content" template="Magento_Theme::html/footer.phtml">
-                <block name="footer-static-links" template="Magento_Theme::html/footer/links.phtml"/>
+
                 <block class="Magento\Cms\Block\Block" name="footer-cms-content">
                     <arguments>
                         <argument name="block_id" xsi:type="string">footer_content</argument>
                     </arguments>
                 </block>
+
+                <!--<block name="footer-static-links" template="Magento_Theme::html/footer/links.phtml"/>-->
+
                 <block
                     class="Magento\Theme\Block\Html\Footer"
                     name="footer-copyright"

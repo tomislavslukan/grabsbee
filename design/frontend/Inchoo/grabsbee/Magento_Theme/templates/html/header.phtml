@@ -70,11 +70,11 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
     }
 </script>
 <div id="header"
-     class="relative bg-primary z-30 w-full border-b shadow bg-container-lighter border-container-lighter"
+     class="relative bg-primary border-none z-30 w-full border-b shadow bg-container-lighter border-container-lighter"
      x-data="initHeader()"
      @private-content-loaded.window="getData(event.detail.data)"
 >
-    <div class="container flex flex-wrap items-center justify-between w-full px-6 py-3 mx-auto mt-0">
+    <div class="flex items-center justify-between w-full px-6 py-3 mt-0 desktop:px-24">
         <!--Logo-->
         <?= $block->getChildHtml('logo'); ?>
 

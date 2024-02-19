@@ -30,25 +30,25 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 
 ?>
 <div x-data="initMenuDesktop<?= $escaper->escapeHtml($uniqueId) ?>()"
-     class="z-20 order-2 sm:order-1 lg:order-2 navigation hidden lg:flex"
+     class="bg-secondary relative"
 >
     <!-- desktop -->
     <div x-ref="nav-desktop"
          @load.window="setActiveMenu($root)"
-         class="hidden lg:block lg:relative lg:min-h-0 lg:px-8 lg:w-auto lg:pt-0">
+         class="hidden lg:block lg:min-h-0 lg:px-24 lg:w-auto lg:pt-0">
         <nav
             class="duration-150 ease-in-out transform w-auto relative min-h-0 transition-display"
             aria-label="<?= $escaper->escapeHtmlAttr(__('Main menu')) ?>"
         >
             <ul class="flex justify-start">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
-                    <li class="relative mr-2 level-0"
+                    <li class="level-0"
                         @mouseenter="hoverPanelActiveId = '<?= /* @noEscape */ (string) $index ?>'"
                         @mouseleave="hoverPanelActiveId = 0"
                         @keyup.escape="hoverPanelActiveId = 0"
                     >
-                        <span class="flex items-center gap-1 p-3 text-md bg-opacity-95">
-                            <a class="w-full py-3 text-base text-gray-700 hover:underline level-0"
+                        <span class="flex items-center gap-1 mr-6 font-heading text-white uppercase font-normal text-xs py-4 leading-5 tracking-wide">
+                            <a class="w-full font-heading text-white uppercase font-normal text-xs leading-5 tracking-wider"
                                href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
                                @focus="hoverPanelActiveId = 0"
@@ -69,31 +69,57 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                 </button>
                             <?php endif; ?>
                         </span>
+
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <ul
-                                class="absolute z-10 hidden px-6 py-4 -ml-6 shadow-lg bg-container-lighter/95"
-                                :class="{
+                            <div>
+                                <ul
+                                    class="absolute left-0 z-10 bg-white hidden shadow-lg w-full h-auto py-6"
+                                    :class="{
                                     'hidden' : hoverPanelActiveId !== '<?= /* @noEscape */ (string) $index ?>',
                                     'block' : hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>'
                                 }"
-                            >
-                                <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
-                                    <li>
-                                        <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
-                                           title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>"
-                                           class="block w-full px-3 py-1 my-1 whitespace-nowrap first:mt-0 hover:underline"
-                                           @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index) ?>]').focus())"
-                                        >
-                                            <span class="text-base text-gray-700">
+                                >
+                                    <?php foreach ($menuItems as $index2 => $menuItem): ?>
+
+                                            <li class="flex flex-row text-center justify-center">
+                                                <a href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
+                                                   title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
+                                                   class="block w-full px-3 py-1 my-1 whitespace-nowrap first:mt-0 hover:underline"
+                                                   @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index2) ?>]').focus())"
+                                                >
+                                            <span class="font-primary font-bold text-sm leading-6 tracking-wide uppercase">
+                                                <?= $escaper->escapeHtml($menuItem['name']) ?>
+                                            </span>
+                                                </a>
+                                            </li>
+
+                                    <?php endforeach; ?>
+
+                                    <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
+
+                                        <li class="flex flex-row text-center justify-center">
+                                            <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
+                                               title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>"
+                                               class="block w-full px-3 py-1 my-1 whitespace-nowrap first:mt-0 hover:underline"
+                                               @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index) ?>]').focus())"
+                                            >
+                                            <span class="font-primary font-bold text-sm leading-6 tracking-wide uppercase">
                                                 <?= $escaper->escapeHtml($subMenuItem['name']) ?>
                                             </span>
-                                        </a>
-                                    </li>
-                                <?php endforeach; ?>
-                            </ul>
+                                            </a>
+                                        </li>
+
+                                    <?php endforeach; ?>
+
+                                </ul>
+                            </div>
                         <?php endif; ?>
+
                     </li>
                 <?php endforeach; ?>
+                <ul class="flex flex-row items-center">
+                    <li class="font-heading text-white uppercase font-normal text-xs py-4 leading-5 tracking-wide"><a href="#">Contact us</a></li>
+                </ul>
             </ul>
         </nav>
     </div>
@@ -110,9 +136,9 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                 Array.from(menuNode.querySelectorAll('a')).filter(link => {
                     return link.href === window.location.href.split('?')[0];
                 }).map(item => {
-                    item.classList.add('underline');
+                    item
                     item.closest('div.level-0') &&
-                    item.closest('div.level-0').querySelector('a.level-0').classList.add('underline');
+                    item.closest('div.level-0').querySelector('a.level-0')
                 });
             },
             openMenuOnClick(menuNode) {
