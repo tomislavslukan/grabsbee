@@ -22,6 +22,9 @@ use Hyva\Theme\ViewModel\SvgIcons;
 /** @var SvgIcons $hyvaicons */
 $hyvaicons = $viewModels->require(SvgIcons::class);
 
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
+
 $storeConfig = $viewModels->require(StoreConfig::class);
 $maxItemsToDisplay = $storeConfig->getStoreConfig('checkout/sidebar/max_items_display_count');
 
@@ -182,14 +185,16 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                 </template>
 
                 <template x-if="itemsCount">
-                    <div class="relative grid gap-6 px-4 py-6 overflow-y-auto overscroll-y-contain bg-white border-b
+
+                    <div class="relative grid gap-6 px-4 py-6 overflow-y-auto overscroll-y-contain bg-white
                                 sm:gap-8 sm:px-6 border-container"
                     >
+                        <p class="font-primary font-bold text-text-color leading-6 text-xs desktop:text-base uppercase">{?} item in cart</p>
+                        <p class="font-primary font-bold text-text-color leading-6 text-xs desktop:text-base mb-6">Recently added items</p>
                         <template x-for="item in cartItems">
-                            <div class="flex items-start p-3 -m-3 space-x-4 transition duration-150
-                        ease-in-out rounded-lg hover:bg-gray-100">
+                            <div class="flex items-start p-3 -m-3 space-x-4">
                                 <a :href="item.product_url"
-                                    class="w-1/4"
+                                    class="w-auto h-[78px]"
                                     :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Product "%0"')) ?>', item.product_name)"
                                 >
                                     <img
@@ -202,10 +207,18 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                                 </a>
                                 <div class="w-3/4 space-y-2">
                                     <div>
-                                        <p class="text-xl">
-                                            <span x-html="item.qty"></span> x <span x-html="item.product_name"></span>
-                                        </p>
-                                        <p class="text-sm"><span x-html="item.product_sku"></span></p>
+                                        <p x-html="item.product_name" class="font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-secondary"></p>
+                                    </div>
+                                    <div>
+                                        <span><strong class="font-primary font-bold text-xs desktop:text-base leading-6 text-text-color">Color: </strong><span x-html="item.product_color" class="font-primary font-normal text-xs desktop:text-base leading-5 text-text-color"></span></span>
+                                    </div>
+                                    <div>
+                                        <strong><p x-html="item.product_price" class="font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-text-color"></p></strong>
+                                    </div>
+                                    <div class="pt-5">
+                                        <span class="font-primary font-bold text-xs desktop:text-base leading-6 text-text-color inline">Qty:
+                                            <input type="text" :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Quantity "%0"')) ?>', item.product_name)" id="qty" name="qty" placeholder="0" class="inline focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-[42px] font-primary w-[63px] font-normal text-sm leading-6">
+                                        </span>
                                     </div>
                                     <template x-for="option in item.options">
                                         <div class="pt-2">
@@ -213,21 +226,22 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                                             <p class="text-secondary" x-html="option.value"></p>
                                         </div>
                                     </template>
-                                    <p><span x-html="item.product_price"></span></p>
-                                    <div class="pt-4">
+                                    <div class="flex flex-row justify-end">
+
                                         <a :href="item.configure_url"
+                                           class="p-6"
                                             x-show="item.product_type !== 'grouped'"
-                                            class="inline-flex p-2 mr-2 btn btn-primary"
                                             :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Edit product "%0"')) ?>', item.product_name)"
                                         >
-                                            <?= $heroicons->pencilHtml('', 20, 20, ['aria-hidden' => 'true']); ?>
+                                            <?= $hyvaicons->renderHtml('pencil', 'w-5 h-5');?>
                                         </a>
+
                                         <button type="button"
-                                                class="inline-flex p-2 btn btn-primary"
+                                                class="p-6 pl-0"
                                                 @click="deleteItemFromCart(item.item_id)"
                                                 :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Remove product "%0" from cart')) ?>', item.product_name)"
                                         >
-                                            <?= $heroicons->trashHtml('', 20, 20, ['aria-hidden' => 'true']); ?>
+                                            <?= $hyvaicons->renderHtml('trash', 'w-5 h-5');?>
                                         </button>
                                     </div>
 
@@ -241,28 +255,34 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                     <div>
                         <?= $block->getChildHtml('cart-drawer.totals.before'); ?>
 
-                        <div class="relative grid gap-6 px-4 py-6 bg-white sm:gap-8 sm:px-6">
-                            <div class="w-full p-3 -m-3 space-x-4 transition duration-150 ease-in-out rounded-lg
-                                        hover:bg-gray-100"
+                        <div class="relative grid px-4 py-6 bg-white">
+                            <div class="w-full"
                             >
-                                <p><?= $escaper->escapeHtml(__('Subtotal')) ?>: <span x-html="cart.subtotal"></span></p>
+                                <div class="flex flex-row justify-between items-center border-b-2 border-t-2 border-primary py-4">
+                                    <p class="font-primary font-normal font-xs desktop:font-base leading-5 desktop:leading-6 text-text-color"><?= $escaper->escapeHtml(__('Cart subtotal')) ?></p>
+                                    <p x-html="cart.subtotal" class="font-primary font-bold font-xs desktop:font-base leading-6 text-text-color"></p>
+                                </div>
                             </div>
-                            <div class="w-full p-3 -m-3 space-x-4 transition duration-150 ease-in-out rounded-lg
-                                        hover:bg-gray-100"
-                            >
-                                <a @click.prevent.stop="$dispatch('toggle-authentication',
+                            <div class="w-full">
+
+                                <div class="flex flex-row justify-between items-center">
+
+                                    <button @click.prevent.stop="$dispatch('toggle-authentication',
                                     {url: '<?= $escaper->escapeUrl($block->getUrl('checkout')) ?>'});"
-                                    href="<?= $escaper->escapeUrl($block->getUrl('checkout')) ?>"
-                                    class="inline-flex btn btn-primary"
-                                >
-                                    <?= $escaper->escapeHtml(__('Checkout')) ?>
-                                </a>
-                                <span><?= $escaper->escapeHtml(__('or')) ?></span>
-                                <a href="<?= $escaper->escapeUrl($block->getUrl('checkout/cart')) ?>"
-                                    class="underline"
-                                >
-                                    <?= $escaper->escapeHtml(__('View and Edit Cart')) ?>
-                                </a>
+                                       href="<?= $escaper->escapeUrl($block->getUrl('checkout')) ?>"
+                                       class="btn__primary w-full h-11 text-sm leading-6 tracking-wider py-2 my-6"
+                                    >
+                                        <?= $escaper->escapeHtml(__('Checkout')) ?>
+                                    </button>
+                                </div>
+
+                                <div>
+                                    <a href="<?= $escaper->escapeUrl($block->getUrl('checkout/cart')) ?>"
+                                       class="font-primary font-normal font-xs desktop:font-base leading-6 text-secondary uppercase text-center flex justify-center"
+                                    >
+                                        <?= $escaper->escapeHtml(__('View and Edit Cart')) ?>
+                                    </a>
+                                </div>
                             </div>
                             <?= $block->getChildHtml('extra_actions') ?>
                         </div>

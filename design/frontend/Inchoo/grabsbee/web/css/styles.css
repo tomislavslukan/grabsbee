@@ -3874,6 +3874,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-top: auto;
 }
 
+.mt-5{
+  margin-top: 1.25rem;
+}
+
 .box-border{
   box-sizing: border-box;
 }
@@ -3996,6 +4000,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .h-full{
   height: 100%;
+}
+
+.h-\[78px\]{
+  height: 78px;
 }
 
 .max-h-screen{
@@ -4132,6 +4140,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .w-screen{
   width: 100vw;
+}
+
+.w-\[63px\]{
+  width: 63px;
 }
 
 .max-w-\[330px\]{
@@ -4842,6 +4854,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   padding: 2rem;
 }
 
+.p-6{
+  padding: 1.5rem;
+}
+
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -5006,6 +5022,14 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .pt-6{
   padding-top: 1.5rem;
+}
+
+.pt-8{
+  padding-top: 2rem;
+}
+
+.pl-0{
+  padding-left: 0px;
 }
 
 .text-left{
@@ -6629,6 +6653,10 @@ fieldset ~ fieldset{
 
   .desktop\:text-base{
     font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .desktop\:leading-6{
     line-height: 1.5rem;
   }
 }
