@@ -11,6 +11,7 @@ use Hyva\Theme\ViewModel\HeroiconsSolid;
 use Hyva\Theme\ViewModel\Navigation;
 use Magento\Framework\View\Element\Template;
 use Magento\Framework\Escaper;
+use Hyva\Theme\ViewModel\SvgIcons;
 
 /** @var Template $block */
 /** @var Escaper $escaper */
@@ -21,6 +22,9 @@ $viewModelNavigation = $viewModels->require(Navigation::class, $block);
 
 /** @var HeroiconsSolid $heroiconsSolid */
 $heroiconsSolid = $viewModels->require(HeroiconsSolid::class);
+
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
 
 $uniqueId = '_' . uniqid();
 
@@ -35,21 +39,22 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
     <!-- desktop -->
     <div x-ref="nav-desktop"
          @load.window="setActiveMenu($root)"
-         class="hidden lg:block lg:min-h-0 lg:px-24 lg:w-auto lg:pt-0">
-
+         class="mx-auto hidden w-full lg:block lg:min-h-0"
+    >
         <nav
-            class="duration-150 ease-in-out transform w-auto relative min-h-0 transition-display"
-            aria-label="<?= $escaper->escapeHtmlAttr(__('Main menu')) ?>"
+            class="mx-24"
+            aria-label="<?= $escaper->escapeHtmlAttr(__('navigation menu')) ?>"
         >
-            <ul class="flex justify-start">
+            <ul class="container mx-auto flex items-center">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
-                    <li class="level-0"
+                    <li class="level-0 before:content-[''] mb-0 block hover:text-white visited:text-white"
                         @mouseenter="hoverPanelActiveId = '<?= /* @noEscape */ (string) $index ?>'"
                         @mouseleave="hoverPanelActiveId = 0"
                         @keyup.escape="hoverPanelActiveId = 0"
+                        style="text-shadow: 0 2px 5px black;"
                     >
-                        <span class="flex items-center gap-1 mr-6 font-heading text-white uppercase font-normal text-xs py-4 leading-5 tracking-wide">
-                            <a class="w-full font-heading text-white uppercase font-normal text-xs leading-5 tracking-wider"
+                        <span class="mr-6 flex items-center py-4">
+                            <a class="mr-2 w-full text-xs font-normal uppercase leading-5 tracking-widest text-white font-heading"
                                href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
                                @focus="hoverPanelActiveId = 0"
@@ -63,56 +68,92 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                     :aria-expanded="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'true' : 'false'"
                                     @click="openMenuOnClick('<?= /* @noEscape */ (string) $index ?>')"
                                 >
-                                    <?= $heroiconsSolid->chevronDownHtml("flex self-center h-5 w-5", 25, 25, ['aria-hidden' => 'true']) ?>
+                                    <span aria-hidden="true"
+                                    >
+                                        <svg width="9" height="6" viewBox="0 0 9 6" fill="#4E4E4E" class="fill-white transition-transform duration-300" :class="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'rotate-180' : ''" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M0.242039 1.66243L3.91704 5.16243C4.15652 5.39051 4.54424 5.39051 4.78311 5.16243L8.45811 1.66243C8.6976 1.43435 8.6976 1.0651 8.45811 0.837597C8.21862 0.610097 7.83091 0.609514 7.59204 0.837597L4.35007 3.92518L1.10811 0.837597C0.868626 0.609514 0.480913 0.609514 0.242039 0.837597C0.00316362 1.06568 0.00255111 1.43493 0.242039 1.66243Z"/>
+                                        </svg>
+                                    </span>
+
                                     <span class="sr-only">
                                         <?= $escaper->escapeHtml(__('Show submenu for %1 category', $menuItem['name'])) ?>
                                     </span>
                                 </button>
                             <?php endif; ?>
                         </span>
-
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <div>
-                                <ul
-                                    class="absolute left-0 z-10 bg-white hidden shadow-lg w-full h-auto py-6"
-                                    :class="{
-                                    'hidden' : hoverPanelActiveId !== '<?= /* @noEscape */ (string) $index ?>',
-                                    'block' : hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>'
-                                }"
-                                >
-
+                            <div class="absolute left-0 bg-white shadow-md block flex w-full items-center justify-center z-999"
+                                 :class="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'scale-y-100' : 'scale-y-0'"
+                            >
+                                <ul class="pt-4 flex gap-8 pb-3 text-xs leading-5 uppercase">
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
-
-                                        <li class="flex flex-row text-center justify-center">
+                                        <li style="text-shadow: none;"
+                                            class="before:content-[''] flex flex-col items-start"
+                                        >
                                             <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
                                                title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>"
-                                               class="block w-full px-3 py-1 my-1 whitespace-nowrap first:mt-0 hover:underline"
+                                               class="block w-full font-bold tracking-widest text-xs leading-5 tracking-wide uppercase"
                                                @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index) ?>]').focus())"
                                             >
-                                            <span class="font-primary font-bold text-sm leading-6 tracking-wide uppercase">
-                                                <?= $escaper->escapeHtml($subMenuItem['name']) ?>
-                                            </span>
+                                                <span class="text-xs leading-5 tracking-wide uppercase text-black">
+                                                    <?= $escaper->escapeHtml($subMenuItem['name']) ?>
+                                                </span>
                                             </a>
+
+                                            <?php if (!empty($subMenuItem['childData'])): ?>
+                                                <ul class="mt-6">
+                                                    <?php foreach ($subMenuItem['childData'] as $thirdSubMenuItem): ?>
+                                                        <li class="before:content-[''] block max-w-[210px]">
+                                                            <a
+                                                                href="<?= $escaper->escapeUrl($thirdSubMenuItem['url']) ?>"
+                                                                title="<?= $escaper->escapeHtmlAttr($thirdSubMenuItem['name']) ?>"
+                                                                class="text-black text-xs leading-5 tracking-wide uppercase text-black"
+                                                            >
+                                                                <?= $escaper->escapeHtml($thirdSubMenuItem['name']) ?>
+                                                            </a>
+                                                        </li>
+                                                    <?php endforeach; ?>
+                                                </ul>
+                                            <?php endif; ?>
                                         </li>
-
                                     <?php endforeach; ?>
+                                    <li class="before:content-[''] flex flex-col items-start text-black" style="text-shadow: none;">
 
+                                        <a href="#" class="text-xs font-bold leading-5 tracking-wide">Contact Us</a>
+                                        <ul class="mt-4 ml-0 normal-case">
+                                            <li class="before:content-[''] flex flex-row items-center">
+                                                <?= $hyvaicons->renderHtml('location', 14,14); ?>
+                                                <p class="ml-2">Trg slobode 6</p>
+                                            </li>
+                                            <li class="before:content-[''] flex flex-row items-center ">
+                                                <?= $hyvaicons->renderHtml('tel', 14, 14); ?>
+                                                <p class="ml-2">+385958811630</p>
+                                            </li>
+                                            <li class="before:content-[''] flex flex-row items-center">
+                                                <?= $hyvaicons->renderHtml('email', 14, 14); ?>
+                                                <p class="ml-2">filip.svetlicic@gmail.com</p>
+                                            </li>
+                                        </ul>
+                                    </li>
                                 </ul>
-
                             </div>
                         <?php endif; ?>
-
                     </li>
                 <?php endforeach; ?>
-                <ul class="flex flex-row items-center">
-                    <li class="font-heading text-white uppercase font-normal text-xs py-4 leading-5 tracking-wide"><a href="#">Contact us</a></li>
-                </ul>
+                <li class="block before:content-[''] mb-0"
+                    style="text-shadow: 0 2px 5px black;"
+                >
+                    <a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>" class="text-xs font-normal uppercase leading-5 tracking-wide font-heading text-white">
+                        Contact us
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>
-
-
 </div>
+
+
+
 <script>
     'use strict';
 
