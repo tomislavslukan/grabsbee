@@ -1,0 +1,203 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\HeroiconsOutline;
+use Hyva\Theme\ViewModel\Store;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+// phpcs:disable Generic.Files.LineLength.TooLong
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+/** @var Store $viewModelStore */
+$viewModelStore = $viewModels->require(Store::class);
+
+/** @var HeroiconsOutline $heroicons */
+$heroicons = $viewModels->require(HeroiconsOutline::class);
+
+$title = (string) $block->getTitle();
+$items = $block->getItems() ?? [];
+if (is_object($items) && $items instanceof Iterator) {
+    $items = iterator_to_array($items);
+}
+if (!$itemCount = count($items)) {
+    return '';
+}
+$sliderItemRenderer = $block->getChildBlock('slider.item.template');
+$sliderIndex = 1;
+?>
+    <script>
+        'use strict';
+
+        function initSliderComponent() {
+            return {
+                active: 0,
+                itemCount: 0,
+                getSlider() {
+                    return this.$root.querySelector('.js_slides');
+                },
+                pageSize: 1,
+                pageFillers: 0,
+                calcPageSize() {
+                    const slider = this.getSlider();
+                    if (slider) {
+                        this.itemCount = slider.querySelectorAll('.js_slide').length;
+                        this.pageSize = Math.round(slider.clientWidth / slider.querySelector('.js_slide').clientWidth);
+                        this.pageFillers = (
+                            this.pageSize * Math.ceil(this.itemCount / this.pageSize)
+                        ) - this.itemCount;
+                    }
+                },
+                calcActive() {
+                    const slider = this.getSlider();
+                    if (slider) {
+                        const sliderItems = this.itemCount + this.pageFillers;
+                        const calculatedActiveSlide = slider.scrollLeft / (slider.scrollWidth / sliderItems);
+                        this.active = Math.round(calculatedActiveSlide / this.pageSize) * this.pageSize;
+                    }
+                },
+                scrollPrevious() {
+                    this.scrollTo(this.active - this.pageSize);
+                },
+                scrollNext() {
+                    this.scrollTo(this.active + this.pageSize);
+                },
+                scrollTo(idx) {
+                    const slider = this.getSlider();
+                    if (slider) {
+                        const slideWidth = slider.scrollWidth / (this.itemCount + this.pageFillers);
+                        slider.scrollLeft = Math.floor(slideWidth) * idx;
+                        this.active = idx;
+                    }
+                },
+                skipCarouselToNavigation(navSelector) {
+                    const element = document.getElementById(navSelector)
+                    if (element) {
+                        element.scrollIntoView({behavior: 'smooth', block: 'end'});
+                        const button = element.querySelector('button:not([disabled])');
+                        this.$nextTick(() => button && button.focus({preventScroll: true}))
+                    }
+                }
+            }
+        }
+    </script>
+<?php if ($items): ?>
+    <section class="relative"
+             x-data="initSliderComponent()"
+             x-init="calcPageSize();"
+             x-id="['slider-nav', 'slider-end', 'slider-desc']"
+             @resize.window.debounce="calcPageSize(); $nextTick( function() { calcActive() })"
+             role="group"
+             aria-roledescription="<?= $escaper->escapeHtml(__('Slider')) ?>"
+             aria-label="<?= $escaper->escapeHtml(__('Latest items')) ?>"
+             :aria-describedby="$id('slider-desc')"
+    >
+        <span
+            class="sr-only"
+            :id="$id('slider-desc')"
+            tabindex="-1"
+        >
+                <?= $escaper->escapeHtml(__('Navigating through the elements of the carousel is possible using the tab key. You can skip the carousel or go straight to carousel navigation using the skip links.')) ?>
+        </span>
+        <a
+            :href="`#${$id('slider-end')}`"
+            class="action skip sr-only focus:not-sr-only focus:absolute focus:z-30 focus:bg-white"
+        >
+            <?= $escaper->escapeHtml(__('Press to skip the slider')) ?>
+        </a>
+        <button
+            x-show="itemCount > pageSize"
+            type="button"
+            class="action skip sr-only focus:not-sr-only focus:absolute focus:z-30 focus:bg-white"
+            @click.prevent="skipCarouselToNavigation($id('slider-nav'))"
+        >
+            <?= $escaper->escapeHtml(__('Press to go to carousel navigation')) ?>
+        </button>
+        <div class="relative w-full overflow-x-hidden focus-within:ring-1 active:ring-0 ring-blue-500 ring-opacity-50">
+            <div class="relative flex flex-nowrap w-full overflow-auto transition-all js_slides snap"
+                 @scroll.debounce="calcActive"
+            >
+                <?php foreach ($items as $item): ?>
+                    <div role="group"
+                         x-id="['slide-desc']"
+                         aria-roledescription="<?= $escaper->escapeHtml(__('Slide')) ?>"
+                         :aria-hidden="<?= (int) $sliderIndex ?> > active && <?= (int) $sliderIndex ?> <= (active + pageSize) ? 'false' : 'true'"
+                         aria-label="<?= $escaper->escapeHtmlAttr(__('Slide %1 of %2', $sliderIndex++, count($items))) ?>"
+                         :aria-describedby="$id('slide-desc')"
+                         class="relative flex shrink-0 w-full js_slide"
+                    >
+                        <?= $sliderItemRenderer->setItem($item)->toHtml() ?>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <template x-if="itemCount > pageSize">
+            <div
+                role="group"
+                aria-label="<?= $escaper->escapeHtml(__('Slide controls')) ?>"
+                :id="$id('slider-nav')"
+            >
+                <div class="hidden absolute top-1/2 -translate-y-1/2 md:flex md:justify-between md:w-full">
+                    <button
+                        role="button"
+                        aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
+                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75"
+                        :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
+                        @click="scrollNext"
+                    >
+
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.95825 15.5633L4.49614 9.90278H16.4523C17.0219 9.90278 17.4842 9.42367 17.4842 8.83333C17.4842 8.243 17.0219 7.76389 16.4523 7.76389H4.49614L9.95825 2.10332C10.3617 1.68517 10.3617 1.00821 9.95825 0.591126C9.55476 0.174042 8.90153 0.172973 8.49907 0.591126L1.27543 8.07724C1.17636 8.1799 1.10206 8.29754 1.0515 8.42374C0.947271 8.68575 0.947271 8.98199 1.0515 9.244C1.10103 9.36806 1.1743 9.48355 1.27027 9.58515C1.27233 9.58729 1.27337 9.58836 1.27543 9.5905L8.49907 17.0766C8.90256 17.4948 9.55579 17.4948 9.95825 17.0766C10.3607 16.6585 10.3617 15.9815 9.95825 15.5644V15.5633Z" fill="#4E4E4E"/>
+                        </svg>
+
+                    </button>
+
+                    <button
+                        role="button"
+                        aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
+                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75"
+                        :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
+                        @click="scrollNext"
+                    >
+
+                        <svg width="19" height="20" viewBox="0 0 19 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.0455 2.63029L15.0042 8.80546L1.96108 8.80546C1.33966 8.80546 0.835316 9.32813 0.835316 9.97213C0.835316 10.6161 1.33966 11.1388 1.96108 11.1388L15.0042 11.1388L9.0455 17.314C8.60533 17.7701 8.60533 18.5086 9.0455 18.9636C9.48567 19.4186 10.1983 19.4198 10.6373 18.9636L18.5177 10.797C18.6257 10.685 18.7068 10.5566 18.762 10.419C18.8757 10.1331 18.8757 9.80996 18.762 9.52413C18.7079 9.38879 18.628 9.26279 18.5233 9.15196C18.521 9.14963 18.5199 9.14846 18.5177 9.14613L10.6373 0.979462C10.1972 0.523294 9.48455 0.523294 9.0455 0.979462C8.60645 1.43563 8.60533 2.17413 9.0455 2.62913V2.63029Z" fill="#4E4E4E"/>
+                        </svg>
+
+
+                    </button>
+                </div>
+
+                <div class="flex gap-3 justify-center items-center absolute w-full mt-8">
+                    <?php for ($i=0; $i < $itemCount; $i++): ?>
+                        <button
+                            role="button"
+                            aria-label="<?= $escaper->escapeHtmlAttr(__('Show slide %1 of %2', $i + 1, $itemCount)) ?>"
+                            class="w-2 h-2 rounded-full shadow-md cursor-pointer hover:bg-gray-25"
+                            @click="scrollTo(<?= (int) $i ?>)"
+                            :class="{
+                                'w-2 h-2 bg-secondary': active === <?= (int) $i ?>,
+                                'w-2 h-2 bg-gray-10': active !== <?= (int) $i ?>,
+                                'hidden': (pageSize !== 1 && !!(<?= (int) $i ?> % pageSize))
+                            }"
+                        >
+                        </button>
+                    <?php endfor; ?>
+                </div>
+            </div>
+        </template>
+        <span :id="$id('slider-end')" tabindex="-1"></span>
+    </section>
+<?php endif ?>

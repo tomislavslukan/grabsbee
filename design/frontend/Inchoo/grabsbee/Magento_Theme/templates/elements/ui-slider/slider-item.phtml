@@ -1,0 +1,42 @@
+<?php declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var ViewModelRegistry $viewModels */
+
+$item = $block->getData('item');
+
+?>
+<div class="block h-[300px] w-full relative md:h-[500px]">
+    <img class="absolute h-full w-full object-cover" src="<?= $escaper->escapeHtmlAttr($item['image_url']) ?>"
+         alt="<?= $escaper->escapeHtmlAttr($item['text_small']) ?>"
+         width="<?= $escaper->escapeHtmlAttr($item['image_width'] ?? '1280') ?>"
+         height="<?= $escaper->escapeHtmlAttr($item['image_height'] ?? '853') ?>"
+         loading="lazy"
+    />
+    <div class="absolute text-center w-full bottom-0 bg-gradient-to-t from-gray-800/50 to-transparent top-1/2">
+
+        <div class="flex flex-col items-center">
+            <div>
+                <div class="text-white text-xl leading-7 font-semibold drop-shadow-md">
+                    <?= $escaper->escapeHtml($item['text_small']) ?>
+                </div>
+
+                <a href="<?= $escaper->escapeUrl($item['url'])?>"
+                   :id="$id('slide-desc')"
+                   class="font-heading font-normal text-3xl leading-12 text-white"
+                   style="text-shadow: 0px 2px 4px black;"
+                >
+                    <?= $escaper->escapeHtml($item['text_large']) ?>
+                </a>
+            </div>
+
+            <button class="mt-[73px] btn__primary w-[151px] h-[48px] text-sm leading-6 tracking-wider px-3 py-2" aria-label="Primary mobile">Buy the disc</button>
+        </div>
+
+    </div>
+</div>

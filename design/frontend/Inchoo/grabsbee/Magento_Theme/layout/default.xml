@@ -91,7 +91,12 @@
             <block class="Magento\Theme\Block\Html\Title" name="page.main.title" template="Magento_Theme::html/title.phtml"/>
         </referenceContainer>
 
+        <referenceContainer name="page.wrapper">
+            <block name="categories" template="Magento_Theme::html/featured-categories.phtml"/>
+        </referenceContainer>
+
         <referenceContainer name="footer">
+
             <block name="footer-content" template="Magento_Theme::html/footer.phtml">
 
                 <block class="Magento\Cms\Block\Block" name="footer-cms-content">
@@ -109,6 +114,8 @@
                     as="copyright"
                 />
             </block>
+
+
         </referenceContainer>
 
         <referenceContainer name="after.body.start">
@@ -120,5 +127,6 @@
         </referenceContainer>
 
         <block class="Magento\Framework\View\Element\Template" name="head.additional" as="head.additional" template="Magento_Theme::html/container.phtml"/>
+
     </body>
 </page>

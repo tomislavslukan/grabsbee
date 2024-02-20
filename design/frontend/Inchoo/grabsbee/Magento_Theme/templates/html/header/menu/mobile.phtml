@@ -98,21 +98,19 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                             </a>
                             <?php if (!empty($menuItem['childData'])): ?>
 
-
                                 <button
                                     @click="openSubcategory('<?= /* @noEscape */ $index ?>')"
-                                    x-bind:class="{ 'rotate-180': open }"
-                                    class="absolute right-0 flex items-center mr-3 w-3 h-3 cursor-pointer
-                                    bg-container-lighter border-container"
+                                    class="absolute right-0 flex items-center mr-3 w-3 h-3 cursor-pointer bg-container-lighter border-container transition-transform transform origin-right"
                                     aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>"
                                     aria-haspopup="true"
                                     :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'"
+
+                                    :class="{ 'rotate-180': mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>' }"
                                 >
                                     <div>
                                         <span class="w-full h-full p-1">
-                                        <?= $hyvaicons->renderHtml('dropdownIcon', ''); ?>
-                                    </span>
-
+                                            <?= $hyvaicons->renderHtml('dropdownIcon', ''); ?>
+                                        </span>
                                     </div>
                                 </button>
 

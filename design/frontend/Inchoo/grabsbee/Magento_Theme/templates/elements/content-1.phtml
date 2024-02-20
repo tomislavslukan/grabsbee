@@ -1,0 +1,63 @@
+<?php
+/**
+ * Hyvä Themes - https://hyva.io
+ * Copyright © Hyvä Themes 2020-present. All rights reserved.
+ * This product is licensed per Magento install
+ * See https://hyva.io/license
+ */
+
+declare(strict_types=1);
+
+use Hyva\Theme\Model\ViewModelRegistry;
+use Hyva\Theme\ViewModel\Slider;
+use Magento\Framework\View\Element\Template;
+
+/** @var ViewModelRegistry $viewModels */
+/** @var Slider $sliderViewModel */
+/** @var Template $block */
+
+$sliderViewModel = $viewModels->require(Slider::class);
+
+/**
+ * These items are examples. You could query products, categories, etc..
+ * Change the slider-item.phtml accordingly to display the correct properties.
+ */
+$items = [
+    [
+        'image_url'    => 'https://images.squarespace-cdn.com/content/v1/56c667e02b8dde3992072a76/1600178339694-A1WOTMBGY1JYIBXVU3AT/New+York+Empire+Greatest+Ultimate+Bag?format=1500w',
+        'image_width'  => 1600,
+        'image_height' => 624,
+        'text_small'   => '',
+        'text_large'   => 'THE FLYING DISC STORE',
+        'url'          => $block->getUrl(''),
+    ],
+    [
+        'image_url'    => 'https://images.squarespace-cdn.com/content/v1/56c667e02b8dde3992072a76/1600181530229-MUWLUQ2F9RNW0TPCQ97F/Empire+Greatest+Ultimate+Bags+-+60L+%26+30L?format=1500w',
+        'image_width'  => 1600,
+        'image_height' => 624,
+        'text_small'   => '',
+        'text_large'   => 'THE FLYING DISC STORE',
+        'url'          => $block->getUrl(''),
+    ],
+    [
+        'image_url'    => 'https://wallpapercosmos.com/w/middle-retina/3/b/9/1111407-3081x2061-desktop-hd-frisbee-wallpaper-photo.jpg',
+        'image_width'  => 1600,
+        'image_height' => 624,
+        'text_small'   => '',
+        'text_large'   => 'THE FLYING DISC STORE',
+        'url'          => $block->getUrl(''),
+    ],
+];
+
+?>
+<div>
+    <?=
+    $sliderViewModel
+        ->getSliderForItems(
+            'Magento_Theme::elements/ui-slider/slider-item.phtml',
+            $items,
+            'Magento_Theme::elements/ui-slider/slider-php.phtml'
+        )
+        ->toHtml()
+    ?>
+</div>
