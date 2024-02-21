@@ -46,11 +46,11 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
             <div class="relative mb-6 w-full">
                 <a href="<?= $escaper->escapeUrl($menuItem['url']) ?>" title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>" class="relative block">
                     <img src="<?= $escaper->escapeHtml($menuItem['image']) ?>" alt="category_image_<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>" class="w-full cover">
-                    <span class="absolute z-20 bottom-4 left-3 mr-2 text-base desktop:text-xl font-normal leading-5 desktop:leading-7 tracking-widest text-white font-heading"
+                    <span class="hover:text-secondary transition duration-300 absolute z-20 bottom-4 left-3 mr-2 text-base desktop:text-xl font-normal leading-5 desktop:leading-7 tracking-widest text-white font-heading"
                           style="text-shadow: 0px 2px 5px black;">
                         <?= $escaper->escapeHtml($menuItem['name']) ?>
                     </span>
-                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#00000050]"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#00000050] hover:to-[#00000075]"></div>
                 </a>
             </div>
         <?php endforeach; ?>

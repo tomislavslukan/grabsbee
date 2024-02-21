@@ -153,7 +153,7 @@ $sliderIndex = 1;
                     <button
                         role="button"
                         aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
-                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75"
+                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75 transition duration-300"
                         :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
                         @click="scrollNext"
                     >
@@ -167,7 +167,7 @@ $sliderIndex = 1;
                     <button
                         role="button"
                         aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
-                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75"
+                        class="bg-white flex justify-center items-center opacity-50 w-12 h-12 hover:opacity-75 transition duration-300"
                         :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
                         @click="scrollNext"
                     >

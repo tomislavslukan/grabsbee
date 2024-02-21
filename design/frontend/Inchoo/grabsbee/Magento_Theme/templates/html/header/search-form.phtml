@@ -79,6 +79,7 @@ $helper = $this->helper(SearchHelper::class);
     }
 </script>
 
+
 <div x-data="initMiniSearch()">
      <form class="form minisearch" id="search_mini_form" x-ref="form" @submit.prevent="search()"
           action="<?= $escaper->escapeUrl($helper->getResultUrl()) ?>" method="get" role="search">

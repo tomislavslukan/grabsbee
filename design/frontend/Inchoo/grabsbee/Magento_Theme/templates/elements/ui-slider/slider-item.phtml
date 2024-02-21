@@ -18,22 +18,20 @@ $item = $block->getData('item');
          height="<?= $escaper->escapeHtmlAttr($item['image_height'] ?? '624') ?>"
          loading="lazy"
     />
-    <div class="absolute text-center w-full bottom-0 bg-gradient-to-t from-gray-800/50 to-transparent top-1/2">
 
-        <div class="flex flex-col items-center">
-            <div>
-
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[#00000075]">
+        <div class="relative top-1/2 -translate-y-1/2">
+            <div class="flex flex-col items-center">
                 <a href="<?= $escaper->escapeUrl($item['url'])?>"
                    :id="$id('slide-desc')"
                    class="font-heading font-normal text-3xl leading-12 text-white"
-                   style="text-shadow: 0px 2px 4px black;"
-                >
+                   style="text-shadow: 0px 2px 4px black;">
+
                     <?= $escaper->escapeHtml($item['text_large']) ?>
                 </a>
+                <button class="mt-[73px] btn__primary w-[151px] h-[48px] text-sm leading-6 tracking-wider px-3 py-2 hover:bg-primary-light transition duration-300" aria-label="Primary mobile">Buy the disc</button>
             </div>
-
-            <button class="mt-[73px] btn__primary w-[151px] h-[48px] text-sm leading-6 tracking-wider px-3 py-2" aria-label="Primary mobile">Buy the disc</button>
         </div>
-
     </div>
+
 </div>

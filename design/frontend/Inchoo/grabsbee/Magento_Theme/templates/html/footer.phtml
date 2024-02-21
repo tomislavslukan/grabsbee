@@ -55,6 +55,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                     <a
                         href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
                         title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
+                        class="hover:underline hover:text-secondary transition duration-300"
                     >
                         <?= $escaper->escapeHtml($menuItem['name']) ?>
                     </a>

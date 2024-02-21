@@ -36,8 +36,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 
 
 <div x-data="initMenuDesktop<?= $escaper->escapeHtml($uniqueId) ?>()"
-     class="bg-secondary relative"
->
+     class="bg-secondary relative">
     <!-- desktop -->
     <div x-ref="nav-desktop"
          @load.window="setActiveMenu($root)"
@@ -54,7 +53,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                         @keyup.escape="hoverPanelActiveId = 0"
                         style="text-shadow: 0 2px 5px black;">
                         <span class="mr-6 flex items-center py-4">
-                            <a class="mr-2 w-full text-xs font-normal uppercase leading-5 tracking-widest text-white font-heading"
+                            <a class="mr-2 w-full text-xs font-normal uppercase leading-5 tracking-widest text-white font-heading hover:underline"
                                href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
                                @focus="hoverPanelActiveId = 0">
@@ -87,7 +86,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                             class="before:content-[''] flex flex-col items-start">
                                             <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
                                                title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>"
-                                               class="block w-full font-bold tracking-widest text-xs leading-5 tracking-wide uppercase"
+                                               class="block w-full font-bold tracking-widest text-xs leading-5 tracking-wide uppercase hover:underline"
                                                @keyup.escape="$nextTick(() => document.querySelector('[data-sr-button-id=<?= $escaper->escapeJs($index) ?>]').focus())">
                                                 <span class="text-xs leading-5 tracking-wide uppercase text-black">
                                                     <?= $escaper->escapeHtml($subMenuItem['name']) ?>
@@ -100,7 +99,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                                             <a
                                                                 href="<?= $escaper->escapeUrl($products['url']) ?>"
                                                                 title="<?= $escaper->escapeHtmlAttr($products['name']) ?>"
-                                                                class="text-black text-xs leading-5 tracking-wide uppercase text-black"
+                                                                class="text-black text-xs leading-5 tracking-wide uppercase text-black hover:underline"
                                                             >
                                                                 <?= $escaper->escapeHtml($products['name']) ?>
                                                             </a>
@@ -111,7 +110,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                         </li>
                                     <?php endforeach; ?>
                                     <li class="before:content-[''] flex flex-col items-start text-black" style="text-shadow: none;">
-                                        <a href="#" class="text-xs font-bold leading-5 tracking-wide">Contact Us</a>
+                                        <a href="#" class="text-xs font-bold leading-5 tracking-wide hover:underline">Contact Us</a>
                                         <ul class="mt-4 ml-0 normal-case">
                                             <li class="before:content-[''] flex flex-row items-center">
                                                 <?= $hyvaicons->renderHtml('location', 14,14); ?>
@@ -134,7 +133,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                 <?php endforeach; ?>
                 <li class="block before:content-[''] mb-0"
                     style="text-shadow: 0 2px 5px black;">
-                    <a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>" class="text-xs font-normal uppercase leading-5 tracking-wide font-heading text-white">
+                    <a href="<?= $escaper->escapeUrl($block->getUrl('contact')) ?>" class="hover:underline text-xs font-normal uppercase leading-5 tracking-wide font-heading text-white">
                         Contact us
                     </a>
                 </li>

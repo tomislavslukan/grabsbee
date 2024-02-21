@@ -51,7 +51,7 @@ $recaptcha = $block->getData('viewModelRecaptcha');
             <?= $recaptcha ? $recaptcha->getInputHtml(ReCaptcha::RECAPTCHA_FORM_ID_NEWSLETTER) : '' ?>
 
 
-            <button class="desktop:w-[130px] desktop:ml-3 my-5 btn__primary w-full h-11 text-sm leading-6 tracking-wider" aria-label="<?= __('Primary mobile large') ?>">
+            <button class="hover:bg-primary-light transition duration-300 desktop:w-[130px] desktop:ml-3 my-5 btn__primary w-full h-11 text-sm leading-6 tracking-wider" aria-label="<?= __('Primary mobile large') ?>">
                 <?= $escaper->escapeHtml(__('Subscribe')) ?>
             </button>
         </div>
