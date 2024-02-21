@@ -131,9 +131,12 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                                               class="cursor-pointer mr-2 inline-block transition-transform transform origin-center">
                                                             <?= $hyvaicons->renderHtml('subCategoryIcon', 'w-3 h-3');?>
                                                         </span>
-                                                        <span class="h-10 font-normal font-primary text-xs uppercase leading-6 tracking-wider">
-                                                        <?= $escaper->escapeHtml($subMenuItem['name']) ?>
-                                                    </span>
+                                                        <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
+                                                           title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
+                                                            <span class="h-10 font-normal font-primary text-xs uppercase leading-6 tracking-wider">
+                                                                <?= $escaper->escapeHtml($subMenuItem['name']) ?>
+                                                            </span>
+                                                        </a>
                                                         <ul x-show="isOpen" class="ml-10">
                                                             <?php foreach ($subMenuItem['childData'] as $products): ?>
                                                                 <li>
@@ -146,9 +149,6 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                                             <?php endforeach; ?>
                                                         </ul>
                                                     </span>
-                                                    <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
-                                                       title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
-                                                    </a>
                                                 <?php endif; ?>
                                             </li>
                                         </ul>
