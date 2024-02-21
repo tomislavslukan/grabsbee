@@ -11,20 +11,17 @@ use Magento\Framework\View\Element\Template;
 $item = $block->getData('item');
 
 ?>
-<div class="block h-[300px] w-full relative md:h-[500px]">
+<div class="block h-[399px] w-full relative md:h-[672px]">
     <img class="absolute h-full w-full object-cover" src="<?= $escaper->escapeHtmlAttr($item['image_url']) ?>"
          alt="<?= $escaper->escapeHtmlAttr($item['text_small']) ?>"
-         width="<?= $escaper->escapeHtmlAttr($item['image_width'] ?? '1280') ?>"
-         height="<?= $escaper->escapeHtmlAttr($item['image_height'] ?? '853') ?>"
+         width="<?= $escaper->escapeHtmlAttr($item['image_width'] ?? '1600') ?>"
+         height="<?= $escaper->escapeHtmlAttr($item['image_height'] ?? '624') ?>"
          loading="lazy"
     />
     <div class="absolute text-center w-full bottom-0 bg-gradient-to-t from-gray-800/50 to-transparent top-1/2">
 
         <div class="flex flex-col items-center">
             <div>
-                <div class="text-white text-xl leading-7 font-semibold drop-shadow-md">
-                    <?= $escaper->escapeHtml($item['text_small']) ?>
-                </div>
 
                 <a href="<?= $escaper->escapeUrl($item['url'])?>"
                    :id="$id('slide-desc')"

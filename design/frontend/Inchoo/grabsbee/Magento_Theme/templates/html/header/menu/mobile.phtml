@@ -65,55 +65,46 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
         :class="{ 'flex': open, 'hidden': !open }"
         :aria-hidden="open ? 'false' : 'true'"
         role="dialog"
-        aria-modal="true"
-    >
+        aria-modal="true">
 
         <p class="font-normal mx-4 mb-6 text-md leading-6 mt-16 text-primary uppercase font-primary">Menu</p>
 
-        <div>
+
+
+        <nav>
             <ul
                 class="mx-4 flex flex-col gap-y-1"
-                aria-label="<?= $escaper->escapeHtmlAttr(__('Site navigation links')) ?>"
-            >
+                aria-label="<?= $escaper->escapeHtmlAttr(__('Site navigation links')) ?>">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
                     <li
                         data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>-main"
-                        class="level-0"
-                    >
+                        class="level-0">
                         <div
                             class="flex items-center"
                             :class="{
                             '-translate-x-0' : mobilePanelActiveId,
-                            'translate-x-0' : !mobilePanelActiveId
-                        }"
-                        >
+                            'translate-x-0' : !mobilePanelActiveId}">
                             <a
                                 class="flex items-center w-full py-2 border-b cursor-pointer
-                                bg-container-lighter border-container level-0 font-bold text-primary uppercase leading-6 tracking-wide text-text-color text-xs
-                            "
+                                bg-container-lighter border-container level-0 font-bold text-primary uppercase leading-6 tracking-wide text-text-color text-xs"
                                 href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
-                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
-                            >
+                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>">
                                 <?= $escaper->escapeHtml($menuItem['name']) ?>
                             </a>
                             <?php if (!empty($menuItem['childData'])): ?>
-
                                 <button
                                     @click="openSubcategory('<?= /* @noEscape */ $index ?>')"
                                     class="absolute right-0 flex items-center mr-3 w-3 h-3 cursor-pointer bg-container-lighter border-container transition-transform transform origin-right"
                                     aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>"
                                     aria-haspopup="true"
                                     :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'"
-
-                                    :class="{ 'rotate-180': mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>' }"
-                                >
+                                    :class="{ 'rotate-180': mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>' }">
                                     <div>
                                         <span class="w-full h-full p-1">
                                             <?= $hyvaicons->renderHtml('dropdownIcon', ''); ?>
                                         </span>
                                     </div>
                                 </button>
-
                             <?php endif; ?>
                         </div>
                         <?php if (!empty($menuItem['childData'])): ?>
@@ -121,61 +112,73 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                 data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>"
                                 class="z-10 flex flex-col gap-1 w-full h-full p-1 bg-container-lighter"
                                 :class="{
-                                'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'
-                            }"
-                            >
-
-                                <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>" class="flex flex-row justify-start items-center">
+                                'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
+                                <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>">
                                     <li>
                                         <a
                                             href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
-                                            title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>"
-                                            class="cursor-pointer"
-                                        >
+                                            title="<?= $escaper->escapeHtmlAttr($menuItem['name'])?>"
+                                            class="cursor-pointer">
                                         </a>
                                     </li>
-
-                                   <div>
-                                       <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
-                                           <li>
-                                               <a
-                                                   href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
-                                                   title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>"
-                                               >
-                                        <span class="h-10 flex flex-row items-center font-normal font-primary text-xs uppercase leading-6 tracking-wider">
-                                            <?= $hyvaicons->renderHtml('subCategoryIcon', 'w-3 h-3');?>
-                                            <span class="ml-2"><?= $escaper->escapeHtml($subMenuItem['name']) ?></span>
-                                        </span>
-                                               </a>
-                                           </li>
-
-                                       <?php endforeach; ?>
-
-                                   </div>
-
+                                    <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
+                                        <ul class="flex flex-row items-center">
+                                            <li>
+                                                <?php if (!empty($subMenuItem['childData'])): ?>
+                                                    <span x-data="{ isOpen: false, rotate: 0 }">
+                                                        <span @click="isOpen = !isOpen; rotate += 45"
+                                                              x-bind:style="'transform: rotate(' + rotate + 'deg)'"
+                                                              class="cursor-pointer mr-2 inline-block transition-transform transform origin-center">
+                                                            <?= $hyvaicons->renderHtml('subCategoryIcon', 'w-3 h-3');?>
+                                                        </span>
+                                                        <span class="h-10 font-normal font-primary text-xs uppercase leading-6 tracking-wider">
+                                                        <?= $escaper->escapeHtml($subMenuItem['name']) ?>
+                                                    </span>
+                                                        <ul x-show="isOpen" class="ml-10">
+                                                            <?php foreach ($subMenuItem['childData'] as $products): ?>
+                                                                <li>
+                                                                    <a href="<?= $escaper->escapeUrl($products['url']) ?>"
+                                                                       title="<?= $escaper->escapeHtmlAttr($products['name']) ?>"
+                                                                       class="text-black text-xs leading-5 tracking-wide uppercase text-black">
+                                                                        <?= $escaper->escapeHtml($products['name']) ?>
+                                                                    </a>
+                                                                </li>
+                                                            <?php endforeach; ?>
+                                                        </ul>
+                                                    </span>
+                                                    <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
+                                                       title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
+                                                    </a>
+                                                <?php endif; ?>
+                                            </li>
+                                        </ul>
+                                    <?php endforeach; ?>
                                 </ul>
                             </div>
                         <?php endif; ?>
                     </li>
                 <?php endforeach; ?>
             </ul>
-        </div>
+        </nav>
         <button
             @click="closeMenu()"
             class="absolute flex justify-end w-16 self-end mb-1"
             aria-label="<?= $escaper->escapeHtmlAttr(__('Close menu')) ?>"
-            type="button"
-        >
+            type="button">
             <span class="'hidden' : !open, 'block': open">
                <div class="flex row items-center mt-6 mr-3">
                    <p class="font-normal text-text-color leading-5 text-xs font-primary">Close</p>
                 <span class="ml-2"> <?= $hyvaicons->renderHtml('closeMenu', 'w-3 h-3');?></span>
                </div>
             </span>
-
         </button>
     </div>
 </nav>
+
+
+
+
+
 <script>
     'use strict';
 
