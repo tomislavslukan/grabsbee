@@ -36,7 +36,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 
     <div class="bg-primary flex flex-col-reverse desktop:flex-row desktop:justify-around py-6 mobile:gap-6 gap-1 desktop:px-24">
 
-        <div x-data="{ open: window.innerWidth < 700 }" x-init="window.addEventListener('resize', () => { open = window.innerWidth > 1024; })">
+        <div x-data="{ open: true }">
             <div class="flex mx-3 flex-row justify-between items-center">
                 <p class="text-white font-primary font-bold text-xs leading-6 uppercase mb-6 mobile:mb-0">Categories</p>
                 <button class="desktop:hidden block" @click="open = !open" x-bind:class="{ 'rotate-180': open }">
@@ -66,7 +66,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
             </nav>
         </div>
 
-        <div x-data="{ open: window.innerWidth <= 700 }" x-init="window.addEventListener('resize', () => { open = window.innerWidth >= 1024; })">
+        <div x-data="{ open: true }">
             <div class="flex flex-row justify-between items-center mx-3">
                 <p class="text-white font-primary font-bold text-xs leading-6 uppercase mb-6 mobile:mb-0">Contact us</p>
 

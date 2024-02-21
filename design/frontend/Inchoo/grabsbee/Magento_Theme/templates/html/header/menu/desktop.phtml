@@ -46,7 +46,6 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
         <nav
             class="mx-24"
             aria-label="<?= $escaper->escapeHtmlAttr(__('navigation menu')) ?>">
-
             <ul class="container mx-auto flex items-center">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
                     <li class="level-0 before:content-[''] mb-0 block hover:text-white visited:text-white"
@@ -80,7 +79,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                             <?php endif; ?>
                         </span>
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <div class="absolute left-0 bg-white shadow-md block flex w-full items-center justify-center z-999"
+                            <div class="absolute left-0 bg-white shadow-md block flex w-full items-center justify-center z-30"
                                  :class="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'scale-y-100' : 'scale-y-0'">
                                 <ul class="pt-4 flex gap-8 pb-3 text-xs leading-5 uppercase">
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
