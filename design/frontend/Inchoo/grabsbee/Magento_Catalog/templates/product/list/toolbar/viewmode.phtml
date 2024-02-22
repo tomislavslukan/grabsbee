@@ -83,7 +83,13 @@ use Magento\Framework\Escaper;
                     </button>
                 <?php endif; ?>
             <?php endforeach; ?>
+
+            <div class="ml-2 hidden desktop:block tablet:block whitespace-nowrap">
+                <?= /** @noEscape */  $block->fetchView($block->getTemplateFile('Magento_Catalog::product/list/toolbar/amount.phtml')) ?>
+            </div>
+
         </div>
+
 
     <?php else: ?>
         <div class="modes w-20 order-1 col-span-1 sm:col-span-2 md:col-span-1 lg:col-span-2"></div>

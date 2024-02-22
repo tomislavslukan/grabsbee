@@ -3573,6 +3573,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   grid-column: span 4 / span 4;
 }
 
+.row-span-1{
+  grid-row: span 1 / span 1;
+}
+
 .float-left{
   float: left;
 }
@@ -4872,6 +4876,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .bg-white\/60{
   background-color: rgb(255 255 255 / 0.6);
+}
+
+.bg-red-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 226 226 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-100{
@@ -6292,6 +6301,12 @@ fieldset ~ fieldset{
   }
 }
 
+@media (min-width: 720px){
+  .tablet\:block{
+    display: block;
+  }
+}
+
 @media (min-width: 768px){
   .md\:relative{
     position: relative;
@@ -6771,6 +6786,10 @@ fieldset ~ fieldset{
 
   .desktop\:ml-3{
     margin-left: 0.75rem;
+  }
+
+  .desktop\:block{
+    display: block;
   }
 
   .desktop\:flex{

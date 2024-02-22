@@ -26,6 +26,10 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 <div class="toolbar-sorter sorter flex items-center order-1 col-span-3 sm:col-span-6
         md:col-span-3 lg:col-span-6 justify-end">
 
+    <span class="hidden whitespace-nowrap tablet:block desktop:block mr-3 font-primary font-normal font-md leading-6 text-text-gray">
+        Sort by:
+    </span>
+
     <select data-role="sorter"
             class="mr-2 focus:border-text-color focus:ring-0 focus:ring-0 border-1 border-gray-25 font-primary text-text-color font-normal leading-6 font-sm h-11 h-[42px] min-w-[110px]"
             aria-label="<?= $escaper->escapeHtml(__('Sort By')) ?>"
