@@ -6400,7 +6400,17 @@ fieldset ~ fieldset{
   }
 }
 
+@media (min-width: 720px){
+  .tablet\:hidden{
+    display: none;
+  }
+}
+
 @media (min-width: 768px){
+  .md\:relative{
+    position: relative;
+  }
+
   .md\:order-3{
     order: 3;
   }
@@ -6642,6 +6652,10 @@ fieldset ~ fieldset{
     text-align: left;
   }
 
+  .md\:font-heading{
+    font-family: Anton, sans-serif;
+  }
+
   .md\:text-3xl{
     font-size: 1.875rem;
     line-height: 2.25rem;
@@ -6650,6 +6664,18 @@ fieldset ~ fieldset{
   .md\:text-lg{
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .md\:font-normal{
+    font-weight: 400;
+  }
+
+  .md\:leading-5{
+    line-height: 1.25rem;
+  }
+
+  .md\:tracking-widest{
+    letter-spacing: 0.1em;
   }
 }
 
@@ -6664,6 +6690,10 @@ fieldset ~ fieldset{
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border-width: 0;
+  }
+
+  .lg\:relative{
+    position: relative;
   }
 
   .lg\:sticky{
@@ -6803,6 +6833,10 @@ fieldset ~ fieldset{
          column-gap: 2.5rem;
   }
 
+  .lg\:border-0{
+    border-width: 0px;
+  }
+
   .lg\:px-5{
     padding-left: 1.25rem;
     padding-right: 1.25rem;
@@ -6834,9 +6868,25 @@ fieldset ~ fieldset{
     text-align: right;
   }
 
+  .lg\:font-heading{
+    font-family: Anton, sans-serif;
+  }
+
   .lg\:text-sm{
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .lg\:font-normal{
+    font-weight: 400;
+  }
+
+  .lg\:leading-5{
+    line-height: 1.25rem;
+  }
+
+  .lg\:tracking-widest{
+    letter-spacing: 0.1em;
   }
 
   .desktop\:order-last{
