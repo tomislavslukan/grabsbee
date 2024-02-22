@@ -4203,6 +4203,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   min-width: 110px;
 }
 
+.min-w-\[65px\]{
+  min-width: 65px;
+}
+
 .max-w-\[210px\]{
   max-width: 210px;
 }
@@ -5064,6 +5068,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.py-\[10px\]{
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .pb-1{
@@ -6887,6 +6896,10 @@ fieldset ~ fieldset{
 
   .xl\:grid-cols-3{
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .xl\:grid-cols-4{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .xl\:border-none{
