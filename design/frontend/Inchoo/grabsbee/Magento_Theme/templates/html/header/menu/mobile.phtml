@@ -132,7 +132,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                                     </span>
                                                 </a>
                                                 <?php if (!empty($subMenuItem['childData'])): ?>
-                                                    <span x-data="{ isOpen: false, rotate: 0 }">
+                                                    <div x-data="{ isOpen: false, rotate: 0 }" class="inline">
                                                         <span @click="isOpen = !isOpen; rotate += 45"
                                                               x-bind:style="'transform: rotate(' + rotate + 'deg)'"
                                                               class="cursor-pointer mr-6 inline-block transition-transform transform origin-center">
@@ -149,9 +149,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                                                 </li>
                                                             <?php endforeach; ?>
                                                         </ul>
-
-
-                                                    </span>
+                                                    </div>
                                                 <?php endif; ?>
                                             </li>
                                         </ul>
