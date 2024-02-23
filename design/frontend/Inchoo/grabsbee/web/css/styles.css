@@ -5966,6 +5966,11 @@ fieldset ~ fieldset{
   background-color: rgb(26 31 154 / var(--tw-bg-opacity));
 }
 
+.hover\:bg-red-500:hover{
+  --tw-bg-opacity: 1;
+  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
+}
+
 .hover\:to-\[\#00000075\]:hover{
   --tw-gradient-to: #00000075;
 }

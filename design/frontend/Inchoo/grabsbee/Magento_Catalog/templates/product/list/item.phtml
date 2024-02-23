@@ -83,7 +83,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
 <?php if ($product->isSaleable()): ?>
 <form method="post"
     action="<?= $escaper->escapeUrl($productViewModel->getAddToCartUrl($product, ['useUencPlaceholder' => true])) ?>"
-    class="item product product-item product_addtocart_form card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'tablet:flex-row desktop:flex-row' ?>"
+    class="item product product-item product_addtocart_form card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:flex-row' ?>"
     <?php if ($product->getOptions()): ?>
     enctype="multipart/form-data"
     <?php endif; ?>
@@ -96,7 +96,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
            value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
     <?php endforeach; ?>
     <?php else: ?>
-<div class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'tablet:text-left desktop:text-left' ?>">
+<div class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
 <?php endif; ?>
     <?php /* Product Image */ ?>
     <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
@@ -109,9 +109,9 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
             ->setProductId($productId)
             ->toHtml(); ?>
     </a>
-    <div class="product-info flex flex-col grow desktop:ml-10 tablet:ml-10">
+    <div class="product-info flex flex-col grow">
         <?php $productNameStripped = $block->stripTags($product->getName(), null, true); ?>
-        <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'tablet:text-left desktop:text-left' ?>">
+        <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
             <a
                 class="product-item-link font-primary font-bold uppercase leading-6 text-secondary font-xs desktop:font-md"
                 href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
@@ -122,7 +122,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
         </div>
 
         <?php if (!$hideRatingSummary): ?>
-        <div class="mx-auto my-3 desktop:my-6 tablet:my-6 desktop:mx-0 tablet:mx-0">
+        <div class="mx-auto my-3 desktop:my-6">
             <?= $block->getReviewsSummaryHtml($product, 'short') ?>
         </div>
         <?php endif; ?>
@@ -132,7 +132,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
         <?php endif; ?>
 
         <?php if ($showDescription): ?>
-        <div class="items-center justify-center text-primary text-center">
+        <div class="items-center justify-center text-primary text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
             <?= /* @noEscape */ $productViewModel->getShortDescriptionForProduct($product) ?>
         </div>
         <?php endif; ?>
@@ -156,26 +156,26 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
                 }
             }
         </script>
-        <div class="text-primary font-primary font-normal font-xs leading-5 text-center desktop:text-left tablet:text-left"
+        <div class="text-primary font-primary font-normal font-xs leading-5 text-center"
              x-data="initPriceBox_<?= /** @noEscape */ $uniqueId ?>()"
              @update-prices-<?= (int)$productId ?>.window="updatePrice($event.detail);"
         >
             <?= /* @noEscape */ $productListItemViewModel->getProductPriceHtml($product) ?>
         </div>
 
-        <div class="grid grid-cols-1 grid-rows-2 place-items-center desktop:block desktop:flex desktop:flex-row tablet:block tablet:flex tablet:flex-row desktop:items-center tablet:items-center desktop:mt-6 tablet:mt-6">
+        <div class="grid grid-cols-1 grid-rows-2 place-items-center desktop:items-center desktop:mt-6">
 
-            <div class="pt-4 desktop:pt-0 desktop:mr-2 tablet:pt-0 tablet:mr-2">
+            <div class="pt-4 desktop:pt-0 desktop:mr-2">
                 <?php if ($product->isSaleable()): ?>
-                    <button class="block btn__primary w-auto h-[48px] text-sm shadow-md font-bold font-sm leading-6 tracking-wider px-3 py-2 desktop:py-3 tablet:py-3 hover:bg-primary-light transition duration-300
-                <?= $viewIsGrid ? 'mr-auto' : 'mr-auto' ?>"
+                    <button class="block btn__primary w-auto h-[48px] text-sm shadow-md font-bold font-sm leading-6 tracking-wider px-3 py-2 desktop:py-3 hover:bg-primary-light transition duration-300
+                <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>"
                             aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Cart') . ' ' . $productName) ?>"
-                    <span class="inline <?= $viewIsGrid ? 'lg:ml-2 lg:inline' : '' ?>">
+                    <span class="inline <?= $viewIsGrid ? 'md:ml-0 md:hidden lg:ml-2 lg:inline' : '' ?>">
                     <?= $escaper->escapeHtml(__('Add to Cart')) ?>
                 </span>
                     </button>
                 <?php else: ?>
-                    <div class="w-auto justify-center <?= $viewIsGrid ? 'mr-auto' : 'mr-auto' ?>">
+                    <div class="w-auto justify-center <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>">
                         <?= $block->getChildBlock('stockstatus')->setData('product', $product)->toHtml() ?>
                     </div>
                 <?php endif; ?>
