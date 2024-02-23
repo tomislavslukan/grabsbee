@@ -267,7 +267,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                                     <button @click.prevent.stop="$dispatch('toggle-authentication',
                                     {url: '<?= $escaper->escapeUrl($block->getUrl('checkout')) ?>'});"
                                        href="<?= $escaper->escapeUrl($block->getUrl('checkout')) ?>"
-                                       class="btn__primary w-full h-11 text-sm leading-6 tracking-wider py-2 my-6"
+                                       class="btn__primary hover:bg-primary-light transition duration-300 w-full h-11 text-sm leading-6 tracking-wider py-2 my-6"
                                     >
                                         <?= $escaper->escapeHtml(__('Checkout')) ?>
                                     </button>

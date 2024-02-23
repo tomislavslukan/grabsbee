@@ -27,8 +27,7 @@ $heroiconsSolid = $viewModels->require(HeroiconsSolid::class);
 $hyvaicons = $viewModels->require(SvgIcons::class);
 
 $uniqueId = '_' . uniqid();
-
-// Order is important here: 1. build the menu data, 2. then set the cache tags from the view model identities
+// Orderfooter is important here: 1. build the menu data, 2. then set the cache tags from the view model identities
 $menuItems = $viewModelNavigation->getNavigation(4);
 $block->setData('cache_tags', $viewModelNavigation->getIdentities());
 

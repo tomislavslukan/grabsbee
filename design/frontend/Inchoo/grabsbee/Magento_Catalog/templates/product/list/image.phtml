@@ -17,7 +17,7 @@ use Magento\Framework\Escaper;
 $hasLoadingAttribute = ($block->getCustomAttributes() ?: [])['loading'] ?? false;
 
 ?>
-<img class="hover:shadow-sm object-contain <?= $escaper->escapeHtmlAttr($block->getClass()) ?>"
+<img class="object-contain <?= $escaper->escapeHtmlAttr($block->getClass()) ?>"
      x-data=""
      @update-gallery-<?= (int)$block->getProductId() ?>.window="$root.src = $event.detail"
     <?php foreach ($block->getCustomAttributes() as $name => $value): ?>
