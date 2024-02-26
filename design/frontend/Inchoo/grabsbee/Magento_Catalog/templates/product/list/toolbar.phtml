@@ -83,8 +83,7 @@ $additionalOptions = ['page' => 'p'];
 </script>
 <?php if ($block->getCollection()->getSize()): ?>
     <div x-data="initToolbar<?= /** @noEscape */ $uniqueId ?>()"
-         class="toolbar toolbar-products grid grid-cols-4 sm:grid-cols-8 md:grid-cols-4
-            lg:grid-cols-8  grid-flow-row gap-2 items-center">
+         class="toolbar toolbar-products flex flex-row justify-between items-center">
         <?php if ($block->getIsBottom()): ?>
 
             <?= $block->getPagerHtml() ?>
@@ -96,4 +95,8 @@ $additionalOptions = ['page' => 'p'];
             <?php endif ?>
         <?php endif ?>
     </div>
+
+
+
+
 <?php endif ?>

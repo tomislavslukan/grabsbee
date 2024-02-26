@@ -102,7 +102,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
 <?php endif; ?>
     <?php /* Product Image */ ?>
     <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
-        class="product photo product-item-photo block mx-auto height-auto desktop:max-w-[207px] max-w-[120px]"
+        class="product photo product-item-photo block mx-auto height-auto desktop:w-[207px] w-[120px]"
         tabindex="-1"
     >
         <?= $block->getImage($product, $imageDisplayArea)
