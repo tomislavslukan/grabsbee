@@ -1778,6 +1778,18 @@ select{
   display: none;
 }
 
+#maincontent, .page-main, .page-main, .top-container{
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+@media (min-width: 1024px){
+  #maincontent, .page-main, .page-main, .top-container{
+    margin-left: 6rem;
+    margin-right: 6rem;
+  }
+}
+
 #category-view-container{
   margin-left: auto;
   margin-right: auto;
@@ -3612,9 +3624,8 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-bottom: 1.5rem;
 }
 
-.my-0{
-  margin-top: 0px;
-  margin-bottom: 0px;
+.-mb-2{
+  margin-bottom: -0.5rem;
 }
 
 .-ml-3{
@@ -3643,6 +3654,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .-mt-6{
   margin-top: -1.5rem;
+}
+
+.-mt-9{
+  margin-top: -2.25rem;
 }
 
 .mb-0{
@@ -3825,22 +3840,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-top: auto;
 }
 
-.-mb-\[4px\]{
-  margin-bottom: -4px;
-}
-
-.-mb-2{
-  margin-bottom: -0.5rem;
-}
-
-.-mt-8{
-  margin-top: -2rem;
-}
-
-.-mt-9{
-  margin-top: -2.25rem;
-}
-
 .box-border{
   box-sizing: border-box;
 }
@@ -3989,10 +3988,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   height: 100vh;
 }
 
-.h-\[50px\]{
-  height: 50px;
-}
-
 .max-h-screen{
   max-height: 100vh;
 }
@@ -4139,10 +4134,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .w-screen{
   width: 100vw;
-}
-
-.w-\[50px\]{
-  width: 50px;
 }
 
 .min-w-\[110px\]{
@@ -4605,6 +4596,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   border-bottom-width: 2px;
 }
 
+.border-b-\[1px\]{
+  border-bottom-width: 1px;
+}
+
 .border-l{
   border-left-width: 1px;
 }
@@ -4635,10 +4630,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .border-t-2{
   border-top-width: 2px;
-}
-
-.border-b-\[1px\]{
-  border-bottom-width: 1px;
 }
 
 .border-none{
@@ -5050,6 +5041,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   padding-bottom: 1.5rem;
 }
 
+.pb-8{
+  padding-bottom: 2rem;
+}
+
 .pl-0{
   padding-left: 0px;
 }
@@ -5104,10 +5099,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pb-8{
-  padding-bottom: 2rem;
 }
 
 .text-left{
@@ -5430,11 +5421,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .text-yellow-400{
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity));
-}
-
-.text-red-100{
-  --tw-text-opacity: 1;
-  color: rgb(254 226 226 / var(--tw-text-opacity));
 }
 
 .underline{
