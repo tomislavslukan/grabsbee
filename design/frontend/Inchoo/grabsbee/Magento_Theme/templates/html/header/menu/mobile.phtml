@@ -58,7 +58,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
     <div
         x-ref="mobileMenuNavLinks"
         class="
-            fixed top-0 right-0 w-full h-full p-1 hidden
+            fixed top-0 right-0 w-full h-screen p-1 hidden
             flex-col border-0 border-container bg-container-lighter
             overflow-y-auto overflow-x-hidden bg-white
         "
@@ -110,7 +110,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                         <?php if (!empty($menuItem['childData'])): ?>
                             <div
                                 data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>"
-                                class="z-10 flex flex-col gap-1 w-full h-full p-1 bg-container-lighter"
+                                class="z-30 flex flex-col gap-1 w-full h-full p-1 bg-container-lighter"
                                 :class="{
                                 'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
                                 <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>">

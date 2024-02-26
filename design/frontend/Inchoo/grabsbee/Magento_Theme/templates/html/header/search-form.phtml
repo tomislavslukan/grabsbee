@@ -102,7 +102,9 @@ $helper = $this->helper(SearchHelper::class);
                             @focus.once="suggest"
                             @input.debounce.300="suggest"
                             @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
+
                             @search-open.window.debounce.10="$el.focus() $el.select()"
+
                             aria-label="<?= __('Search field') ?>"
                             class="w-full focus:border-secondary focus:ring-0 h-[42px] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary indent-4" />
 

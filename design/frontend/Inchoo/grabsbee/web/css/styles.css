@@ -1859,9 +1859,6 @@ select{
   margin-top: 0px;
 }
 
-.category-view .sidebar .price-excluding-tax.filter {
-}
-
 .price-container.price-tier_price{
   display: flex;
   gap: 0.25rem;
@@ -2051,9 +2048,6 @@ select{
   margin-top: 0px;
 }
 
-.category-view .sidebar .product-item .price-container.filter {
-}
-
 .product-item .price-container .price{
   font-size: 1.125rem;
   line-height: 1.75rem;
@@ -2100,9 +2094,6 @@ select{
   margin-top: 0px;
 }
 
-.category-view .sidebar .page-product-bundle .price-final_price .price-from .price-container.filter,.category-view .sidebar  .page-product-bundle .price-final_price .price-to .price-container.filter {
-}
-
 .page-product-bundle .price-final_price .price-from .price-container .price-label, .page-product-bundle .price-final_price .price-to .price-container .price-label{
   display: block;
   font-size: 1.125rem;
@@ -2113,9 +2104,6 @@ select{
 [data-content-type$='block'] .page-product-bundle .price-final_price .price-from .price-container .price-label p:last-child,[data-content-type$='block']  .page-product-bundle .price-final_price .price-to .price-container .price-label p:last-child{
   margin-bottom: 1rem;
   margin-top: 0px;
-}
-
-.category-view .sidebar .page-product-bundle .price-final_price .price-from .price-container .price-label.filter,.category-view .sidebar  .page-product-bundle .price-final_price .price-to .price-container .price-label.filter {
 }
 
 .page-product-bundle .price-final_price .price-from .price-container .price, .page-product-bundle .price-final_price .price-to .price-container .price{
@@ -2642,9 +2630,6 @@ body{
   margin-top: 0px;
 }
 
-.category-view .sidebar [data-content-type='tabs'] .tabs-navigation.filter {
-}
-
 [data-content-type='tabs'] .tabs-navigation li.tab-header{
   position: relative;
   margin-top: 0px;
@@ -2694,9 +2679,6 @@ body{
 [data-content-type$='block'] [data-content-type='tabs'] .tabs-navigation li.tab-header a.tab-title p:last-child{
   margin-bottom: 1rem;
   margin-top: 0px;
-}
-
-.category-view .sidebar [data-content-type='tabs'] .tabs-navigation li.tab-header a.tab-title.filter {
 }
 
 [data-content-type='tabs'] .tabs-navigation li.tab-header a.tab-title span{
@@ -3389,9 +3371,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-top: 0px;
 }
 
-.category-view .sidebar .glider-dot.filter {
-}
-
 .glider-dot.active{
   opacity: 1;
 }
@@ -4051,6 +4030,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   max-height: 100vh;
 }
 
+.max-h-full{
+  max-height: 100%;
+}
+
 .w-0{
   width: 0px;
 }
@@ -4187,20 +4170,16 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   width: 100vw;
 }
 
-.w-\[124px\]{
-  width: 124px;
-}
-
-.w-\[125px\]{
-  width: 125px;
-}
-
 .min-w-\[110px\]{
   min-width: 110px;
 }
 
 .min-w-\[65px\]{
   min-width: 65px;
+}
+
+.max-w-\[120px\]{
+  max-width: 120px;
 }
 
 .max-w-\[210px\]{
@@ -4221,18 +4200,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .max-w-prose{
   max-width: 65ch;
-}
-
-.max-w-\[\]{
-  max-width: ;
-}
-
-.max-w-\[207px\]{
-  max-width: 207px;
-}
-
-.max-w-\[120px\]{
-  max-width: 120px;
 }
 
 .flex-1{
@@ -4454,10 +4421,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .flex-nowrap{
   flex-wrap: nowrap;
-}
-
-.place-content-center{
-  place-content: center;
 }
 
 .place-items-center{
@@ -5672,7 +5635,7 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .table-row-items > div.table-row-item:nth-child(2n + 1) {
 }
 
-.category-view .sidebar .block.filter {
+.catalog-category-view {
 }
 
 .account-nav ul li a, .account-nav ul li strong{
@@ -5724,9 +5687,6 @@ body > div > div.grecaptcha-badge{
 [data-content-type$='block'] .order-links p:last-child{
   margin-bottom: 1rem;
   margin-top: 0px;
-}
-
-.category-view .sidebar .order-links.filter {
 }
 
 .order-links{
@@ -5784,9 +5744,6 @@ form label, fieldset label{
 [data-content-type$='block'] form label p:last-child,[data-content-type$='block']  fieldset label p:last-child{
   margin-bottom: 1rem;
   margin-top: 0px;
-}
-
-.category-view .sidebar form label.filter,.category-view .sidebar  fieldset label.filter {
 }
 
 form .field.choice, fieldset .field.choice{
@@ -5964,11 +5921,6 @@ fieldset ~ fieldset{
 .hover\:bg-primary-light:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(26 31 154 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-red-500:hover{
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
 .hover\:to-\[\#00000075\]:hover{
@@ -6164,6 +6116,11 @@ fieldset ~ fieldset{
   opacity: 0.75;
 }
 
+.group:hover .group-hover\:bg-secondary{
+  --tw-bg-opacity: 1;
+  background-color: rgb(236 29 46 / var(--tw-bg-opacity));
+}
+
 @media (min-width: 360px){
   .mobile\:mx-3{
     margin-left: 0.75rem;
@@ -6323,63 +6280,8 @@ fieldset ~ fieldset{
 }
 
 @media (min-width: 720px){
-  .tablet\:mx-0{
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
-  .tablet\:my-6{
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .tablet\:ml-10{
-    margin-left: 2.5rem;
-  }
-
-  .tablet\:ml-8{
-    margin-left: 2rem;
-  }
-
-  .tablet\:mt-6{
-    margin-top: 1.5rem;
-  }
-
-  .tablet\:mr-2{
-    margin-right: 0.5rem;
-  }
-
   .tablet\:block{
     display: block;
-  }
-
-  .tablet\:flex{
-    display: flex;
-  }
-
-  .tablet\:flex-row{
-    flex-direction: row;
-  }
-
-  .tablet\:place-content-start{
-    place-content: start;
-  }
-
-  .tablet\:items-center{
-    align-items: center;
-  }
-
-  .tablet\:py-3{
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .tablet\:pt-0{
-    padding-top: 0px;
-  }
-
-  .tablet\:text-left{
-    text-align: left;
   }
 }
 
@@ -6437,10 +6339,6 @@ fieldset ~ fieldset{
     margin-bottom: 0px;
   }
 
-  .md\:mb-0{
-    margin-bottom: 0px;
-  }
-
   .md\:mb-3{
     margin-bottom: 0.75rem;
   }
@@ -6451,10 +6349,6 @@ fieldset ~ fieldset{
 
   .md\:mr-0{
     margin-right: 0px;
-  }
-
-  .md\:mr-5{
-    margin-right: 1.25rem;
   }
 
   .md\:mt-0{
@@ -6509,20 +6403,12 @@ fieldset ~ fieldset{
     width: 66.666667%;
   }
 
-  .md\:w-2\/6{
-    width: 33.333333%;
-  }
-
   .md\:w-auto{
     width: auto;
   }
 
   .md\:w-full{
     width: 100%;
-  }
-
-  .md\:shrink-0{
-    flex-shrink: 0;
   }
 
   .md\:-translate-x-1\/3{
@@ -6861,9 +6747,8 @@ fieldset ~ fieldset{
     margin-bottom: 1.5rem;
   }
 
-  .desktop\:mx-0{
-    margin-left: 0px;
-    margin-right: 0px;
+  .desktop\:ml-12{
+    margin-left: 3rem;
   }
 
   .desktop\:ml-24{
@@ -6874,32 +6759,12 @@ fieldset ~ fieldset{
     margin-left: 0.75rem;
   }
 
-  .desktop\:ml-2{
-    margin-left: 0.5rem;
-  }
-
   .desktop\:mr-2{
     margin-right: 0.5rem;
   }
 
-  .desktop\:mt-2{
-    margin-top: 0.5rem;
-  }
-
-  .desktop\:mt-4{
-    margin-top: 1rem;
-  }
-
   .desktop\:mt-6{
     margin-top: 1.5rem;
-  }
-
-  .desktop\:ml-4{
-    margin-left: 1rem;
-  }
-
-  .desktop\:ml-10{
-    margin-left: 2.5rem;
   }
 
   .desktop\:block{
@@ -6930,10 +6795,6 @@ fieldset ~ fieldset{
     max-width: 207px;
   }
 
-  .desktop\:max-w-\[120px\]{
-    max-width: 120px;
-  }
-
   .desktop\:grid-cols-12{
     grid-template-columns: repeat(12, minmax(0, 1fr));
   }
@@ -6948,6 +6809,10 @@ fieldset ~ fieldset{
 
   .desktop\:flex-row{
     flex-direction: row;
+  }
+
+  .desktop\:items-start{
+    align-items: flex-start;
   }
 
   .desktop\:items-center{
@@ -6982,14 +6847,6 @@ fieldset ~ fieldset{
 
   .desktop\:pt-0{
     padding-top: 0px;
-  }
-
-  .desktop\:text-left{
-    text-align: left;
-  }
-
-  .desktop\:text-start{
-    text-align: start;
   }
 
   .desktop\:text-base{

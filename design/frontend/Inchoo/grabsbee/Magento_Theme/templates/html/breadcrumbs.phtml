@@ -10,20 +10,26 @@ declare(strict_types=1);
 
 use Magento\Theme\Block\Html\Breadcrumbs;
 use Magento\Framework\Escaper;
+use Hyva\Theme\ViewModel\SvgIcons;
 
 /** @var Escaper $escaper */
 /** @var Breadcrumbs $block */
 /** @var array[] $crumbs */
 
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
+
 ?>
 <?php if ($crumbs && is_array($crumbs)): ?>
-<nav class="breadcrumbs bg-container-lighter shadow-sm" aria-label="Breadcrumb">
+<nav class="breadcrumbs" aria-label="Breadcrumb">
     <div class="container">
-        <ol class="items list-reset py-4 rounded flex flex-wrap text-grey text-sm">
+        <ol class="items list-reset py-5 rounded flex flex-wrap font-primary font-xs font-normal leading-5 text-secondary">
             <?php foreach ($crumbs as $crumbName => $crumbInfo): ?>
                 <li class="item flex <?= $escaper->escapeHtmlAttr($crumbName) ?>">
                 <?php if (!$crumbInfo['first']): ?>
-                    <span aria-hidden="true" class="separator text-primary-lighter px-2">/</span>
+                    <span aria-hidden="true" class="separator text-primary-lighter px-2 flex flex-row items-center">
+                         <?= $hyvaicons->renderHtml('breadcrumb', '', 12, 12); ?>
+                    </span>
                 <?php endif; ?>
                 <?php if ($crumbInfo['link']): ?>
                     <a href="<?= $escaper->escapeUrl($crumbInfo['link']) ?>"
@@ -32,7 +38,7 @@ use Magento\Framework\Escaper;
                     ><?= $escaper->escapeHtml($crumbInfo['label']) ?></a>
                 <?php elseif ($crumbInfo['last']): ?>
                     <span
-                       class="text-primary-lighter"
+                       class="text-primary-lighter text-text-color font-bold"
                        aria-current="page"
                     ><?= $escaper->escapeHtml($crumbInfo['label']) ?></span>
                 <?php else: ?>

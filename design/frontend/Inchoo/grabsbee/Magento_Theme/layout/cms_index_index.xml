@@ -58,5 +58,11 @@
             </block>
         </referenceContainer>
         <referenceBlock name="page.main.title" remove="true"/>
+
+
+        <referenceContainer name="page.wrapper">
+            <block name="categories" template="Magento_Theme::html/featured-categories.phtml"/>
+        </referenceContainer>
+
     </body>
 </page>

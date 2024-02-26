@@ -91,10 +91,6 @@
             <block class="Magento\Theme\Block\Html\Title" name="page.main.title" template="Magento_Theme::html/title.phtml"/>
         </referenceContainer>
 
-        <referenceContainer name="page.wrapper">
-            <block name="categories" template="Magento_Theme::html/featured-categories.phtml"/>
-        </referenceContainer>
-
         <referenceContainer name="footer">
 
             <block name="footer-content" template="Magento_Theme::html/footer.phtml">
