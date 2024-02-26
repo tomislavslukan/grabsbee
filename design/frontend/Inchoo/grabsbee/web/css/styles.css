@@ -1778,13 +1778,13 @@ select{
   display: none;
 }
 
-#maincontent, .page-main, .page-main, .top-container{
+#maincontent, .page-main, .top-container{
   margin-left: 0.75rem;
   margin-right: 0.75rem;
 }
 
 @media (min-width: 1024px){
-  #maincontent, .page-main, .page-main, .top-container{
+  #maincontent, .page-main, .top-container{
     margin-left: 6rem;
     margin-right: 6rem;
   }
@@ -4164,6 +4164,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   max-width: 65ch;
 }
 
+.max-w-\[120px\]{
+  max-width: 120px;
+}
+
 .flex-1{
   flex: 1 1 0%;
 }
@@ -6508,8 +6512,16 @@ fieldset ~ fieldset{
     margin-bottom: 1.5rem;
   }
 
+  .tablet\:ml-12{
+    margin-left: 3rem;
+  }
+
   .tablet\:block{
     display: block;
+  }
+
+  .tablet\:items-start{
+    align-items: flex-start;
   }
 }
 
@@ -6782,6 +6794,10 @@ fieldset ~ fieldset{
 
   .desktop\:w-\[364px\]{
     width: 364px;
+  }
+
+  .desktop\:max-w-\[207px\]{
+    max-width: 207px;
   }
 
   .desktop\:grid-cols-12{
