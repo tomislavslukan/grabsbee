@@ -12,7 +12,7 @@
     <body>
         <referenceBlock name="page.main.title">
             <arguments>
-                <argument name="css_class" xsi:type="string">justify-start border-b-[1px] border-text-muted</argument>
+                <argument name="css_class" xsi:type="string">justify-start mx-3 desktop:mx-24 border-b-[1px] border-text-muted font-heading text-2xl desktop:text-3xl font-normal leading-[42px] desktop:leading-[48px] capitalize text-black</argument>
             </arguments>
         </referenceBlock>
 
