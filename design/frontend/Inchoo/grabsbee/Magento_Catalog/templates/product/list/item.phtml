@@ -98,6 +98,8 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
            value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
     <?php endforeach; ?>
     <?php else: ?>
+
+    <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
 <div class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
 <?php endif; ?>
     <?php /* Product Image */ ?>
@@ -111,6 +113,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
             ->setProductId($productId)
             ->toHtml(); ?>
     </a>
+
     <div class="product-info flex flex-col grow <?= $viewIsGrid ? '' : 'items-center desktop:items-start desktop:ml-12' ?>">
         <?php $productNameStripped = $block->stripTags($product->getName(), null, true); ?>
         <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
@@ -138,6 +141,8 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
             <?= /* @noEscape */ $productViewModel->getShortDescriptionForProduct($product) ?>
         </div>
         <?php endif; ?>
+    </div>
+
 
         <script>
             function initPriceBox_<?= /** @noEscape */ $uniqueId ?>()
@@ -206,16 +211,9 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
                 <?= $addToBlock->setProduct($product)->getChildHtml() ?>
             <?php endif; ?>
         </div>
-
-
     </div>
-
-
-
 <?php if ($product->isSaleable()): ?>
 </form>
-
-
 
 <?php else: ?>
 </div>

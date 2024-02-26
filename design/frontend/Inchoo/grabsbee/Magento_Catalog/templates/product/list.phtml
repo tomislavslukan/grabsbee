@@ -27,6 +27,7 @@ $eagerLoadImagesCount = (int) ($block->getData('eager_load_images_count') ?? 3);
 $productCollection = $block->getLoadedProductCollection();
 
 ?>
+
 <?php if (!$productCollection->count()): ?>
     <div class="message info empty">
         <div>
@@ -34,7 +35,8 @@ $productCollection = $block->getLoadedProductCollection();
         </div>
     </div>
 <?php else: ?>
-    <section class="py-8" id="product-list" aria-label="<?= $escaper->escapeHtmlAttr(__('Product list')) ?>" tabindex="-1">
+
+    <section class="pb-8" id="product-list" aria-label="<?= $escaper->escapeHtmlAttr(__('Product list')) ?>" tabindex="-1">
         <?= $block->getToolbarHtml() ?>
         <?= $block->getAdditionalHtml() ?>
         <?php
@@ -57,7 +59,7 @@ $productCollection = $block->getLoadedProductCollection();
         <div class="products wrapper mode-<?= /* @noEscape */$viewMode ?> products-<?= /* @noEscape */$viewMode ?>">
             <ul
                 role="list"
-                class="mx-auto pt-4 pb-12 grid gap-4 grid-cols-1 <?= /* @noEscape */$viewMode === 'grid'
+                class="mx-auto pt-4 grid gap-4 grid-cols-1 <?= /* @noEscape */$viewMode === 'grid'
                     ? 'sm:grid-cols-2 xl:grid-cols-4'
                     : '' ?>"
             >
@@ -80,6 +82,8 @@ $productCollection = $block->getLoadedProductCollection();
                     </li>
                 <?php endforeach; ?>
             </ul>
+
+            <div class="content-[''] w-full h-[1px] bg-text-muted my-5 tablet:my-6 desktop:my-6"></div>
         </div>
         <?= $block->getChildBlock('toolbar')->setIsBottom(true)->toHtml() ?>
     </section>

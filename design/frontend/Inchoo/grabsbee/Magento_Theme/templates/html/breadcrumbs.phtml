@@ -23,7 +23,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
 <?php if ($crumbs && is_array($crumbs)): ?>
 <nav class="breadcrumbs" aria-label="Breadcrumb">
     <div class="container">
-        <ol class="items list-reset py-5 rounded flex flex-wrap font-primary font-xs font-normal leading-5 text-secondary">
+        <ol class="items list-reset mt-6 -mb-2 rounded flex flex-wrap font-primary font-xs font-normal leading-5 text-secondary">
             <?php foreach ($crumbs as $crumbName => $crumbInfo): ?>
                 <li class="item flex <?= $escaper->escapeHtmlAttr($crumbName) ?>">
                 <?php if (!$crumbInfo['first']): ?>

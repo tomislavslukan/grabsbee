@@ -58,8 +58,8 @@ module.exports = hyvaModules.mergeTailwindConfig({
         },
 
         screens: {
-            'mobile': '360px',
-            'tablet': '720px',
+            'mobile': '640px',
+            'tablet': '768px',
             'desktop': '1024px',
         },
 

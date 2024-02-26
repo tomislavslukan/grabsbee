@@ -17,20 +17,22 @@ use Magento\Theme\Block\Html\Title;
 $cssClass = $block->getCssClass() ? ' ' . $block->getCssClass() : 'text-3xl';
 $titleHtml = '';
 if (trim((string)$block->getPageHeading())) {
-    $titleHtml = '<span class="base" data-ui-id="page-title-wrapper" '
+    $titleHtml = '<span style="text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);" class="font-heading text-2xl desktop:text-3xl font-normal leading-[42px] desktop:leading-[48px] capitalize text-black" data-ui-id="page-title-wrapper" '
         . $block->getAddBaseAttribute()
         . '>'
         . $escaper->escapeHtml($block->getPageHeading())
         . '</span>';
 }
 ?>
+
 <?php if ($titleHtml): ?>
-<div class="container flex flex-col md:flex-row flex-wrap my-6 font-bold
-    lg:mt-8 <?= /** @noEscape */ $cssClass ?>">
+<div class="container flex flex-col md:flex-row flex-wrap font-bold <?= /** @noEscape */ $cssClass ?>">
     <h1 class="text-gray-900 page-title title-font"
         <?php if ($block->getId()): ?> id="<?= $escaper->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>>
         <?= /* @noEscape */ $titleHtml ?>
+
     </h1>
     <?= $block->getChildHtml() ?>
+
 </div>
 <?php endif; ?>
