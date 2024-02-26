@@ -71,8 +71,4 @@
         @apply hidden;
     }
 
-    #maincontent, .page-main, .top-container {
-        @apply mx-3 desktop:mx-24;
-    }
-
 }

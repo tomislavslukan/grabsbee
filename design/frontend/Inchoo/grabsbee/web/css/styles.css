@@ -1778,18 +1778,6 @@ select{
   display: none;
 }
 
-#maincontent, .page-main, .top-container{
-  margin-left: 0.75rem;
-  margin-right: 0.75rem;
-}
-
-@media (min-width: 1024px){
-  #maincontent, .page-main, .top-container{
-    margin-left: 6rem;
-    margin-right: 6rem;
-  }
-}
-
 #category-view-container{
   margin-left: auto;
   margin-right: auto;
@@ -3624,6 +3612,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-bottom: 1.5rem;
 }
 
+.mx-0{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .-mb-2{
   margin-bottom: -0.5rem;
 }
@@ -3738,6 +3731,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .ml-10{
   margin-left: 2.5rem;
+}
+
+.ml-12{
+  margin-left: 3rem;
 }
 
 .ml-2{
@@ -4092,10 +4089,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   width: 2.25rem;
 }
 
-.w-\[120px\]{
-  width: 120px;
-}
-
 .w-\[151px\]{
   width: 151px;
 }
@@ -4144,6 +4137,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   min-width: 65px;
 }
 
+.max-w-\[120px\]{
+  max-width: 120px;
+}
+
 .max-w-\[210px\]{
   max-width: 210px;
 }
@@ -4162,10 +4159,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .max-w-prose{
   max-width: 65ch;
-}
-
-.max-w-\[120px\]{
-  max-width: 120px;
 }
 
 .flex-1{
@@ -4371,6 +4364,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .flex-row{
   flex-direction: row;
+}
+
+.flex-row-reverse{
+  flex-direction: row-reverse;
 }
 
 .flex-col{
@@ -6748,6 +6745,16 @@ fieldset ~ fieldset{
     margin-bottom: 1.5rem;
   }
 
+  .desktop\:mx-12{
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .desktop\:mx-24{
+    margin-left: 6rem;
+    margin-right: 6rem;
+  }
+
   .desktop\:ml-12{
     margin-left: 3rem;
   }
@@ -6786,10 +6793,6 @@ fieldset ~ fieldset{
 
   .desktop\:w-\[130px\]{
     width: 130px;
-  }
-
-  .desktop\:w-\[207px\]{
-    width: 207px;
   }
 
   .desktop\:w-\[364px\]{

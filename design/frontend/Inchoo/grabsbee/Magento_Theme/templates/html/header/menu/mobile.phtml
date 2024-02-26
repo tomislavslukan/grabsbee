@@ -110,7 +110,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                         <?php if (!empty($menuItem['childData'])): ?>
                             <div
                                 data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>"
-                                class="z-30 flex flex-col gap-1 w-full h-full p-1 bg-container-lighter"
+                                class="z-30 w-full h-full p-1 bg-container-lighter"
                                 :class="{
                                 'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
                                 <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>">
@@ -123,22 +123,23 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                                     </li>
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
                                         <ul class="flex flex-row items-center">
-                                            <li>
-                                                <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
-                                                   class="hover:underline"
-                                                   title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
+                                            <li class="flex flex-row-reverse">
                                                     <span class="h-10 font-normal font-primary text-xs uppercase leading-6 tracking-wider">
+                                                        <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
+                                                           class="hover:underline"
+                                                           title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
                                                         <?= $escaper->escapeHtml($subMenuItem['name']) ?>
+                                                        </a>
                                                     </span>
-                                                </a>
+
                                                 <?php if (!empty($subMenuItem['childData'])): ?>
                                                     <div x-data="{ isOpen: false, rotate: 0 }" class="inline">
                                                         <span @click="isOpen = !isOpen; rotate += 45"
                                                               x-bind:style="'transform: rotate(' + rotate + 'deg)'"
-                                                              class="cursor-pointer mr-6 inline-block transition-transform transform origin-center">
+                                                              class="cursor-pointer mr-2 inline-block transition-transform transform origin-center">
                                                             <?= $hyvaicons->renderHtml('subCategoryIcon', 'w-3 h-3');?>
                                                         </span>
-                                                        <ul x-show="isOpen" class="ml-6">
+                                                        <ul x-show="isOpen" class="ml-12">
                                                             <?php foreach ($subMenuItem['childData'] as $products): ?>
                                                                 <li>
                                                                     <a href="<?= $escaper->escapeUrl($products['url']) ?>"
