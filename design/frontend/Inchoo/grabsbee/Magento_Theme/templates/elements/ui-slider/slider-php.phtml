@@ -37,61 +37,61 @@ if (!$itemCount = count($items)) {
 $sliderItemRenderer = $block->getChildBlock('slider.item.template');
 $sliderIndex = 1;
 ?>
-    <script>
-        'use strict';
+<script>
+    'use strict';
 
-        function initSliderComponent() {
-            return {
-                active: 0,
-                itemCount: 0,
-                getSlider() {
-                    return this.$root.querySelector('.js_slides');
-                },
-                pageSize: 1,
-                pageFillers: 0,
-                calcPageSize() {
-                    const slider = this.getSlider();
-                    if (slider) {
-                        this.itemCount = slider.querySelectorAll('.js_slide').length;
-                        this.pageSize = Math.round(slider.clientWidth / slider.querySelector('.js_slide').clientWidth);
-                        this.pageFillers = (
-                            this.pageSize * Math.ceil(this.itemCount / this.pageSize)
-                        ) - this.itemCount;
-                    }
-                },
-                calcActive() {
-                    const slider = this.getSlider();
-                    if (slider) {
-                        const sliderItems = this.itemCount + this.pageFillers;
-                        const calculatedActiveSlide = slider.scrollLeft / (slider.scrollWidth / sliderItems);
-                        this.active = Math.round(calculatedActiveSlide / this.pageSize) * this.pageSize;
-                    }
-                },
-                scrollPrevious() {
-                    this.scrollTo(this.active - this.pageSize);
-                },
-                scrollNext() {
-                    this.scrollTo(this.active + this.pageSize);
-                },
-                scrollTo(idx) {
-                    const slider = this.getSlider();
-                    if (slider) {
-                        const slideWidth = slider.scrollWidth / (this.itemCount + this.pageFillers);
-                        slider.scrollLeft = Math.floor(slideWidth) * idx;
-                        this.active = idx;
-                    }
-                },
-                skipCarouselToNavigation(navSelector) {
-                    const element = document.getElementById(navSelector)
-                    if (element) {
-                        element.scrollIntoView({behavior: 'smooth', block: 'end'});
-                        const button = element.querySelector('button:not([disabled])');
-                        this.$nextTick(() => button && button.focus({preventScroll: true}))
-                    }
+    function initSliderComponent() {
+        return {
+            active: 0,
+            itemCount: 0,
+            getSlider() {
+                return this.$root.querySelector('.js_slides');
+            },
+            pageSize: 1,
+            pageFillers: 0,
+            calcPageSize() {
+                const slider = this.getSlider();
+                if (slider) {
+                    this.itemCount = slider.querySelectorAll('.js_slide').length;
+                    this.pageSize = Math.round(slider.clientWidth / slider.querySelector('.js_slide').clientWidth);
+                    this.pageFillers = (
+                        this.pageSize * Math.ceil(this.itemCount / this.pageSize)
+                    ) - this.itemCount;
+                }
+            },
+            calcActive() {
+                const slider = this.getSlider();
+                if (slider) {
+                    const sliderItems = this.itemCount + this.pageFillers;
+                    const calculatedActiveSlide = slider.scrollLeft / (slider.scrollWidth / sliderItems);
+                    this.active = Math.round(calculatedActiveSlide / this.pageSize) * this.pageSize;
+                }
+            },
+            scrollPrevious() {
+                this.scrollTo(this.active - this.pageSize);
+            },
+            scrollNext() {
+                this.scrollTo(this.active + this.pageSize);
+            },
+            scrollTo(idx) {
+                const slider = this.getSlider();
+                if (slider) {
+                    const slideWidth = slider.scrollWidth / (this.itemCount + this.pageFillers);
+                    slider.scrollLeft = Math.floor(slideWidth) * idx;
+                    this.active = idx;
+                }
+            },
+            skipCarouselToNavigation(navSelector) {
+                const element = document.getElementById(navSelector)
+                if (element) {
+                    element.scrollIntoView({behavior: 'smooth', block: 'end'});
+                    const button = element.querySelector('button:not([disabled])');
+                    this.$nextTick(() => button && button.focus({preventScroll: true}))
                 }
             }
         }
-    </script>
+    }
+</script>
 <?php if ($items): ?>
     <section class="relative"
              x-data="initSliderComponent()"

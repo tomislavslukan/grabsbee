@@ -77,7 +77,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
             :class="{ 'hidden': !blockOpen}"
         >
 
-            <div class="flex flex-row justify-end -mt-9">
+            <div class="flex flex-row justify-end">
                 <button
                     @click="blockOpen = !blockOpen"
                     aria-label="<?= $escaper->escapeHtmlAttr(__('Close menu')) ?>"
