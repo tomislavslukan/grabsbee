@@ -3522,6 +3522,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin: auto;
 }
 
+.-m-4{
+  margin: -1rem;
+}
+
 .-mx-2{
   margin-left: -0.5rem;
   margin-right: -0.5rem;
@@ -3615,6 +3619,16 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .my-6{
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
+}
+
+.-mx-1{
+  margin-left: -0.25rem;
+  margin-right: -0.25rem;
+}
+
+.my-8{
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .-mb-2{
@@ -3847,6 +3861,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .-ml-4{
   margin-left: -1rem;
+}
+
+.mt-12{
+  margin-top: 3rem;
 }
 
 .box-border{
@@ -4145,6 +4163,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   width: 100vw;
 }
 
+.w-40{
+  width: 10rem;
+}
+
 .min-w-\[110px\]{
   min-width: 110px;
 }
@@ -4215,6 +4237,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .origin-top-left{
   transform-origin: top left;
+}
+
+.origin-top-right{
+  transform-origin: top right;
 }
 
 .-translate-x-0{
@@ -4324,6 +4350,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .cursor-pointer{
   cursor: pointer;
+}
+
+.cursor-not-allowed{
+  cursor: not-allowed;
 }
 
 .select-none{
@@ -4490,6 +4520,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   gap: 2.25rem;
 }
 
+.gap-1\.5{
+  gap: 0.375rem;
+}
+
 .gap-x-1{
   -moz-column-gap: 0.25rem;
        column-gap: 0.25rem;
@@ -4513,6 +4547,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   row-gap: 0.5rem;
 }
 
+.gap-y-0{
+  row-gap: 0px;
+}
+
 .space-x-4 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -4525,12 +4563,22 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-bottom: calc(0.5rem * var(--tw-space-y-reverse));
 }
 
+.space-y-6 > :not([hidden]) ~ :not([hidden]){
+  --tw-space-y-reverse: 0;
+  margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+}
+
 .self-end{
   align-self: flex-end;
 }
 
 .self-center{
   align-self: center;
+}
+
+.self-stretch{
+  align-self: stretch;
 }
 
 .overflow-auto{
@@ -4716,6 +4764,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .border-text-muted{
   --tw-border-opacity: 1;
   border-color: rgb(207 207 207 / var(--tw-border-opacity));
+}
+
+.border-gray-200{
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .border-b-secondary{
@@ -5144,6 +5197,18 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   padding-top: 1.5rem;
 }
 
+.pb-12{
+  padding-bottom: 3rem;
+}
+
+.pl-5{
+  padding-left: 1.25rem;
+}
+
+.pt-16{
+  padding-top: 4rem;
+}
+
 .text-left{
   text-align: left;
 }
@@ -5298,6 +5363,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .uppercase{
   text-transform: uppercase;
+}
+
+.lowercase{
+  text-transform: lowercase;
 }
 
 .capitalize{
@@ -5466,6 +5535,11 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   color: rgb(250 204 21 / var(--tw-text-opacity));
 }
 
+.text-gray-300{
+  --tw-text-opacity: 1;
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
 .underline{
   text-decoration-line: underline;
 }
@@ -5615,6 +5689,12 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .transition-opacity{
   transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-colors{
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -6187,6 +6267,14 @@ fieldset ~ fieldset{
     margin-top: 0px;
   }
 
+  .sm\:mb-0{
+    margin-bottom: 0px;
+  }
+
+  .sm\:mr-8{
+    margin-right: 2rem;
+  }
+
   .sm\:block{
     display: block;
   }
@@ -6416,6 +6504,10 @@ fieldset ~ fieldset{
     height: auto;
   }
 
+  .md\:h-6{
+    height: 1.5rem;
+  }
+
   .md\:w-1\/2{
     width: 50%;
   }
@@ -6438,6 +6530,10 @@ fieldset ~ fieldset{
 
   .md\:w-screen{
     width: 100vw;
+  }
+
+  .md\:w-6{
+    width: 1.5rem;
   }
 
   .md\:-translate-x-1\/3{
@@ -6550,6 +6646,11 @@ fieldset ~ fieldset{
   .md\:text-lg{
     font-size: 1.125rem;
     line-height: 1.75rem;
+  }
+
+  .md\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 
   .md\:font-normal{
@@ -6717,6 +6818,10 @@ fieldset ~ fieldset{
 
   .lg\:grid-cols-8{
     grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-6{
+    grid-template-columns: repeat(6, minmax(0, 1fr));
   }
 
   .lg\:flex-row{
