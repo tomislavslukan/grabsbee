@@ -56,19 +56,22 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
     </button>
 
     <div
+        x-show="open"
         x-ref="mobileMenuNavLinks"
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
         class="
-            fixed top-0 right-0 w-full h-screen p-1 hidden
-            flex-col border-0 border-container bg-container-lighter
-            overflow-y-auto overflow-x-hidden bg-white
-        "
+        fixed top-0 right-0 w-full h-screen p-1
+        flex-col border-0 border-container bg-container-lighter
+        overflow-y-auto overflow-x-hidden bg-white"
+
         :class="{ 'flex': open, 'hidden': !open }"
         :aria-hidden="open ? 'false' : 'true'"
         role="dialog"
         aria-modal="true">
 
         <p class="font-normal mx-4 mb-6 text-md leading-6 mt-16 text-primary uppercase font-primary">Menu</p>
-
 
 
         <nav>
