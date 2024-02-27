@@ -74,7 +74,11 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
         <div
             id="filters-content"
             class="block-content filter-content hidden md:block lg:block absolute md:relative lg:relative top-0 left-0 right-0 w-full h-screen z-40 tablet:z-0 desktop:z-0 tablet:z-0 bg-white p-3"
-            :class="{ 'hidden': !blockOpen}"
+            :class="{ 'hidden': !blockOpen }"
+            x-show="blockOpen"
+            x-transition:enter="transition ease-in duration-300"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
         >
 
             <div class="flex flex-row justify-end">
