@@ -124,7 +124,8 @@ $sliderIndex = 1;
         >
             <?= $escaper->escapeHtml(__('Press to go to carousel navigation')) ?>
         </button>
-        <div class="relative w-full overflow-x-hidden focus-within:ring-1 active:ring-0 ring-blue-500 ring-opacity-50">
+
+        <div class="relative w-screen overflow-x-hidden focus-within:ring-1 active:ring-0 ring-blue-500 ring-opacity-50">
             <div class="relative flex flex-nowrap w-full overflow-auto transition-all js_slides snap"
                  @scroll.debounce="calcActive"
             >
@@ -149,7 +150,7 @@ $sliderIndex = 1;
                 aria-label="<?= $escaper->escapeHtml(__('Slide controls')) ?>"
                 :id="$id('slider-nav')"
             >
-                <div class="hidden absolute top-1/2 -translate-y-1/2 md:flex md:justify-between md:w-full">
+                <div class="hidden absolute top-1/2 -translate-y-1/2 md:flex md:justify-between md:w-screen">
 
                     <button
                         role="button"
@@ -168,7 +169,7 @@ $sliderIndex = 1;
                     <button
                         role="button"
                         aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
-                        class="w-[46px] height-[48px] bg-white opacity-50 hover:opacity-75"
+                        class="w-[46px] height-[48px] mr-4 bg-white opacity-50 hover:opacity-75"
                         :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
                         @click="scrollNext"
                     >
