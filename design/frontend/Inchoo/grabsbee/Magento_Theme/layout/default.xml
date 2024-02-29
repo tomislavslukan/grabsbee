@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
-<!--
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
--->
+
 <page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
 
@@ -96,26 +89,23 @@
         </referenceContainer>
 
         <referenceContainer name="footer">
-
             <block name="footer-content" template="Magento_Theme::html/footer.phtml">
-
                 <block class="Magento\Cms\Block\Block" name="footer-cms-content">
                     <arguments>
                         <argument name="block_id" xsi:type="string">footer_content</argument>
                     </arguments>
                 </block>
 
-                <!--<block name="footer-static-links" template="Magento_Theme::html/footer/links.phtml"/>-->
+                <block name="footer-static-links" template="Magento_Theme::html/footer/links.phtml"/>
+
+                <referenceBlock name="footer-static-links" remove="true"/>
 
                 <block
                     class="Magento\Theme\Block\Html\Footer"
                     name="footer-copyright"
                     template="Magento_Theme::html/footer/copyright.phtml"
-                    as="copyright"
-                />
+                    as="copyright"/>
             </block>
-
-
         </referenceContainer>
 
         <referenceContainer name="after.body.start">
@@ -127,6 +117,7 @@
         </referenceContainer>
 
         <block class="Magento\Framework\View\Element\Template" name="head.additional" as="head.additional" template="Magento_Theme::html/container.phtml"/>
+
 
     </body>
 </page>

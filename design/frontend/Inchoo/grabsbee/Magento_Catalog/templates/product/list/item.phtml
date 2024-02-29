@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -82,139 +76,138 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
 
 <?php if ($product->isSaleable()): ?>
 
-
 <form method="post"
-    action="<?= $escaper->escapeUrl($productViewModel->getAddToCartUrl($product, ['useUencPlaceholder' => true])) ?>"
-    class="group item product product-item product_addtocart_form card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:flex-row' ?>"
+      action="<?= $escaper->escapeUrl($productViewModel->getAddToCartUrl($product, ['useUencPlaceholder' => true])) ?>"
+      class="group item product product-item product_addtocart_form card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:flex-row' ?>"
     <?php if ($product->getOptions()): ?>
-    enctype="multipart/form-data"
+        enctype="multipart/form-data"
     <?php endif; ?>
 >
     <?= /** @noEscape */ $block->getBlockHtml('formkey') ?>
     <input type="hidden" name="product" value="<?= (int)$productId ?>"/>
     <?php foreach ($options as $optionItem): ?>
-    <input type="hidden"
-           name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
-           value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
+        <input type="hidden"
+               name="<?= $escaper->escapeHtml($optionItem['name']) ?>"
+               value="<?= $escaper->escapeHtml($optionItem['value']) ?>">
     <?php endforeach; ?>
     <?php else: ?>
 
-
     <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>" class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
-<div class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
-<?php endif; ?>
-    <?php /* Product Image */ ?>
-    <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
-        class="product photo product-item-photo block mx-auto height-auto desktop:max-w-[207px] max-w-[120px]"
-        tabindex="-1"
-    >
-        <?= $block->getImage($product, $imageDisplayArea)
-            ->setTemplate('Magento_Catalog::product/list/image.phtml')
-            ->setData('custom_attributes', $imageCustomAttributes)
-            ->setProductId($productId)
-            ->toHtml(); ?>
-    </a>
-    <div class="product-info flex flex-col grow <?= $viewIsGrid ? '' : 'items-center tablet:items-start tablet:ml-12 desktop:items-start desktop:ml-12' ?>">
-        <?php $productNameStripped = $block->stripTags($product->getName(), null, true); ?>
-        <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
-            <a
-                class="product-item-link font-primary font-bold uppercase leading-6 text-secondary font-xs desktop:font-md"
-                href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
-                :id="`slide-desc-<?= $escaper->escapeHtmlAttr($product->getId()) ?>-${$id('slider-id')}`"
+        <div class="item product product-item card card-interactive flex flex-col w-full <?= $viewIsGrid ? '' : 'md:text-left' ?>">
+            <?php endif; ?>
+
+
+            <?php /* Product Image */ ?>
+            <a href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
+               class="product photo product-item-photo block mx-auto height-auto desktop:max-w-[207px] max-w-[120px]"
+               tabindex="-1"
             >
-                <?= /* @noEscape */ $productName ?>
+                <?= $block->getImage($product, $imageDisplayArea)
+                    ->setTemplate('Magento_Catalog::product/list/image.phtml')
+                    ->setData('custom_attributes', $imageCustomAttributes)
+                    ->setProductId($productId)
+                    ->toHtml(); ?>
             </a>
-        </div>
+            <div class="product-info flex flex-col grow <?= $viewIsGrid ? '' : 'items-center tablet:items-start tablet:ml-12 desktop:items-start desktop:ml-12' ?>">
+                <?php $productNameStripped = $block->stripTags($product->getName(), null, true); ?>
+                <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
+                    <a
+                        class="product-item-link font-primary font-bold uppercase leading-6 text-secondary font-xs desktop:font-md"
+                        href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
+                        :id="`slide-desc-<?= $escaper->escapeHtmlAttr($product->getId()) ?>-${$id('slider-id')}`"
+                    >
+                        <?= /* @noEscape */ $productName ?>
+                    </a>
+                </div>
 
-        <?php if (!$hideRatingSummary): ?>
-        <div class="my-3 desktop:my-6  <?= $viewIsGrid ? 'mx-auto' : '' ?>">
-            <?= $block->getReviewsSummaryHtml($product, 'short') ?>
-        </div>
-        <?php endif; ?>
-
-        <?php if ($product->isAvailable() && !$hideDetails): ?>
-            <?= $block->getProductDetailsHtml($product) ?>
-        <?php endif; ?>
-
-        <?php if ($showDescription): ?>
-        <div class="items-center justify-center text-primary text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
-            <?= /* @noEscape */ $productViewModel->getShortDescriptionForProduct($product) ?>
-        </div>
-        <?php endif; ?>
-
-        <script>
-            function initPriceBox_<?= /** @noEscape */ $uniqueId ?>()
-            {
-                return {
-                    updatePrice(priceData) {
-                        const regularPriceLabel = this.$root.querySelector('.normal-price .price-label');
-                        const regularPriceElement = this.$root.querySelector('.normal-price [data-price-type=finalPrice].price-wrapper .price');
-                        const basePriceElement = this.$root.querySelector('.normal-price [data-price-type=basePrice].price-wrapper .price');
-                        if (priceData.finalPrice.amount < priceData.oldPrice.amount) {
-                            regularPriceLabel.classList.add('hidden');
-                        } else {
-                            regularPriceLabel.classList.remove('hidden');
-                        }
-                        regularPriceElement && (regularPriceElement.innerText = hyva.formatPrice(priceData.finalPrice.amount));
-                        basePriceElement && (basePriceElement.innerText = hyva.formatPrice(priceData.basePrice.amount));
-                    }
-                }
-            }
-        </script>
-        <div class="text-primary font-primary font-normal font-xs leading-5 text-center"
-             x-data="initPriceBox_<?= /** @noEscape */ $uniqueId ?>()"
-             @update-prices-<?= (int)$productId ?>.window="updatePrice($event.detail);"
-        >
-            <?= /* @noEscape */ $productListItemViewModel->getProductPriceHtml($product) ?>
-        </div>
-
-        <div class="grid grid-cols-1 grid-rows-2 place-items-center desktop:items-center desktop:mt-6 <?= $viewIsGrid ? '' : 'desktop:flex' ?> ">
-
-            <div class="pt-4 desktop:pt-0 desktop:mr-2">
-                <?php if ($product->isSaleable()): ?>
-                    <button class="group-hover:bg-secondary block btn__primary w-auto h-[48px] text-sm shadow-md font-bold font-sm leading-6 tracking-wider px-3 py-2 desktop:py-3 hover:bg-primary-light transition duration-300
-                <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>"
-                            aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Cart') . ' ' . $productName) ?>"
-                    <span class="inline <?= $viewIsGrid ? 'md:ml-0 md:hidden lg:ml-2 lg:inline' : '' ?>">
-                    <?= $escaper->escapeHtml(__('Add to Cart')) ?>
-                </span>
-                    </button>
-                <?php else: ?>
-                    <div class="w-auto justify-center <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>">
-                        <?= $block->getChildBlock('stockstatus')->setData('product', $product)->toHtml() ?>
+                <?php if (!$hideRatingSummary): ?>
+                    <div class="my-3 desktop:my-6  <?= $viewIsGrid ? 'mx-auto' : '' ?>">
+                        <?= $block->getReviewsSummaryHtml($product, 'short') ?>
                     </div>
                 <?php endif; ?>
-            </div>
 
-           <div>
-               <?php if ($showAddToWishlist): ?>
-               <button x-data="initWishlist()"
-                       @click.prevent="addToWishlist(<?= (int)$productId ?>)"
-                       aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wish List') . ' ' . $productName) ?>"
-                       class="mr-3"
-                       type="button">
-                   <?= $hyvaicons->renderHtml('wishlist', 'w-5 h-5');?>
-               </button>
-               <?php endif; ?>
-               <?php if ($showAddToCompare): ?>
-                   <button x-data="initCompareOnProductList()"
-                           @click.prevent="addToCompare(<?= (int)$productId ?>)"
-                           aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Compare') . ' ' . $productName) ?>"
-                           type="button">
-                       <?= $hyvaicons->renderHtml('compare', 'w-5 h-5');?>
-                   </button>
-            <?php endif; ?>
-            <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
-                <?= $addToBlock->setProduct($product)->getChildHtml() ?>
-            <?php endif; ?>
+                <?php if ($product->isAvailable() && !$hideDetails): ?>
+                    <?= $block->getProductDetailsHtml($product) ?>
+                <?php endif; ?>
 
-        </div>
-    </div>
+                <?php if ($showDescription): ?>
+                    <div class="items-center justify-center text-primary text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
+                        <?= /* @noEscape */ $productViewModel->getShortDescriptionForProduct($product) ?>
+                    </div>
+                <?php endif; ?>
 
-<?php if ($product->isSaleable()): ?>
+                <script>
+                    function initPriceBox_<?= /** @noEscape */ $uniqueId ?>()
+                    {
+                        return {
+                            updatePrice(priceData) {
+                                const regularPriceLabel = this.$root.querySelector('.normal-price .price-label');
+                                const regularPriceElement = this.$root.querySelector('.normal-price [data-price-type=finalPrice].price-wrapper .price');
+                                const basePriceElement = this.$root.querySelector('.normal-price [data-price-type=basePrice].price-wrapper .price');
+                                if (priceData.finalPrice.amount < priceData.oldPrice.amount) {
+                                    regularPriceLabel.classList.add('hidden');
+                                } else {
+                                    regularPriceLabel.classList.remove('hidden');
+                                }
+                                regularPriceElement && (regularPriceElement.innerText = hyva.formatPrice(priceData.finalPrice.amount));
+                                basePriceElement && (basePriceElement.innerText = hyva.formatPrice(priceData.basePrice.amount));
+                            }
+                        }
+                    }
+                </script>
+                <div class="text-primary font-primary font-normal font-xs leading-5 text-center"
+                     x-data="initPriceBox_<?= /** @noEscape */ $uniqueId ?>()"
+                     @update-prices-<?= (int)$productId ?>.window="updatePrice($event.detail);"
+                >
+                    <?= /* @noEscape */ $productListItemViewModel->getProductPriceHtml($product) ?>
+                </div>
+
+                <div class="grid grid-cols-1 grid-rows-2 place-items-center desktop:items-center desktop:mt-6 <?= $viewIsGrid ? '' : 'desktop:flex' ?> ">
+
+                    <div class="pt-4 desktop:pt-0 desktop:mr-2">
+                        <?php if ($product->isSaleable()): ?>
+                            <button class="group-hover:bg-secondary block btn__primary w-auto h-[48px] text-sm shadow-md font-bold font-sm leading-6 tracking-wider px-3 py-2 desktop:py-3 hover:bg-primary-light transition duration-300
+                        <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>"
+                                    aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Cart') . ' ' . $productName) ?>"
+                            <span class="inline <?= $viewIsGrid ? 'md:ml-0 md:hidden lg:ml-2 lg:inline' : '' ?>">
+                            <?= $escaper->escapeHtml(__('Add to Cart')) ?>
+                        </span>
+                            </button>
+                        <?php else: ?>
+                            <div class="w-auto justify-center <?= $viewIsGrid ? 'mr-auto' : 'mr-auto md:mr-0' ?>">
+                                <?= $block->getChildBlock('stockstatus')->setData('product', $product)->toHtml() ?>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+
+                    <div>
+                        <?php if ($showAddToWishlist): ?>
+                            <button x-data="initWishlist()"
+                                    @click.prevent="addToWishlist(<?= (int)$productId ?>)"
+                                    aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Wish List') . ' ' . $productName) ?>"
+                                    class="mr-3"
+                                    type="button">
+                                <?= $hyvaicons->renderHtml('wishlist', 'w-5 h-5');?>
+                            </button>
+                        <?php endif; ?>
+                        <?php if ($showAddToCompare): ?>
+                            <button x-data="initCompareOnProductList()"
+                                    @click.prevent="addToCompare(<?= (int)$productId ?>)"
+                                    aria-label="<?= $escaper->escapeHtmlAttr(__('Add to Compare') . ' ' . $productName) ?>"
+                                    type="button">
+                                <?= $hyvaicons->renderHtml('compare', 'w-5 h-5');?>
+                            </button>
+                        <?php endif; ?>
+                        <?php if ($addToBlock = $block->getChildBlock('addto')): ?>
+                            <?= $addToBlock->setProduct($product)->getChildHtml() ?>
+                        <?php endif; ?>
+
+                    </div>
+                </div>
+
+                <?php if ($product->isSaleable()): ?>
 </form>
 
-
 <?php else: ?>
-</div>
+    </div>
 <?php endif; ?>

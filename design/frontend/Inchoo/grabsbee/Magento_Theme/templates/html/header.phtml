@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -14,6 +8,7 @@ use Hyva\Theme\ViewModel\StoreConfig;
 use Magento\Checkout\Block\Cart\Sidebar as SidebarCart;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
+use Hyva\Theme\ViewModel\SvgIcons;
 
 /** @var Escaper $escaper */
 /** @var Template $block */
@@ -21,6 +16,9 @@ use Magento\Framework\View\Element\Template;
 
 /** @var HeroiconsOutline $heroicons */
 $heroicons = $viewModels->require(HeroiconsOutline::class);
+
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
 
 /** @var StoreConfig $storeConfig */
 $storeConfig = $viewModels->require(StoreConfig::class);
@@ -74,7 +72,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
      x-data="initHeader()"
      @private-content-loaded.window="getData(event.detail.data)"
 >
-    <div class="flex items-center justify-between w-full px-3 py-3 mt-0 desktop:px-24">
+    <div class="flex items-center justify-between w-full px-3 py-5 tablet:py-6 mt-0 desktop:px-24">
         <!--Logo-->
         <?= $block->getChildHtml('logo'); ?>
 
@@ -83,7 +81,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
             <!--Search Icon-->
             <button
                 id="menu-search-icon"
-                class="inline-block ml-1 no-underline sm:ml-3 text-white hover:text-white"
+                class="inline-block ml-5 no-underline text-white hover:text-white"
                 @click.prevent="
                     searchOpen = !searchOpen;
                     $dispatch('search-open');
@@ -93,14 +91,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 :aria-expanded="searchOpen"
                 x-ref="searchButton"
             >
-                <?= $heroicons->searchHtml(
-                    "w-5 h-5 hover:text-white text-p",
-                    25,
-                    25,
-                    [
-                        "aria-hidden" => "true"
-                    ]
-                ) ?>
+                <?= $hyvaicons->renderHtml('searchIcon', '', 18, 18, ["aria-hidden" => "true"]); ?>
             </button>
 
             <!--Cart Icon-->
@@ -110,7 +101,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 <a
             <?php endif ?>
                 id="menu-cart-icon"
-                class="relative inline-block ml-1 no-underline sm:ml-3 hover:text-white"
+                class="relative inline-block ml-5 no-underline hover:text-white"
                 x-ref="cartButton"
                 :aria-disabled="isCartEmpty()"
                 title="<?= $escaper->escapeHtmlAttr(__('Cart')) ?>"
@@ -140,11 +131,7 @@ $showMiniCart = $storeConfig->getStoreConfig(SidebarCart::XML_PATH_CHECKOUT_SIDE
                 >
                 </span>
 
-                <?= $heroicons->shoppingCartHtml(
-                    "w-5 h-5 text-white hover:text-white",
-                    25,
-                    25
-                ) ?>
+                    <?= $hyvaicons->renderHtml('cartIcon', '', 18, 18, ["aria-hidden" => "true"]); ?>
 
                 <span
                     x-text="cart.summary_count"

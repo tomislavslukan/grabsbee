@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
@@ -37,7 +31,7 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
     x-data="initMenuMobile<?= $escaper->escapeHtml($uniqueId) ?>()"
     @load.window="setActiveMenu($root)"
     @keydown.window.escape="closeMenu()"
-    class="z-20 order-2 sm:order-1 lg:order-2 navigation lg:hidden w-12 h-12"
+    class="z-20 order-2 sm:order-1 lg:order-2 items-center navigation lg:hidden flex flex-row items-center justify-center ml-5"
     aria-label="<?= $escaper->escapeHtmlAttr(__('Site navigation')) ?>"
     role="navigation"
 >
@@ -50,17 +44,17 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
         aria-label="<?= $escaper->escapeHtmlAttr(__('Open menu')) ?>"
         aria-haspopup="menu"
         :aria-expanded="open"
-        :hidden="open"
-    >
-        <?= $heroicons->menuHtml('p-3', 48, 48, [":class" => "{ 'hidden' : open, 'block': !open }", "aria-hidden" => "true"]) ?>
+        :hidden="open">
+
+        <?= $hyvaicons->renderHtml('hamburgerIcon', '', 18, 18, [":class" => "{ 'hidden' : open, 'block': !open }", "aria-hidden" => "true"]); ?>
     </button>
 
     <div
         x-show="open"
-        x-ref="mobileMenuNavLinks"
         x-transition:enter="transition ease-out duration-300 transform"
         x-transition:enter-start="opacity-0 scale-95"
         x-transition:enter-end="opacity-100 scale-100"
+        x-ref="mobileMenuNavLinks"
         class="
         fixed top-0 right-0 w-full h-screen p-1
         flex-col border-0 border-container bg-container-lighter
@@ -71,100 +65,70 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
         role="dialog"
         aria-modal="true">
 
-        <p class="font-normal mx-4 mb-6 text-md leading-6 mt-16 text-primary uppercase font-primary">Menu</p>
+        <p class="font-normal mx-3 mb-6 text-md leading-6 mt-16 text-primary uppercase font-primary"><?= $escaper->escapeHtmlAttr(__('Menu')) ?></p>
 
-
-        <nav>
-            <ul
-                class="mx-4 flex flex-col gap-y-1"
-                aria-label="<?= $escaper->escapeHtmlAttr(__('Site navigation links')) ?>">
+        <nav class="mx-3">
+            <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Site navigation links')) ?>">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
-                    <li
-                        data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>-main"
-                        class="level-0">
-                        <div
-                            class="flex items-center"
-                            :class="{
-                            '-translate-x-0' : mobilePanelActiveId,
-                            'translate-x-0' : !mobilePanelActiveId}">
-                            <a
-                                class="flex items-center w-full py-2 border-b cursor-pointer
-                                bg-container-lighter border-container level-0 font-bold text-primary uppercase leading-6 tracking-wide text-text-color text-xs hover:underline"
-                                href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
-                                title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>">
+                    <li data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>-main" class="level-0 border-b border-text-gray">
+
+                        <div x-data="{ rot: 0 }" class="hover:underline flex flex-row justify-between items-center font-primary text-xs font-bold my-2 uppercase text-text-color leading-6 tracking-wide">
+                            <a href="<?= $escaper->escapeUrl($menuItem['url']) ?>" title="<?= $escaper->escapeHtmlAttr($menuItem['name']) ?>">
                                 <?= $escaper->escapeHtml($menuItem['name']) ?>
                             </a>
+
                             <?php if (!empty($menuItem['childData'])): ?>
-                                <button
-                                    @click="openSubcategory('<?= /* @noEscape */ $index ?>')"
-                                    class="absolute right-0 flex items-center mr-3 w-3 h-3 cursor-pointer bg-container-lighter border-container transition-transform transform origin-right"
-                                    aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>"
-                                    aria-haspopup="true"
-                                    :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'"
-                                    :class="{ 'rotate-180': mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>' }">
-                                    <div>
-                                        <span class="w-full h-full p-1">
-                                            <?= $hyvaicons->renderHtml('dropdownIcon', ''); ?>
-                                        </span>
-                                    </div>
+                                <button @click="openSubcategory('<?= /* @noEscape */ $index ?>'); rot = rot === 0 ? 180 : 0" x-bind:style="'transform: rotate(' + rot + 'deg)'" aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>" aria-haspopup="true" :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'">
+                                    <span>
+                                        <?= $hyvaicons->renderHtml('dropdownIcon', '', 14, 14); ?>
+                                    </span>
                                 </button>
                             <?php endif; ?>
                         </div>
+
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <div
-                                data-child-id="<?= $escaper->escapeHtmLAttr($index) ?>"
-                                class="z-30 w-full h-full p-1 bg-container-lighter"
-                                :class="{
-                                'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
+                            <div data-child-id="<?= $escaper->escapeHtmlAttr($index) ?>" :class="{ 'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
                                 <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>">
-                                    <li>
-                                        <a
-                                            href="<?= $escaper->escapeUrl($menuItem['url']) ?>"
-                                            title="<?= $escaper->escapeHtmlAttr($menuItem['name'])?>"
-                                            class="cursor-pointer hover:underline">
-                                        </a>
-                                    </li>
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
-                                        <ul class="flex flex-row items-center">
-                                            <li class="flex flex-row-reverse">
-                                                    <span class="h-10 font-normal font-primary text-xs uppercase leading-6 tracking-wider">
-                                                        <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
-                                                           class="hover:underline"
-                                                           title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>">
-                                                        <?= $escaper->escapeHtml($subMenuItem['name']) ?>
-                                                        </a>
-                                                    </span>
+                                        <li class="flex flex-col justify-start font-primary text-xs uppercase my-2 font-normal leading-6 tracking-wide text-text-color" x-data="{ isOpen: false, rotate: 0 }" >
+                                            <div class="flex justify-start items-center" x-data="{ rotate: 0 }">
 
                                                 <?php if (!empty($subMenuItem['childData'])): ?>
-                                                    <div x-data="{ isOpen: false, rotate: 0 }" class="inline">
-                                                        <span @click="isOpen = !isOpen; rotate += 45"
-                                                              x-bind:style="'transform: rotate(' + rotate + 'deg)'"
-                                                              class="cursor-pointer mr-2 inline-block transition-transform transform origin-center">
-                                                            <?= $hyvaicons->renderHtml('subCategoryIcon', 'w-3 h-3');?>
+                                                    <button @click="isOpen = !isOpen; rotate += 45" x-bind:style="'transform: rotate(' + rotate + 'deg)'" class="toggle-icon ml-3 mr-2">
+                                                        <span>
+                                                            <?= $hyvaicons->renderHtml('subCategoryIcon', 'cursor-pointer', 14, 14);?>
                                                         </span>
-                                                        <ul x-show="isOpen" class="ml-12">
-                                                            <?php foreach ($subMenuItem['childData'] as $products): ?>
-                                                                <li>
-                                                                    <a href="<?= $escaper->escapeUrl($products['url']) ?>"
-                                                                       title="<?= $escaper->escapeHtmlAttr($products['name']) ?>"
-                                                                       class="text-black text-xs leading-5 tracking-wide uppercase text-black hover:underline">
-                                                                        <?= $escaper->escapeHtml($products['name']) ?>
-                                                                    </a>
-                                                                </li>
-                                                            <?php endforeach; ?>
-                                                        </ul>
-                                                    </div>
+                                                    </button>
                                                 <?php endif; ?>
-                                            </li>
-                                        </ul>
+
+                                                <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>" title="<?= $escaper->escapeHtmlAttr($subMenuItem['name']) ?>" class="submenu-link hover:underline">
+                                                    <?= $escaper->escapeHtml($subMenuItem['name']) ?>
+                                                </a>
+                                            </div>
+                                            <?php if (!empty($subMenuItem['childData'])): ?>
+                                                <div>
+                                                    <ul x-show="isOpen" class="ml-12" x-transition:enter="transition ease-out duration-300 transform" x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100">
+                                                        <?php foreach ($subMenuItem['childData'] as $products): ?>
+                                                            <li class="hover:underline my-2">
+                                                                <a href="<?= $escaper->escapeUrl($products['url']) ?>" title="<?= $escaper->escapeHtmlAttr($products['name']) ?>" class="sub-submenu-link">
+                                                                    <?= $escaper->escapeHtml($products['name']) ?>
+                                                                </a>
+                                                            </li>
+                                                        <?php endforeach; ?>
+                                                    </ul>
+                                                </div>
+                                            <?php endif; ?>
+                                        </li>
                                     <?php endforeach; ?>
                                 </ul>
                             </div>
                         <?php endif; ?>
+
                     </li>
                 <?php endforeach; ?>
             </ul>
         </nav>
+
         <button
             @click="closeMenu()"
             class="absolute flex justify-end w-16 self-end mb-1"
@@ -172,15 +136,13 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
             type="button">
             <span class="'hidden' : !open, 'block': open">
                <div class="flex row items-center mt-6 mr-3">
-                   <p class="font-normal text-text-color leading-5 text-xs font-primary">Close</p>
-                <span class="ml-2"> <?= $hyvaicons->renderHtml('closeMenu', 'w-3 h-3');?></span>
+                   <p class="font-normal text-text-color leading-5 text-xs font-primary"><?= $escaper->escapeHtmlAttr(__('Close')) ?></p>
+                <span class="ml-2"> <?= $hyvaicons->renderHtml('closeMenu', '', 12, 12);?></span>
                </div>
             </span>
         </button>
     </div>
 </nav>
-
-
 
 
 
@@ -202,7 +164,6 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
             openMenu() {
                 this.open = true
                 this.$nextTick(() => hyva.trapFocus(this.$refs['mobileMenuNavLinks']));
-                // Prevent from body scrolling while mobile menu opened
                 document.body.style.position = 'fixed';
             },
             closeMenu() {

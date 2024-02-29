@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -27,7 +21,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
         md:col-span-3 lg:col-span-6 justify-end">
 
     <span class="hidden whitespace-nowrap tablet:block desktop:block mr-3 font-primary font-normal font-md leading-6 text-text-gray">
-        Sort by:
+        <?= $escaper->escapeHtml(__('Sort by:')) ?>
     </span>
 
     <select data-role="sorter"
@@ -57,7 +51,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
            class="action sorter-action sort-desc"
            @click.prevent="changeUrl('product_list_dir', 'asc', options.directionDefault)"
         >
-            <?= $hyvaicons->renderHtml('sortIcon', 'w-5 h-5');?>
+            <?= $hyvaicons->renderHtml('filterArrow', '', 14, 14); ?>
         </a>
     <?php else: ?>
         <a title="<?= $escaper->escapeHtmlAttr(__('Set Descending Direction')) ?>"
@@ -65,7 +59,7 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
            class="action sorter-action sort-asc transform rotate-180"
            @click.prevent="changeUrl('product_list_dir', 'desc', options.directionDefault)"
         >
-            <?= $hyvaicons->renderHtml('sortIcon', 'w-5 h-5');?>
+            <?= $hyvaicons->renderHtml('filterArrow', '', 14, 14); ?>
         </a>
     <?php endif; ?>
 

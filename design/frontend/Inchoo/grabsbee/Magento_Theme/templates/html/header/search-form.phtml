@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -91,10 +85,11 @@ $helper = $this->helper(SearchHelper::class);
               x-transition:enter="transition ease-out duration-300 transform"
               x-transition:enter-start="opacity-0 scale-95"
               x-transition:enter-end="opacity-100 scale-100"
-              class="desktop:h-[144px] h-[147px] px-3 desktop:px-24 desktop:flex desktop:items-center desktop:justify-center bg-primary w-full">
-             <div class="h-[101px] bg-primary grid desktop:grid-cols-12 desktop:grid-rows-1 grid-cols-12 grid-rows-2">
+              class="desktop:h-[9rem] h-[9.188rem] px-3 desktop:px-24 desktop:flex desktop:items-center desktop:justify-center bg-primary w-full">
 
+             <div class="h-[6.313rem] bg-primary grid desktop:grid-cols-12 desktop:grid-rows-1 grid-cols-12 grid-rows-2">
                  <div class="desktop:col-span-11 col-span-12 flex items-center relative">
+                     <label for="search" class="sr-only"><?= $escaper->escapeHtmlAttr(__('Search entire store here')) ?></label>
                      <input id="search"
                             x-ref="searchInput"
                             type="search"
@@ -106,9 +101,9 @@ $helper = $this->helper(SearchHelper::class);
                             @focus.once="suggest"
                             @input.debounce.300="suggest"
                             @keydown.arrow-down.prevent="focusElement($root.querySelector('[tabindex]'))"
-                            @search-open.window.debounce.10="$el.focus() $el.select()"
                             aria-label="<?= __('Search field') ?>"
-                            class="w-full focus:border-secondary focus:ring-0 h-[42px] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary indent-4" />
+                            x-init="$refs.searchInput.focus()"
+                            class="w-full focus:border-secondary focus:ring-0 h-[2.625rem] bg-primary text-white border-t-0 border-l-0 border-r-0 border-b-secondary placeholder:text-white placeholder:mobile:leading-6 placeholder:leading-5 placeholder:text-sm placeholder:mobile:text-base placeholder:weight-normal placeholder:font-primary indent-4" />
 
                      <div class="absolute left-2 top-1/2 transform -translate-y-1/2 text-white">
                          <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -117,35 +112,31 @@ $helper = $this->helper(SearchHelper::class);
                      </div>
                  </div>
 
-
                  <div class="desktop:col-span-1 col-span-12 flex items-center justify-center order-first desktop:order-last desktop:justify-end">
                      <button
                          class="flex justify-end ml-6"
                          aria-label="<?= $escaper->escapeHtmlAttr(__('Close search menu')) ?>"
                          type="button"
                          @click.prevent="
-                    searchOpen = !searchOpen;
-                    $dispatch('search-open');
-                "
-                     >
+                        searchOpen = !searchOpen;
+                        $dispatch('search-open');">
 
-                <span class="'hidden' : !open, 'block': open">
-                    <div class="flex row items-center desktop:ml-24">
-                        <p class="font-normal text-white leading-5 text-xs font-primary">Close</p>
-                        <span class="ml-2"><?= $hyvaicons->renderHtml('searchClose', 'w-3 h-3');?></span>
-                    </div>
-                </span>
+                        <div class="'hidden' : !open, 'block': open">
+                            <div class="flex row items-center desktop:ml-24">
+                                <p class="font-normal text-white leading-5 text-xs font-primary"><?= $escaper->escapeHtmlAttr(__('Close')) ?></p>
+                                <span class="ml-2"><?= $hyvaicons->renderHtml('searchClose', 'w-3 h-3');?></span>
+                            </div>
+                        </div>
                      </button>
                  </div>
              </div>
          </div>
 
-
          <template x-if="suggestions.length > 0">
-             <div class="leading-normal transition appearance-none text-grey-800 flex flex-col mt-1">
+             <div class="leading-normal transition appearance-none text-grey-800 flex flex-col bg-secondary">
                  <template x-for="suggestion in suggestions">
-                     <div class="flex justify-between p-2 bg-container-lighter even:bg-container mb-1 cursor-pointer
-                                 border border-container hover:bg-container-darker"
+                     <div class="flex justify-between p-2 text-white bg-container-lighter even:bg-container cursor-pointer
+                                 border-b border-bottom hover:bg-container-darker"
                           tabindex="0"
                           @click="search(suggestion.title)"
                           @keydown.enter="search(suggestion.title)"
@@ -160,11 +151,12 @@ $helper = $this->helper(SearchHelper::class);
                  </template>
              </div>
          </template>
+
         <button type="submit"
                 title="<?= $escaper->escapeHtml(__('Search')) ?>"
                 class="action search sr-only"
-                aria-label="Search"
-        >
+                aria-label="Search">
+
             <?= $escaper->escapeHtml(__('Search')) ?>
         </button>
     </form>

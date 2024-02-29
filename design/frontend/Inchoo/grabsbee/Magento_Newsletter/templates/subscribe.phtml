@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 use Hyva\Theme\Model\ViewModelRegistry;
 use Hyva\Theme\ViewModel\HeroiconsOutline;
@@ -26,7 +20,7 @@ $recaptcha = $block->getData('viewModelRecaptcha');
 ?>
 <div class="">
     <form
-        class="form subscribe mobile:mx-3"
+        class="form subscribe mx-3"
         action="<?= $escaper->escapeUrl($block->getFormActionUrl()) ?>"
         method="post"
         x-data="initNewsletterForm()"
@@ -41,17 +35,19 @@ $recaptcha = $block->getData('viewModelRecaptcha');
             <?= $escaper->escapeHtml(__('Newsletter')) ?>
 
         </h2>
-        <p class="font-primary font-normal text-xs text-white leading-5 text-center py-5">Sign up for our newsletter and be the first to find out about new products, discounts and more</p>
+        <p class="font-primary font-normal text-xs text-white leading-5 text-center py-5"><?= $escaper->escapeHtmlAttr(__('Sign up for our newsletter and be the first to find out about new products, discounts and more')) ?></p>
         <div>
 
         <div class="desktop:flex desktop:flex-row desktop:items-center desktop:justify-around">
-            <input type="text" aria-label="<?= __('Label') ?>" id="" name="" placeholder="Subscribe to our newsletter!" class="desktop:w-[364px] focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-11 font-primary w-full font-normal text-sm leading-6">
+
+            <label for="newsletter-sub" class="sr-only"><?= $escaper->escapeHtmlAttr(__('Subscribe to Newsletter')) ?></label>
+            <input type="email" pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}" required type="text" aria-label="<?= __('Label') ?>" id="newsletter-sub" name="newsletter-subscribe" placeholder="Subscribe to our newsletter!" class="desktop:w-[364px] focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-11 font-primary w-full font-normal text-sm leading-6">
 
             <?= $block->getBlockHtml('formkey') ?>
             <?= $recaptcha ? $recaptcha->getInputHtml(ReCaptcha::RECAPTCHA_FORM_ID_NEWSLETTER) : '' ?>
 
 
-            <button class="hover:bg-primary-light transition duration-300 desktop:w-[130px] desktop:ml-3 my-5 btn__primary w-full h-11 text-sm leading-6 tracking-wider" aria-label="<?= __('Primary mobile large') ?>">
+        <button class="hover:bg-primary-light transition duration-300 desktop:w-[130px] my-5 btn__primary w-full h-11 text-sm leading-6 tracking-wider" aria-label="<?= __('Subscribe to out newsletter button') ?>">
                 <?= $escaper->escapeHtml(__('Subscribe')) ?>
             </button>
         </div>

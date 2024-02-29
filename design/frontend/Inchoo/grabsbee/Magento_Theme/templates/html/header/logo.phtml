@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -42,7 +36,7 @@ $logoSrc = $logoPathResolver && method_exists($logoPathResolver, 'getLogoSrc')
         href="<?= $escaper->escapeUrl($block->getUrl('')) ?>"
         aria-label="<?= $escaper->escapeHtmlAttr(__('Go to Home page')) ?>">
 
-        <img src="<?= $block->getViewFileUrl('images/logo.svg'); ?>" alt="logo" class="w-auto h-[21px] mobile:h-[24px]">
+        <img src="<?= $block->getViewFileUrl('images/logo.svg'); ?>" alt="logo" class="h-5 md:h-6 lg:h-6" width="auto" height="auto">
 
         <?php if (!$logoSrc): ?>
             <?= $escaper->escapeHtml($storeName) ?>

@@ -1,0 +1,25 @@
+.toolbar-products {
+    & .modes-mode {
+        @apply w-6 h-6 bg-center bg-no-repeat;
+
+        span {
+            @apply sr-only;
+        }
+    }
+
+    & .mode-grid {
+        background-image: url('../svg/grid.svg');
+    }
+
+    & .mode-grid.active {
+        background-image: url('../svg/grid-active.svg');
+    }
+
+    & .mode-list {
+        background-image: url('../svg/list.svg');
+    }
+
+    & .mode-list.active {
+        background-image: url('../svg/list-active.svg');
+    }
+}

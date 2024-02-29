@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -13,6 +7,7 @@ use Hyva\Theme\ViewModel\HeroiconsOutline;
 use Hyva\Theme\ViewModel\Store;
 use Magento\Framework\Escaper;
 use Magento\Framework\View\Element\Template;
+use Hyva\Theme\ViewModel\SvgIcons;
 
 // phpcs:disable Generic.Files.LineLength.TooLong
 
@@ -25,6 +20,9 @@ $viewModelStore = $viewModels->require(Store::class);
 
 /** @var HeroiconsOutline $heroicons */
 $heroicons = $viewModels->require(HeroiconsOutline::class);
+
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
 
 $title = (string) $block->getTitle();
 $items = $block->getItems() ?? [];
@@ -103,13 +101,13 @@ $sliderIndex = 1;
              aria-label="<?= $escaper->escapeHtml(__('Latest items')) ?>"
              :aria-describedby="$id('slider-desc')"
     >
-        <span
-            class="sr-only"
-            :id="$id('slider-desc')"
-            tabindex="-1"
-        >
-                <?= $escaper->escapeHtml(__('Navigating through the elements of the carousel is possible using the tab key. You can skip the carousel or go straight to carousel navigation using the skip links.')) ?>
-        </span>
+    <span
+        class="sr-only"
+        :id="$id('slider-desc')"
+        tabindex="-1"
+    >
+            <?= $escaper->escapeHtml(__('Navigating through the elements of the carousel is possible using the tab key. You can skip the carousel or go straight to carousel navigation using the skip links.')) ?>
+    </span>
         <a
             :href="`#${$id('slider-end')}`"
             class="action skip sr-only focus:not-sr-only focus:absolute focus:z-30 focus:bg-white"
@@ -125,7 +123,7 @@ $sliderIndex = 1;
             <?= $escaper->escapeHtml(__('Press to go to carousel navigation')) ?>
         </button>
 
-        <div class="relative w-screen overflow-x-hidden focus-within:ring-1 active:ring-0 ring-blue-500 ring-opacity-50">
+        <div class="relative w-full overflow-x-hidden focus-within:ring-1 active:ring-0 ring-blue-500 ring-opacity-50">
             <div class="relative flex flex-nowrap w-full overflow-auto transition-all js_slides snap"
                  @scroll.debounce="calcActive"
             >
@@ -150,50 +148,45 @@ $sliderIndex = 1;
                 aria-label="<?= $escaper->escapeHtml(__('Slide controls')) ?>"
                 :id="$id('slider-nav')"
             >
-                <div class="hidden absolute top-1/2 -translate-y-1/2 md:flex md:justify-between md:w-screen">
+                <div class="hidden absolute top-1/2 -translate-y-1/2 md:flex md:justify-between md:w-full">
 
                     <button
                         role="button"
                         aria-label="<?= $escaper->escapeHtml(__('Previous slide')) ?>"
-                        class="w-[46px] height-[48px] bg-white opacity-50 hover:opacity-75"
+                        class="w-[2.875rem] height-[3rem] bg-white opacity-50 hover:opacity-75"
                         :class="{ 'opacity-25 pointer-events-none' : active === 0 }"
                         @click="scrollPrevious"
                     >
-                       <span class="flex items-center justify-center py-[11px] px-[9px]">
-                            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M13.9582 19.5633L8.49614 13.9028H20.4523C21.0219 13.9028 21.4842 13.4237 21.4842 12.8333C21.4842 12.243 21.0219 11.7639 20.4523 11.7639H8.49614L13.9582 6.10332C14.3617 5.68517 14.3617 5.00821 13.9582 4.59113C13.5548 4.17404 12.9015 4.17297 12.4991 4.59113L5.27543 12.0772C5.17636 12.1799 5.10206 12.2975 5.0515 12.4237C4.94727 12.6857 4.94727 12.982 5.0515 13.244C5.10103 13.3681 5.1743 13.4836 5.27027 13.5852C5.27233 13.5873 5.27337 13.5884 5.27543 13.5905L12.4991 21.0766C12.9026 21.4948 13.5558 21.4948 13.9582 21.0766C14.3607 20.6585 14.3617 19.9815 13.9582 19.5644V19.5633Z" fill="#4E4E4E"/>
-                            </svg>
-                       </span>
+                   <span class="flex items-center justify-center py-[0.688rem] px-[0.563rem]">
+                        <?= $hyvaicons->renderHtml('paginationL', '',28, 28); ?>
+                   </span>
                     </button>
 
                     <button
                         role="button"
                         aria-label="<?= $escaper->escapeHtml(__('Next slide')) ?>"
-                        class="w-[46px] height-[48px] mr-4 bg-white opacity-50 hover:opacity-75"
+                        class="w-[2.875rem] height-[3rem] bg-white opacity-50 hover:opacity-75 transition duration-300"
                         :class="{ 'opacity-25 pointer-events-none' : active >= itemCount-pageSize }"
-                        @click="scrollNext"
-                    >
-                       <span class="flex items-center justify-center py-[11px] px-[9px]">
-                            <svg width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13.0455 7.63029L19.0042 13.8055L5.96108 13.8055C5.33966 13.8055 4.83532 14.3281 4.83532 14.9721C4.83532 15.6161 5.33966 16.1388 5.96108 16.1388H19.0042L13.0455 22.314C12.6053 22.7701 12.6053 23.5086 13.0455 23.9636C13.4857 24.4186 14.1983 24.4198 14.6373 23.9636L22.5177 15.797C22.6257 15.685 22.7068 15.5566 22.762 15.419C22.8757 15.1331 22.8757 14.81 22.762 14.5241C22.7079 14.3888 22.628 14.2628 22.5233 14.152C22.521 14.1496 22.5199 14.1485 22.5177 14.1461L14.6373 5.97946C14.1972 5.52329 13.4845 5.52329 13.0455 5.97946C12.6065 6.43563 12.6053 7.17413 13.0455 7.62913V7.63029Z" fill="#4E4E4E"/>
-                        </svg>
+                        @click="scrollNext">
+                       <span class="flex items-center justify-center py-[0.688rem] px-[0.563rem]">
+                            <?= $hyvaicons->renderHtml('paginationR', '', 28, 28); ?>
                        </span>
-
                     </button>
+
                 </div>
 
-                <div class="flex gap-3 justify-center items-center absolute w-full mt-8">
+                <div class="flex gap-3 justify-center items-center absolute w-full pt-3 desktop:pt-6">
                     <?php for ($i=0; $i < $itemCount; $i++): ?>
                         <button
                             role="button"
                             aria-label="<?= $escaper->escapeHtmlAttr(__('Show slide %1 of %2', $i + 1, $itemCount)) ?>"
-                            class="w-2 h-2 rounded-full shadow-md cursor-pointer hover:bg-gray-25"
+                            class="w-2 h-2 rounded-full shadow-md cursor-pointer hover:bg-gray-25 transition duration-300"
                             @click="scrollTo(<?= (int) $i ?>)"
                             :class="{
-                                'w-2 h-2 bg-secondary': active === <?= (int) $i ?>,
-                                'w-2 h-2 bg-gray-10': active !== <?= (int) $i ?>,
-                                'hidden': (pageSize !== 1 && !!(<?= (int) $i ?> % pageSize))
-                            }"
+                            'w-2 h-2 bg-secondary': active === <?= (int) $i ?>,
+                            'w-2 h-2 bg-gray-10': active !== <?= (int) $i ?>,
+                            'hidden': (pageSize !== 1 && !!(<?= (int) $i ?> % pageSize))
+                        }"
                         >
                         </button>
                     <?php endfor; ?>

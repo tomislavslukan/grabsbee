@@ -71,4 +71,8 @@
         @apply hidden;
     }
 
+    .cms-home .columns {
+        @apply gap-0;
+    }
+
 }

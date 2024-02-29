@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -203,21 +197,35 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
                                     />
                                 </a>
                                 <div class="w-3/4 space-y-2">
-                                    <div>
-                                        <p x-html="item.product_name" class="font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-secondary"></p>
+
+                                    <div class="product-info">
+
+                                        <div class="product-name">
+                                            <span class="product-name font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-secondary" x-html="item.product_name"></span>
+                                        </div>
+
+                                        <div class="product-detail mt-3 mb-2">
+                                            <span class="detail-label font-primary font-bold text-xs desktop:text-base leading-6 text-text-color">Color: </span>
+                                                <template x-for="option in item.options">
+                                                    <span class="detail-value font-primary font-normal text-xs desktop:text-base leading-5 text-text-color" x-text="option.value">
+                                                </template>
+                                            </span>
+                                        </div>
+
+                                        <div class="product-price">
+                                            <strong class="font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-text-color">
+                                                <span x-html="item.product_price" class="price-text"></span>
+                                            </strong>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <span><strong class="font-primary font-bold text-xs desktop:text-base leading-6 text-text-color">Color: </strong><span x-html="item.product_color" class="font-primary font-normal text-xs desktop:text-base leading-5 text-text-color"></span></span>
-                                    </div>
-                                    <div>
-                                        <strong><p x-html="item.product_price" class="font-primary font-bold uppercase text-xs desktop:text-base leading-6 text-text-color"></p></strong>
-                                    </div>
+
                                     <div class="pt-5">
                                         <span class="font-primary font-bold text-xs desktop:text-base leading-6 text-text-color inline">Qty:
-                                            <input type="text" :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Quantity "%0"')) ?>', item.product_name)" id="qty" name="qty" placeholder="0" class="inline focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-[42px] font-primary w-[63px] font-normal text-sm leading-6">
+                                             <label for="qty" class="sr-only"><?= $escaper->escapeHtmlAttr(__('Quantity')) ?></label>
+                                            <input type="text" :aria-label="hyva.strf('<?= $escaper->escapeJs(__('Quantity "%0"')) ?>', item.product_name)" id="qty" name="qty" :placeholder="item.qty" class="inline focus:border-text-color focus:ring-0 block border-1 border-gray-25 h-[42px] font-primary w-[63px] font-normal text-sm leading-6">
                                         </span>
                                     </div>
-                                    <template x-for="option in item.options">
+                                    <template x-for="option in item.options hidden">
                                         <div class="pt-2">
                                             <p class="font-semibold" x-text="option.label + ':'"></p>
                                             <p class="text-secondary" x-html="option.value"></p>

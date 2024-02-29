@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -25,6 +19,10 @@ $heroicons = $viewModels->require(HeroiconsOutline::class);
 
 /** @var SvgIcons $hyvaicons */
 $hyvaicons = $viewModels->require(SvgIcons::class);
+
+/** @var SvgIcons $hyvaicons */
+$hyvaicons = $viewModels->require(SvgIcons::class);
+
 
 ?>
 
@@ -55,16 +53,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                 <?= $escaper->escapeHtml(__('Shop By')) ?>
 
                 <span class="ml-2">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_1538_399)">
-                        <path d="M13.4168 7.00001C13.4168 6.13201 13.2442 5.30251 12.9309 4.54593C12.6054 3.76018 12.1288 3.05376 11.5379 2.46284C10.947 1.87193 10.2406 1.39476 9.45483 1.06984C8.69766 0.75601 7.86816 0.583344 7.00016 0.583344C6.13216 0.583344 5.30266 0.75601 4.54608 1.06926C3.76033 1.39476 3.05391 1.87134 2.463 2.46284C1.87208 3.05434 1.39491 3.76018 1.06941 4.54593C0.756163 5.30251 0.583496 6.13201 0.583496 7.00001C0.583496 7.86801 0.756163 8.69751 1.06941 9.45409C1.39491 10.2398 1.8715 10.9463 2.46241 11.5372C3.05333 12.1281 3.75975 12.6053 4.5455 12.9302C5.30266 13.244 6.13216 13.4167 7.00016 13.4167C7.86816 13.4167 8.69766 13.244 9.45425 12.9308C10.24 12.6053 10.9464 12.1287 11.5373 11.5378C12.1282 10.9468 12.6054 10.2404 12.9303 9.45468C13.2442 8.69751 13.4168 7.86801 13.4168 7.00001ZM12.2502 7.00001C12.2502 7.71226 12.1084 8.39009 11.8529 9.00784C11.5869 9.65009 11.1972 10.2282 10.7125 10.7123C10.2277 11.1965 9.64966 11.5868 9.008 11.8528C8.39025 12.1083 7.71241 12.25 7.00016 12.25C6.28791 12.25 5.61008 12.1083 4.99233 11.8528C4.35008 11.5868 3.772 11.1971 3.28783 10.7123C2.80308 10.2276 2.41341 9.64951 2.14741 9.00784C1.89191 8.39009 1.75016 7.71226 1.75016 7.00001C1.75016 6.28776 1.89191 5.60993 2.14741 4.99218C2.41341 4.34993 2.80308 3.77184 3.28783 3.28768C3.77258 2.80351 4.35066 2.41326 4.99233 2.14726C5.61008 1.89176 6.28791 1.75001 7.00016 1.75001C7.71241 1.75001 8.39025 1.89176 9.008 2.14726C9.65025 2.41326 10.2283 2.80293 10.7125 3.28768C11.1972 3.77243 11.5869 4.35051 11.8529 4.99218C12.1084 5.60993 12.2502 6.28776 12.2502 7.00001ZM4.66683 7.58334H6.41683V9.33334C6.41683 9.65534 6.67816 9.91668 7.00016 9.91668C7.32216 9.91668 7.5835 9.65534 7.5835 9.33334V7.58334H9.3335C9.6555 7.58334 9.91683 7.32201 9.91683 7.00001C9.91683 6.67801 9.6555 6.41668 9.3335 6.41668H7.5835V4.66668C7.5835 4.34468 7.32216 4.08334 7.00016 4.08334C6.67816 4.08334 6.41683 4.34468 6.41683 4.66668V6.41668H4.66683C4.34483 6.41668 4.0835 6.67801 4.0835 7.00001C4.0835 7.32201 4.34483 7.58334 4.66683 7.58334Z" fill="#FF0000"></path>
-                        </g>
-                        <defs>
-                        <clipPath id="clip0_1538_399">
-                        <rect width="14" height="14" fill="white"></rect>
-                        </clipPath>
-                        </defs>
-                    </svg>
+                    <?= $hyvaicons->renderHtml('filterIcon', '', 14, 14); ?>
                 </span>
             </button>
 
@@ -73,13 +62,8 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
 
         <div
             id="filters-content"
-            class="block-content filter-content hidden md:block lg:block absolute md:relative lg:relative top-0 left-0 right-0 w-full h-screen z-40 tablet:z-0 desktop:z-0 tablet:z-0 bg-white p-3"
-            :class="{ 'hidden': !blockOpen }"
-            x-show="blockOpen"
-            x-transition:enter="transition ease-in duration-300"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-        >
+            class="block-content filter-content hidden md:block lg:block absolute md:relative lg:relative top-0 left-0 right-0 w-full h-screen z-40 tablet:z-0 bg-white p-3 pt-0"
+            :class="{ 'hidden': !blockOpen }">
 
             <div class="flex flex-row justify-end">
                 <button
@@ -93,7 +77,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                 </button>
             </div>
 
-            <h2 class="font-primary font-bold uppercase font-sm leading-6 text-primary mt-7 mb-6">
+            <h2 class="font-primary font-bold uppercase font-sm leading-6 text-primary mb-6">
                 Shopping options
             </h2>
 
