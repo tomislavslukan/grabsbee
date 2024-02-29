@@ -112,7 +112,7 @@ $productName = $catalogOutputHelper->productAttribute($product, $product->getNam
                 <?php $productNameStripped = $block->stripTags($product->getName(), null, true); ?>
                 <div class="items-center justify-center text-center <?= $viewIsGrid ? '' : 'md:text-left' ?>">
                     <a
-                        class="product-item-link font-primary font-bold uppercase leading-6 text-secondary font-xs desktop:font-md"
+                        class="product-item-link text-ellipsis overflow-hidden font-primary font-bold uppercase leading-6 text-secondary font-xs desktop:font-md"
                         href="<?= $escaper->escapeUrl($product->getProductUrl()) ?>"
                         :id="`slide-desc-<?= $escaper->escapeHtmlAttr($product->getId()) ?>-${$id('slider-id')}`"
                     >
