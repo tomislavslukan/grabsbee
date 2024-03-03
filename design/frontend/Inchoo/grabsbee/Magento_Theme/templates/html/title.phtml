@@ -1,10 +1,4 @@
 <?php
-/**
- * Hyvä Themes - https://hyva.io
- * Copyright © Hyvä Themes 2020-present. All rights reserved.
- * This product is licensed per Magento install
- * See https://hyva.io/license
- */
 
 declare(strict_types=1);
 
@@ -26,7 +20,7 @@ if (trim((string)$block->getPageHeading())) {
 ?>
 
 <?php if ($titleHtml): ?>
-    <div class="flex flex-col md:flex-row flex-wrap font-bold <?= /** @noEscape */ $cssClass ?>">
+    <div class="flex flex-col md:flex-row flex-wrap font-bold py-3 <?= /** @noEscape */ $cssClass ?>">
         <h1 class="text-gray-900 page-title title-font"
             <?php if ($block->getId()): ?> id="<?= $escaper->escapeHtmlAttr($block->getId()) ?>" <?php endif; ?>>
             <?= /* @noEscape */ $titleHtml ?>

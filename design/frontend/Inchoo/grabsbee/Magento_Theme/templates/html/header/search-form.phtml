@@ -85,6 +85,9 @@ $helper = $this->helper(SearchHelper::class);
               x-transition:enter="transition ease-out duration-300 transform"
               x-transition:enter-start="opacity-0 scale-95"
               x-transition:enter-end="opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-300 transform"
+              x-transition:leave-start="opacity-100 scale-100"
+              x-transition:leave-end="opacity-0 scale-95"
               class="desktop:h-[9rem] h-[9.188rem] px-3 desktop:px-24 desktop:flex desktop:items-center desktop:justify-center bg-primary w-full">
 
              <div class="h-[6.313rem] bg-primary grid desktop:grid-cols-12 desktop:grid-rows-1 grid-cols-12 grid-rows-2">

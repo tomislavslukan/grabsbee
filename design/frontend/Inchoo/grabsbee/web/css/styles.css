@@ -1782,6 +1782,10 @@ select{
   gap: 0px;
 }
 
+.page-with-filter .columns{
+  max-width: 100%;
+}
+
 #category-view-container{
   margin-left: auto;
   margin-right: auto;
@@ -3640,10 +3644,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-top: -1.5rem;
 }
 
-.-mt-8{
-  margin-top: -2rem;
-}
-
 .mb-0{
   margin-bottom: 0px;
 }
@@ -3824,10 +3824,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   margin-top: 1.5rem;
 }
 
-.mt-7{
-  margin-top: 1.75rem;
-}
-
 .mt-8{
   margin-top: 2rem;
 }
@@ -3952,6 +3948,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   height: 1px;
 }
 
+.h-\[2\.625\]{
+  height: 2.625;
+}
+
 .h-\[2\.625rem\]{
   height: 2.625rem;
 }
@@ -3994,26 +3994,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .h-screen{
   height: 100vh;
-}
-
-.h-\[198px\]{
-  height: 198px;
-}
-
-.h-\[168px\]{
-  height: 168px;
-}
-
-.h-64{
-  height: 16rem;
-}
-
-.h-\[190px\]{
-  height: 190px;
-}
-
-.h-\[10\.5rem\]{
-  height: 10.5rem;
 }
 
 .max-h-screen{
@@ -4164,26 +4144,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   width: 100vw;
 }
 
-.w-\[329px\]{
-  width: 329px;
-}
-
-.w-\[21rem\]{
-  width: 21rem;
-}
-
-.w-\[1600px\]{
-  width: 1600px;
-}
-
-.w-\[1200px\]{
-  width: 1200px;
-}
-
-.w-\[1024px\]{
-  width: 1024px;
-}
-
 .min-w-\[110px\]{
   min-width: 110px;
 }
@@ -4238,6 +4198,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .table-auto{
   table-layout: auto;
+}
+
+.origin-top{
+  transform-origin: top;
 }
 
 .origin-top-left{
@@ -4615,10 +4579,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   text-overflow: ellipsis;
 }
 
-.text-clip{
-  text-overflow: clip;
-}
-
 .whitespace-nowrap{
   white-space: nowrap;
 }
@@ -4939,18 +4899,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   --tw-gradient-to: #00000075;
 }
 
-.bg-cover{
-  background-size: cover;
-}
-
-.bg-contain{
-  background-size: contain;
-}
-
-.bg-center{
-  background-position: center;
-}
-
 .fill-current{
   fill: currentColor;
 }
@@ -5114,14 +5062,14 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   padding-bottom: 2rem;
 }
 
+.py-\[0\.625rem\]{
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 .py-\[0\.688rem\]{
   padding-top: 0.688rem;
   padding-bottom: 0.688rem;
-}
-
-.py-\[10px\]{
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
 .py-\[14px\]{
@@ -5193,6 +5141,10 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
   padding-right: 1.5rem;
 }
 
+.pt-0{
+  padding-top: 0px;
+}
+
 .pt-1{
   padding-top: 0.25rem;
 }
@@ -5219,14 +5171,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 
 .pt-6{
   padding-top: 1.5rem;
-}
-
-.pt-0{
-  padding-top: 0px;
-}
-
-.pb-0{
-  padding-bottom: 0px;
 }
 
 .text-left{
@@ -5562,11 +5506,6 @@ a.pagebuilder-button-secondary:focus, button.pagebuilder-button-secondary:focus,
 .text-yellow-400{
   --tw-text-opacity: 1;
   color: rgb(250 204 21 / var(--tw-text-opacity));
-}
-
-.text-red-500{
-  --tw-text-opacity: 1;
-  color: rgb(239 68 68 / var(--tw-text-opacity));
 }
 
 .underline{
@@ -6372,52 +6311,8 @@ fieldset ~ fieldset{
     display: flex;
   }
 
-  .mobile\:h-\[50\%\]{
-    height: 50%;
-  }
-
-  .mobile\:h-\[198px\]{
-    height: 198px;
-  }
-
-  .mobile\:h-auto{
-    height: auto;
-  }
-
-  .mobile\:max-h-\[198px\]{
-    max-height: 198px;
-  }
-
-  .mobile\:min-h-\[198px\]{
-    min-height: 198px;
-  }
-
-  .mobile\:w-\[50\%\]{
-    width: 50%;
-  }
-
-  .mobile\:w-\[336px\]{
-    width: 336px;
-  }
-
-  .mobile\:min-w-\[336px\]{
-    min-width: 336px;
-  }
-
-  .mobile\:max-w-\[336px\]{
-    max-width: 336px;
-  }
-
   .mobile\:flex-col{
     flex-direction: column;
-  }
-
-  .mobile\:gap-6{
-    gap: 1.5rem;
-  }
-
-  .mobile\:pb-0{
-    padding-bottom: 0px;
   }
 
   .placeholder\:mobile\:text-base::-moz-placeholder{
@@ -6549,10 +6444,6 @@ fieldset ~ fieldset{
     height: auto;
   }
 
-  .md\:h-\[168px\]{
-    height: 168px;
-  }
-
   .md\:w-1\/2{
     width: 50%;
   }
@@ -6575,10 +6466,6 @@ fieldset ~ fieldset{
 
   .md\:w-full{
     width: 100%;
-  }
-
-  .md\:w-\[336px\]{
-    width: 336px;
   }
 
   .md\:-translate-x-1\/3{
@@ -6707,16 +6594,20 @@ fieldset ~ fieldset{
     margin-bottom: 1.5rem;
   }
 
+  .tablet\:ml-0{
+    margin-left: 0px;
+  }
+
   .tablet\:ml-12{
     margin-left: 3rem;
   }
 
-  .tablet\:mt-0{
-    margin-top: 0px;
-  }
-
   .tablet\:block{
     display: block;
+  }
+
+  .tablet\:max-w-\[329px\]{
+    max-width: 329px;
   }
 
   .tablet\:items-start{
@@ -6726,6 +6617,19 @@ fieldset ~ fieldset{
   .tablet\:py-6{
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
+  }
+
+  .tablet\:pl-0{
+    padding-left: 0px;
+  }
+
+  .tablet\:pr-0{
+    padding-right: 0px;
+  }
+
+  .tablet\:text-sm{
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }
 
@@ -6969,24 +6873,12 @@ fieldset ~ fieldset{
     margin-left: 6rem;
   }
 
-  .desktop\:ml-3{
-    margin-left: 0.75rem;
-  }
-
   .desktop\:mr-2{
     margin-right: 0.5rem;
   }
 
   .desktop\:mt-6{
     margin-top: 1.5rem;
-  }
-
-  .desktop\:mt-0{
-    margin-top: 0px;
-  }
-
-  .desktop\:ml-0{
-    margin-left: 0px;
   }
 
   .desktop\:block{
@@ -7005,18 +6897,6 @@ fieldset ~ fieldset{
     height: 9rem;
   }
 
-  .desktop\:h-\[190px\]{
-    height: 190px;
-  }
-
-  .desktop\:h-\[168px\]{
-    height: 168px;
-  }
-
-  .desktop\:h-\[11\.875rem\]{
-    height: 11.875rem;
-  }
-
   .desktop\:w-\[130px\]{
     width: 130px;
   }
@@ -7025,20 +6905,16 @@ fieldset ~ fieldset{
     width: 364px;
   }
 
-  .desktop\:w-\[329px\]{
-    width: 329px;
-  }
-
-  .desktop\:w-\[336px\]{
-    width: 336px;
-  }
-
-  .desktop\:w-\[20\.563rem\]{
-    width: 20.563rem;
+  .desktop\:w-\[38\.563rem\]{
+    width: 38.563rem;
   }
 
   .desktop\:max-w-\[207px\]{
     max-width: 207px;
+  }
+
+  .desktop\:max-w-\[38\.563rem\]{
+    max-width: 38.563rem;
   }
 
   .desktop\:grid-cols-12{

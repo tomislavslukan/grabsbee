@@ -56,14 +56,14 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
         x-transition:enter-end="opacity-100 scale-100"
         x-ref="mobileMenuNavLinks"
         class="
-        fixed top-0 right-0 w-full h-screen p-1
-        flex-col border-0 border-container bg-container-lighter
-        overflow-y-auto overflow-x-hidden bg-white"
-
+    fixed top-0 right-0 w-full h-screen p-1
+    flex-col border-0 border-container bg-container-lighter
+    overflow-y-auto overflow-x-hidden bg-white"
         :class="{ 'flex': open, 'hidden': !open }"
         :aria-hidden="open ? 'false' : 'true'"
         role="dialog"
-        aria-modal="true">
+        aria-modal="true"
+    >
 
         <p class="font-normal mx-3 mb-6 text-md leading-6 mt-16 text-primary uppercase font-primary"><?= $escaper->escapeHtmlAttr(__('Menu')) ?></p>
 
@@ -78,16 +78,23 @@ $block->setData('cache_tags', $viewModelNavigation->getIdentities());
                             </a>
 
                             <?php if (!empty($menuItem['childData'])): ?>
-                                <button @click="openSubcategory('<?= /* @noEscape */ $index ?>'); rot = rot === 0 ? 180 : 0" x-bind:style="'transform: rotate(' + rot + 'deg)'" aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>" aria-haspopup="true" :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'">
+                                <button @click="openSubcategory('<?= /* @noEscape */ $index ?>');" :class="{ 'rotate-180': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}" aria-label="<?= $escaper->escapeHtmlAttr(__('Open %1 subcategories', $menuItem['name'])) ?>" aria-haspopup="true" :aria-expanded="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'">
                                     <span>
-                                        <?= $hyvaicons->renderHtml('dropdownIcon', '', 14, 14); ?>
+                                        <?= $hyvaicons->renderHtml('dropdownIcon', 'rotate-180', 14, 14); ?>
                                     </span>
                                 </button>
                             <?php endif; ?>
                         </div>
 
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <div data-child-id="<?= $escaper->escapeHtmlAttr($index) ?>" :class="{ 'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}">
+                            <div
+                                x-show="mobilePanelActiveId === '<?= /* @noEscape */ (string) $index ?>'"
+                                x-transition:enter="transition ease-out duration-300 transform"
+                                x-transition:enter-start="opacity-0 scale-95"
+                                x-transition:enter-end="opacity-100 scale-100"
+                                data-child-id="<?= $escaper->escapeHtmlAttr($index) ?>"
+                                :class="{ 'hidden': mobilePanelActiveId !== '<?= /* @noEscape */ (string) $index ?>'}"
+                            >
                                 <ul aria-label="<?= $escaper->escapeHtmlAttr(__('Subcategories')) ?>">
                                     <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
                                         <li class="flex flex-col justify-start font-primary text-xs uppercase my-2 font-normal leading-6 tracking-wide text-text-color" x-data="{ isOpen: false, rotate: 0 }" >

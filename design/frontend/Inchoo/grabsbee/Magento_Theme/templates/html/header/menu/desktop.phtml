@@ -40,7 +40,7 @@ $storeConfig = $viewModels->require(StoreConfig::class);
          class="mx-auto hidden w-full lg:block lg:min-h-0">
 
         <nav class="mx-24" aria-label="<?= $escaper->escapeHtmlAttr(__('navigation menu')) ?>">
-            <ul class="container mx-auto flex items-center">
+            <ul class="container flex items-center">
                 <?php foreach ($menuItems as $index => $menuItem): ?>
                     <li class="level-0 before:content-[''] mb-0 block hover:text-white visited:text-white"
                         @mouseenter="hoverPanelActiveId = '<?= /* @noEscape */ (string) $index ?>'"
@@ -73,8 +73,8 @@ $storeConfig = $viewModels->require(StoreConfig::class);
                     <?php endif; ?>
                 </span>
                         <?php if (!empty($menuItem['childData'])): ?>
-                            <ul class="absolute left-0 bg-white shadow-md block flex w-full py-6 justify-center z-30"
-                                :class="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'scale-y-100' : 'scale-y-0'">
+                        <ul class="absolute left-0 bg-white shadow-md block flex w-full py-6 justify-center z-30 transform origin-top"
+           :class="hoverPanelActiveId === '<?= /* @noEscape */ (string) $index ?>' ? 'scale-y-100 transition-transform duration-200' : 'scale-y-0 transition-transform duration-200'">
                                 <?php foreach ($menuItem['childData'] as $subMenuItem): ?>
                                     <li style="text-shadow: none;" class="before:content-[''] mr-8 flex flex-col items-start">
                                         <a href="<?= $escaper->escapeUrl($subMenuItem['url']) ?>"
@@ -102,8 +102,8 @@ $storeConfig = $viewModels->require(StoreConfig::class);
                                         <?php endif; ?>
                                     </li>
                                 <?php endforeach; ?>
-                                <li class="before:content-[''] flex flex-col items-start font-normal text-xs text-black font-primary leading-6 tracking-wide" style="text-shadow: none;">
-                                    <a href="/contact/" class="block w-full text-xs font-bold font-primary leading-6 tracking-wide uppercase">
+                                <li class="before:content-[''] flex flex-col items-start font-normal text-xs text-black font-primary leading-5 tracking-wide" style="text-shadow: none;">
+                                    <a href="/contact/" class="block w-full text-xs font-bold font-primary leading-5 tracking-wide uppercase">
                                         <?= $escaper->escapeHtmlAttr(__('Contact us')) ?>
                                     </a>
 

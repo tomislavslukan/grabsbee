@@ -49,7 +49,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                 :aria-disabled="!isMobile"
                 :disabled="!isMobile ? '' : null"
 
-                class="btn__secondary h-[42px] justify-center text-sm tracking-wider shadow-md px-3 py-2 md:hidden lg:hidden" aria-label="Secondary mobile">
+                class="btn__secondary h-[2.625] items-center justify-center text-sm tracking-wider shadow-md px-3 py-2 md:hidden lg:hidden" aria-label="Secondary mobile">
                 <?= $escaper->escapeHtml(__('Shop By')) ?>
 
                 <span class="ml-2">
@@ -62,8 +62,10 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
 
         <div
             id="filters-content"
-            class="block-content filter-content hidden md:block lg:block absolute md:relative lg:relative top-0 left-0 right-0 w-full h-screen z-40 tablet:z-0 bg-white p-3 pt-0"
-            :class="{ 'hidden': !blockOpen }">
+            x-show="blockOpen" x-transition
+            class="block-content tablet:max-w-[329px] filter-content hidden md:block lg:block absolute md:relative lg:relative top-0 left-0 tablet:ml-0 tablet:pl-0 right-0 w-full h-screen z-40 tablet:z-0 bg-white p-3 pt-0 tablet:pr-0"
+            :class="{ 'hidden': !blockOpen }"
+            :class="{ 'scrollbar-none': blockOpen }">
 
             <div class="flex flex-row justify-end">
                 <button
@@ -71,7 +73,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                     aria-label="<?= $escaper->escapeHtmlAttr(__('Close menu')) ?>"
                     type="button">
                     <div class="flex row items-center mt-6 md:hidden lg:hidden">
-                        <p class="font-normal text-text-color leading-5 text-xs font-primary">Close</p>
+                        <p class="font-normal text-text-color leading-5 text-md font-primary">Close</p>
                         <span class="ml-2"> <?= $hyvaicons->renderHtml('closeMenu', 'w-3 h-3');?></span>
                     </div>
                 </button>
@@ -98,7 +100,7 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                         }"
                         class="filter-option border-b md:border-0 lg:border-0 mt-2"
                     >
-                        <h3 :id="`${id}-title`" class="border-b">
+                        <h3 :id="`${id}-title`" class="border-b py-2">
                             <button
                                 type="button"
                                 @click="open = !open"
@@ -106,15 +108,14 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                                 :aria-controls="`${id}-content`"
                                 :aria-expanded="open"
                             >
-                                <span class="title font-primary md:font-heading lg:font-heading font-bold font-xs leading-6 md:font-normal lg:font-normal md:leading-5 lg:leading-5 tracking-wide text-text-color uppercase">
+                                <span class="title font-primary md:font-heading lg:font-heading font-bold text-xs tablet:text-sm leading-6 md:font-normal lg:font-normal md:leading-5 lg:leading-5 tracking-wide text-text-color uppercase">
                                     <?= $escaper->escapeHtml(__($filter->getName())) ?>
                                     <span class="sr-only"> <?= $escaper->escapeHtml(__('filter')) ?></span>
                                 </span>
-                                    <span class="py-[10px]">
-                                    <?= $heroicons->chevronDownHtml(
-                                        'transition-transform transform duration-300 ease-in-out',
-                                        24,
-                                        24,
+                                    <span class="py-[0.625rem]">
+                                    <?= $heroicons->chevronDownHtml('',
+                                        14,
+                                        14,
                                         [
                                             ":class" => "{ 'rotate-180': open }",
                                             "aria-hidden" => "true",
@@ -124,10 +125,11 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                                 </span>
                             </button>
                         </h3>
-                        <template x-if="open">
+                        <template x-if="open" x-show="open">
                             <div
                                 :id="`${id}-content`"
-                                class="filter-options-content ml-3 font-primary uppercase font-normal font-xs leading-6 tracking-wide text-text-color">
+                                x-transition
+                                class="filter-options-content ml-3 font-primary uppercase font-normal text-xs tablet:text-sm leading-6 tracking-wide text-text-color">
                                 <?= /* @noEscape */ $block->getChildBlock('renderer')->setFilterTitle($filter->getName())->render($filter); ?>
                             </div>
                         </template>
@@ -147,9 +149,14 @@ $hyvaicons = $viewModels->require(SvgIcons::class);
                     const mobileElement = this.$refs.LayeredNavigationMobileToggleIcon;
                     this.isMobile = mobileElement
                         ? getComputedStyle(mobileElement).display !== "none"
-                        : window.matchMedia('(max-width: 767px)').matches; // Fallback to `md` breakpoint
+                        : window.matchMedia('(max-width: 768px)').matches;
+
+                    this.blockOpen = window.matchMedia('(min-width: 768px)').matches;
+
                 }
-            }
+
+            };
         }
     </script>
+
 <?php endif; ?>
